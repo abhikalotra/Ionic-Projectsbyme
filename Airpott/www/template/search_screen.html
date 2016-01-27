@@ -1,0 +1,79 @@
+<div ng-controller="searchScreenCtrl">
+<ion-view >
+  <ion-content>
+
+<div class="wrapperDashboard" >
+  <div class="container">
+  <div class="header">
+   <div class="nav-menu "><button class="button button-icon icon ion-navicon"></button>  </div>
+    <div class="logo-1">
+		<a href="#"><img ng-src="img/logo-1.png" ></a> 
+	</div>
+	</div>
+	<div class="search">Search</div>
+	<strong>Longitude </strong> &nbsp {{position.coords.longitude}}
+	<strong>Latitude </strong> &nbsp {{position.coords.latitude}} </br>
+	 {{positions[4].long_name}} {{positions[7].long_name}} {{positions[8].long_name}}
+	 
+	<button class="button button-block button-positive" ng-click="getLocation()">
+		Get My Location
+	</button>
+	<form method="post">
+	<div class="User-Search-Location">
+		<div class="list">
+		  <label class="item item-input">
+			<input type="text" placeholder="Current location, search bar" value="{{positions[4].long_name}} {{positions[7].long_name}} {{positions[8].long_name}}"><i class="icon ion-search placeholder-icon"></i>
+		  </label>
+		  <label class="item item-input">
+			<input type="number"  placeholder="Guest[s]"  id="french-hens" >
+		  </label>
+		  <label class="item item-input">
+			<input type="date"  placeholder="Check In Date">
+		  </label>
+		 
+		</div>
+	</div>
+	
+	<div class="searchContaner">
+		<div class="searchContaner-section-left">
+				<ion-list>
+				  <ion-checkbox>Free Parking</ion-checkbox>
+				  <ion-checkbox>Showers</ion-checkbox>
+				  <ion-checkbox>Sauna</ion-checkbox>
+				</ion-list>				
+		</div>		
+		<div class="searchContaner-section-right">
+				<ion-list>
+				  <ion-checkbox>Free Parking</ion-checkbox>
+				  <ion-checkbox>Showers</ion-checkbox>
+				  <ion-checkbox>Sauna</ion-checkbox>
+				</ion-list>
+		</div>	
+		<div class="searchContaner-showmore">
+				<p class="button-stable"> <i class="ion-arrow-down-b"></i>Show more Categories</p>
+				
+				  <ion-infinite-scroll on-infinite="loadMore()"  distance="1%"> </ion-infinite-scroll>
+				
+		</div>		  
+
+	</div>
+	<div class="showClubs">
+		<input type="submit" name="submit" value="Show Clubs" ng-click="showClubs()" class="showClubs">	
+	</div>
+	
+	</form>
+		
+    
+  </div>
+</div>
+
+  </ion-content>
+  
+</ion-view>
+</div>
+<style>
+input.showClubs {
+    width: 100%;
+    border: none;
+}
+</style>

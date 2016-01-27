@@ -1,0 +1,58 @@
+<div ng-controller="dashboardCtrl">
+<ion-view >
+  <ion-content>
+
+<div class="wrapperDashboard" >
+  <div class="container">
+  <div class="header">
+<!--   <div class="nav-menu "> <img ng-src="img/menu-icon.png" > </div> -->
+ <div class="nav-menu "><button class="button button-icon icon ion-navicon"></button>  </div>
+    <div class="logo-1">
+		<a href="#"><img ng-src="img/logo-1.png" ></a> 
+	</div>
+	</div>
+	<div class="search"><a ng-href="#/searchscreen" title="Search"> Search </s>  <a href="#/logout" class="tital">Logout</a>
+	<div class="list">
+		  <label class="item item-input item-floating-label">
+			<span class="input-label cat">Category Name</span>
+			<input type="text" ng-model="searchByIdentifier"  placeholder="Enter your search Catagory" class="catagorytextWhite">
+		  </label>
+	</div>
+	
+	
+	
+	</div>
+	
+	<div class="Images"  ng-repeat="image in images | filterIdentifier:searchByIdentifier">
+		<div class="main-section">
+		<a ng-href="#/searchresult/{{ image.id }}" title="{{ image.id }}">
+				 <div class="image-media">
+					<img ng-src="https://placeholdit.imgix.net/~text?txtsize=144&txt=190%C3%97200&w=500&h=200" style="width:100%; height:200px;">
+				</div>    
+			<div class="image-tital">{{ image.name }}</div>
+		</a>			
+		</div>	
+		
+			
+
+	</div>
+	
+		
+    
+  </div>
+</div>
+
+  </ion-content>
+  
+</ion-view>
+</div>
+<style>
+input.catagorytextWhite {
+    color: white;
+	    font-size: 17px;
+}
+span.cat {
+    color: white;
+    font-weight: bold;
+}
+</style>

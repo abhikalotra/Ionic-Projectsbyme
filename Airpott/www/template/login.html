@@ -1,0 +1,49 @@
+<div ng-controller="loginCustomerCtrl" >
+
+
+<ion-view >
+  <ion-content>
+<div class="wrapperLogin" >
+  <div class="container">
+    <div class="logo"><a href="#/landing"><img ng-src="img/logolanding.png"></a></div>
+    
+	<div class="loginHe">
+		
+		
+ <form method ="post" >   
+   <div class="list">	  
+	  <label class="item item-input item-floating-label">
+		<span class="input-label floatingName">Email</span>
+		<input type="text"  ng-model="loginForm.email" placeholder="Enter You Email"  class="textWhite">
+	  </label>
+	  <label class="item item-input item-floating-label">
+		<span class="input-label floatingName">Password</span>
+		<input type="password"  ng-model="loginForm.password" placeholder="Enter You Password" class="textWhite">
+	  </label>
+	   <label class="itemBackground login-btn">
+            <input type="submit" name="submit" value="login" ng-click="login()" class=" button button-block button-default " >
+        </label>
+		
+	</div>
+    </form>
+	
+	<label class="itemBackground">
+            <button type="button" class="button button-block button-default " >Login With Facebook</button>
+			<span><img ng-src="img/f.png"></span>
+        </label>
+	</div>
+	
+	<div class="btm-btn">
+	<ul>
+	<li><a href="#/register">New User Sign Up</a></li>
+	<li><a href="#">Forgot Password</a></li>
+	</ul>
+	</div>
+
+ </div>
+ </div>
+
+  </ion-content>  
+</ion-view>
+
+</div>
