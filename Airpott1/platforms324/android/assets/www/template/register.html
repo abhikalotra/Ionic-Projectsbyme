@@ -1,0 +1,60 @@
+<div ng-controller="registerCustomerCtrl">
+<ion-view>
+  <ion-content>
+<div class="wrapperLogin" >
+  <div class="container">
+    <div class="logo"><a href="#/landing"><img ng-src="img/logolanding.png"></a></div>    
+		<div class="loginHe">
+			<form method ="post">   
+			   <div class="list">	  
+				  <label class="item item-input item-floating-label">
+					<span class="input-label floatingName">Email</span>
+					<input type="email"  ng-model="registrationCustomerForm.email" placeholder="Enter You Email"  class="textWhite">
+				  </label>
+				  <label class="item item-input item-floating-label">
+					<span class="input-label floatingName">Password</span>
+					<input type="password"  ng-model="registrationCustomerForm.password" placeholder="Enter You Password" class="textWhite">
+				  </label>
+				   <label class="itemBackground login-btn">
+						<input type="submit" name="submit" value="Register" ng-click="registrationBuyer()" class=" button button-block button-default">			
+					</label>			
+				</div>
+			</form>
+		</div>
+	
+	<div class="btm-btn">
+		<ul>
+			<li><a href="#/login">Login</a></li>
+		</ul>
+	</div>	
+ </div>
+ </div>
+
+  </ion-content>  
+</ion-view>
+
+</div>
+
+<!-- 
+<div ng-controller="registerCtrl" >
+    <form method ="post" >
+      <div class="list">  
+	   <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input type="text" ng-model="registrationForm.username" placeholder="Enter You Username">
+        </label> 
+	  <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="email" ng-model="registrationForm.email" placeholder="Enter You Email">
+        </label>      
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="registrationForm.password">
+        </label>
+       
+        <label class="item">
+            <input type="submit" name="submit" value="Register" ng-click="register()" class="button button-block button-positive" >
+        </label>
+      </div>
+    </form>
+</div> -->

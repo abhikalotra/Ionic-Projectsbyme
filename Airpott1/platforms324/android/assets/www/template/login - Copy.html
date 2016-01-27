@@ -1,0 +1,51 @@
+<div ng-controller="loginCtrl" >
+
+
+<ion-view >
+  <ion-content>
+<div class="wrapperLogin" >
+  <div class="container">
+    <div class="logo"><a href="#/landing"><img src="../img/logolanding.png"></a></div>
+    
+	<div class="loginHe">
+		
+		
+ <form method ="post" >   
+   <div class="list">	  
+	  <label class="item item-input item-floating-label">
+		<span class="input-label floatingName">Email</span>
+		<input type="text"  ng-model="loginForm.email" placeholder="Enter You Email"  class="textWhite">
+	  </label>
+	  <label class="item item-input item-floating-label">
+		<span class="input-label floatingName">Password</span>
+		<input type="password"  ng-model="loginForm.password" placeholder="Enter You Password" class="textWhite">
+	  </label>
+	   <label class="item itemBackground">
+            <input type="submit" name="submit" value="login" ng-click="login()" class="button button-block button-default" >
+        </label>
+	</div>
+	
+     
+    </form>
+	</div>
+	 <!-- <div class="list"> 	 
+	  <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="email" ng-model="loginForm.email" placeholder="Enter You Email">
+        </label>      
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="loginForm.password">
+        </label>
+       
+        <label class="item">
+            <input type="submit" name="submit" value="login" ng-click="login()" class="button button-block button-positive" >
+        </label>
+      </div> -->
+ </div>
+ </div>
+
+  </ion-content>  
+</ion-view>
+
+</div>

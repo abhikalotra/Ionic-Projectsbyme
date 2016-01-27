@@ -1,0 +1,70 @@
+<div ng-controller="searchResultCtrl" >
+<ion-view>
+  <ion-content>
+<div class="wrapperSearchScreen" >
+  <div class="container">
+    <div class="header">
+		<!-- <div class="nav-menu "> <img ng-src="img/menu-icon.png" > </div> -->
+		 <div class="nav-menu "><button class="button button-icon icon ion-navicon"></button>  </div>
+		<div class="logo-1">
+			<a href="#"><img ng-src="img/logo-1.png" ></a> 
+		</div>
+	</div>
+	<div class="search">Search Results</div>
+	
+	<div class="search-Screen">
+		<div class="show-map">
+			<button type="button" class="button button-block button-default">Show on Map</button>
+		</div>
+		<div class="show-filter">
+			<button type="button" class="button button-block button-default">Filter</button>
+		</div>
+	</div>
+	
+	<div class="record-show-details">
+		<div class="shows-leftimg">
+			<img ng-src="https://placeholdit.imgix.net/~text?txtsize=144&txt=190%C3%97200&w=500&h=200" title="{{ showResult.identifier }}">
+		</div>
+		<div class="shows-rightimgdetail">
+			<div class="shows-right-para">
+				<p> WIP</p>
+				<!-- <p> Min Street 1</p> -->
+				<p> Star Comment:  {{ showStarRatingData.comment }}</p>
+				<p> Rating:  {{ showStarRatingData.rating }}<span>$10</span></p>
+				<p> 
+					<img ng-src="img/star-fill.png" class="star-fill" data-ng-repeat="i in starRange" >
+
+				</p>
+			</div>
+		</div>
+	</div>
+	
+<!-- 	<div class="record-show-details">
+		<div class="shows-leftimg">
+			<img ng-src="img/small-dumble.jpg" >
+		</div>
+		<div class="shows-rightimgdetail">
+			<div class="shows-right-para">
+				<p> Hi Abhi</p>
+				<p> Min Street 1</p>
+				<p> Rating: 4  <span>$10</span></p>
+				<p> 
+					<img ng-src="img/star-fill.png" class="star-fill">
+					<img ng-src="img/star-fill.png" class="star-fill">
+					<img ng-src="img/star-fill.png" class="star-fill">
+					<img ng-src="img/star-fill.png" class="star-fill">
+					<img ng-src="img/blank-star.png" class="star-fill">
+				</p>
+			</div>
+		</div>
+	</div>
+	
+	 -->
+	
+ </div>
+ </div>
+
+  </ion-content>  
+</ion-view>
+
+</div>

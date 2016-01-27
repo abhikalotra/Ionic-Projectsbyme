@@ -1,0 +1,59 @@
+<ion-side-menus>
+  <!-- Left menu -->
+  <ion-side-menu side="left">
+		<ion-content>
+		
+		<div class="header-SideMenu">
+		
+			<div class="logo-1">
+					<a href="#"><img ng-src="img/logo-1.png" ></a> 
+			</div>
+			  
+			</ion-header-bar>
+			
+		</div>
+			<div class="side-nav-barr">
+				<div class="search-nav-barr">Search</div>
+				<div class="User-Search-Location-nav">
+					<div class="list">
+					  <label class="item item-input">
+						<input type="text" placeholder="Enter"><i class="icon ion-search placeholder-icon"></i>
+					  </label>										 
+					</div>
+				</div>
+				<div class="nav-details">				
+					<ion-list>				
+						<ion-item menu-close href="#" class="nav-itm">
+						<i class="ion-ios-eye-outline"></i>User:	Joseph
+						</ion-item>
+						<ion-item menu-close href="#" class="nav-itm">
+						<i class="ion-android-radio-button-on"></i>Bookings
+						</ion-item>
+						<ion-item menu-close href="#" class="nav-itm">
+						<i class="ion-ios-heart-outline"></i> Favorites
+						</ion-item>
+						<ion-item menu-close href="#" class="nav-itm"> 
+						<i class="ion-ios-gear-outline"></i>Settings
+						</ion-item>
+					</ion-list>
+				</div>	
+			</div>	
+			</ion-content>
+  </ion-side-menu>
+
+  <ion-side-menu-content>
+			
+			<div class="header">
+				<div class="nav-menu "><button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button> 
+				</div>
+				<div class="logo-1">
+					<a href="#"><img ng-src="img/logo-1.png" ></a> 
+				</div>
+			</div>
+				<div ng-controller="homeScreenCtrl" > 
+					<div class="search">Search Results</div>  
+				 </div>
+  </ion-side-menu-content> 
+</ion-side-menus>
+           
+
