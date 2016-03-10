@@ -1,0 +1,208 @@
+/* General
+==================================*/
+h1 {
+    color: #fff;
+    text-shadow: 0 1px 0px #000;
+    /* font-size: 42px; */
+}
+
+
+/* Utilities
+==================================*/
+.title-bordered {
+    border-top: solid 2px #bbb;
+    padding-top: 30px;
+}
+
+p {
+    color: #555;
+    margin: 0 0 25px;
+}
+
+.scroll {
+    height: 100%;
+}
+
+
+/* Menu
+==================================*/
+.menu .bar.bar-header.expanded {
+    transition: all .5s ease-in-out;
+}
+
+.menu-open .bar.bar-header.expanded {
+    background-color: #222;
+}
+
+.menu h2 {
+    bottom: 0;
+    font-size: 18px;
+    left: 16px;
+    position: absolute;
+}
+
+.menu .avatar {
+    height: 88px;
+    width: 88px;
+}
+
+.menu.menu-left * {
+    font-weight: bold;
+}
+
+.menu-open .ion-navicon {
+    transform: rotate(-360deg);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.menu-open .ion-navicon:before {
+    content: "\f2ca";
+}
+
+
+/* Login
+==================================*/
+.app-icon {
+    background-color: #fff;
+    background: url('../img/logos.png') center;
+    background-size: cover;
+    border-radius: 50%;
+    height: 125px;
+    margin: 0 auto;
+    width: 125px;
+}
+
+.social-login {
+    position: fixed;
+    bottom: 0;
+}
+
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+
+
+.logoImage{
+height: 134px !important;
+width: 310px !important;  
+ background-repeat: no-repeat !important;
+ background-position: center !important;
+ background-size: contain !important;
+ border-radius: 0% !important;
+ display: inline-block !important;
+ left: 0 !important;
+ position: absolute !important;
+}
+.paddingleft{
+    padding-left: 0px !important;
+}
+
+p.ccc {
+    text-align: center;
+}
+.centerS {
+    width: 100%;
+}
+span.imageCenter {
+    width: 60%;
+    float: right;
+}
+span.imageCenter img {
+    width: 35%;
+}
+.item1 h2 {
+    color: black !important;
+}
+
+
+
+/* my css menu class  ------------ start*/
+.navsubNav a.item-content {
+    padding: 0 !important;
+}
+.navsubNav{
+  background-clip: padding-box;
+  background-image: url("../img/arrow-n.png");
+  background-origin: padding-box;
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: 10px auto;
+  margin: 0;
+  min-height: auto !important;
+  padding: 2px 16% 0 ;
+  text-transform: capitalize;
+  font-weight: normal;
+}
+.menu p.sessionEmail {
+  bottom: -4px;
+  color: #ffffff;
+  font-size: 16px;
+  left: 110px;
+  position: absolute;
+  text-transform: capitalize;
+}
+.menu h2.sessionName {
+  font-size: 18px;
+  left: 108px;
+  position: absolute;
+  top: 0;
+}
+.navsubNavhead {
+  color: #000000;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 6px 18px;
+  min-height:auto!important;
+}
+.golu {
+  background: #00A72B;
+  border-radius: 50%;
+  clear: both;
+  float: left;
+  height: 10px;
+  margin: 5px 8px 0 0 ;
+  width: 10px;
+}
+
+
+.minHieghtSide {
+    height: 51px;
+    background: rgba(208, 206, 206, 0.51);
+}
+
+.menu .bar.bar-header.expanded {
+    box-shadow: none;
+    min-height: 86px;
+    color: #fff;
+}
+.has-expanded-header {
+    top: 87px!important;
+}
+.navsubNavhead a.item-content {
+    padding: 0 !important;
+}
+.flotleftPad{
+padding-left: 18px !important;
+}
+/* my css menu class  ------------ end*/
