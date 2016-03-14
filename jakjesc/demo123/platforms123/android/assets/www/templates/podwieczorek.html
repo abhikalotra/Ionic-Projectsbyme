@@ -1,0 +1,218 @@
+ <ion-header-bar class="bar-balanced">
+	<button class="button back-button buttons no-text button-clear header-item" ng-click="ionicGoBack()">
+<i class="icon ion-ios-arrow-back"></i>
+	<div class="title title-left header-item" style="transform: translate3d(0px, 0px, 0px); right: 68px;">Podwieczorek</div>
+	</button>
+ </ion-header-bar>
+
+<ion-view view-title="Drugie Śniadanie">
+    <ion-content  ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+<!--         <div class="item card-item">
+            <div  class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap flotleftPad" >
+                    <h1 style="color: black;">Podwieczorek</h1>                   
+                </div>
+            </div>
+        </div>
+	  <div class="item card-item">
+            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    <span class="avatar" style="background-image: url('img/Diet-Catering-in-Wroclaw.jpg');"></span>
+                    <strong>{{resultDetails.name}}</strong> {{resultDetails.email}}
+                    <div class="card-footer text-right">
+                        <div class="pull-left">
+							<p>{{resultDetails.adres}}</p>
+							<p>{{resultDetails.nazwa}}</p> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="item card-item">
+			<form method ="post"> 
+				<ion-md-input type="date" ng-model="PodwieczorekForm.date" placeholder="Date" required></ion-md-input>
+					<button ng-click="PodwieczorekDetails()" class="button button-full button-balanced ink">Podwieczorek</button>
+			</form>	
+		</div>
+ -->
+ 
+<div ng-if="showUserScore==1">
+	<div id="myValues" ng-show="myValue"> 
+	
+	<div class="items card-items">		
+				<div class="card stable-bg ink ink-dark">
+					<div class="item1 item-avatar item-text-wrap1 paddingleft">                   
+				
+			  <div class="container_s"> 
+	    <div class="center_logo"><img src="img/logoSan.png"></div>
+		<div class="after-logo-text">
+		<p class="dz_menu">Dzisiejsze menu</p>
+		<p class="witold_menu">{{myValue.name}}</p>
+		<p class="witold_menu">( {{getDayNames}}  {{myValue.dzien}}, {{myValue.nazwa_zestawu}}, 0 Kcal )</p>
+		</div>
+		<div class="sniadaine_1">
+		<p class="witold_menu"> {{myValue.posilek_rodzaj}} ( {{myValue.godzina}} ) {{myValue.opis_dania}} </p>
+		<p class="biale-text">{{myValue.suma_kalorii}} kcal: {{myValue.nazwa_dania}}</p>
+		</div>
+	
+		
+		<div class="logo_two-box">
+		<div class="logo_tw1">
+		<img src="img/s1.png">		
+		    <h2>Pomaranczowa obwódka:</h2>
+			<p>posiłek przeznaczony do podgrzania
+			w temperaturze nieprzekraczajacej
+			120 ° C. Przed podgrzaniem, folie
+			ochronna nalezy jedynie przebic
+			bez jej sciagniecia.
+		</p>
+		</div>
+		<div class="logo_tw2">
+		<img src="img/s2.png">		
+		   <h2>Zielona obwódka:</h2>
+		   <p>posiłek nie wymaga podgrzania.
+			Zalecana temperatura spozycia jest
+			temperatura pokojowa.
+		</p>
+		</div>
+		</div>		
+		
+      </div>					 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-if="showUserMobile==1" >
+	<div ng-show="errors">
+		<div class="card stable-bg ink ink-dark">
+				<div class="item item-avatar item-text-wrap flotleftPad in in done">
+					<div class="centerS">
+						 <h2><strong><p class="ccc">{{errors}}</strong> </h2>
+						</div> 						
+				</div>
+			</div>
+	</div>	
+</div>
+	
+
+<div ng-if="Underdevelopment==1" >
+	<div ng-show="errors">
+		<div class="card stable-bg ink ink-dark">
+				<div class="item item-avatar item-text-wrap flotleftPad in in done">
+					<div class="centerS">
+					 <h2><strong><p class="ccc">{{Underdevelopment}}</strong> </h2>
+					</div> 				
+				</div>
+			</div>
+		</div>	
+</div>		
+	
+	</ion-content>
+</ion-view>
+
+
+<style>
+.bar-assertive-900 {
+    background: #01A72B !important;
+}
+.container_s {
+  margin: 0 auto;
+  max-width: 980px;
+  width: 100%;
+  padding: 2%;
+  box-sizing: border-box;
+}
+ .center_logo {
+  text-align: center;
+}
+.center_logo img {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 1% 8%;
+}
+.logo_tw1 h2 {
+    font-size: large;
+	font-weight: bold;
+ }
+.logo_tw2 h2 {
+    font-size: large;
+	font-weight: bold;
+ }
+ .center_logo img {
+    box-shadow: none;
+} 
+.logo_tw1 img {
+    box-shadow: none;
+} 
+.logo_tw2 img {
+    box-shadow: none;
+}
+.after-logo-text {
+  text-align: center;
+  width: 100%;
+}
+.after-logo-text p {
+  /*line-height: 24px;*/
+}
+.dz_menu {
+  font-size: 32px;
+      padding-top: 19px;
+}
+.witold_menu {
+  font-size: 20px;
+  line-height: normal;
+}
+.sniadaine_1 {
+  padding: 1% 0;
+  text-align: center;
+  width: 100%;
+}
+.sniadaine_1 p {
+  line-height: 30px;
+}
+.biale-text {
+  color: #948a37;
+  font-size: 20px;
+}
+.logo_two-box {
+  float: left;
+  padding: 4% 0;
+  width: 100%;
+}
+
+.logo_tw1 {
+  width: 50%;
+  float: left;
+}
+.logo_tw2 {
+  width: 50%;
+  float: left;
+}
+.logo_tw1 > img {
+  float: left;
+  max-width: 100%;
+  padding: 0 4% 0 0;
+}
+.logo_tw2 > img {
+  float: left;
+  max-width: 100%;
+  padding: 0 4% 0 0;
+}
+@media (max-width:700px) {
+.logo_tw1, .logo_tw2 {
+  width: 100%;
+  padding: 2% 0;
+}
+}
+@media (max-width:360px) {
+.logo_tw1, .logo_tw2 {
+  text-align:center;
+}	
+.logo_tw1 img, .logo_tw2 img {
+  float: none;
+}
+}
+</style>

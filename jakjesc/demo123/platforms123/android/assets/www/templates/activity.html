@@ -1,0 +1,64 @@
+<ion-view view-title="Activity Etykietki">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+        <div class="item card-item">
+            <div  class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    <h1 style="color: black;">Etykietki</h1>                   
+                </div>
+            </div>
+        </div>
+		   <div class="item card-item">
+            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    <span class="avatar" style="background-image: url('img/Dietetyczne-odchudzanie-we-Wroclawiu.jpg');"></span>
+                    <strong>{{resultDetails.name}}</strong> {{resultDetails.email}}
+                    <div class="card-footer text-right">
+                        <div class="pull-left">
+							<p>{{resultDetails.adres}}</p>
+							<p>{{resultDetails.nazwa}}</p> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="item card-item">
+			<form method ="post"> 
+				<ion-md-input type="date" ng-model="EtykietkiForm.date" placeholder="Date"  ></ion-md-input>
+				 	<button ng-click="EtykietkiDetails()" class="button button-full button-balanced ink">Etykietki</button>
+			</form>	
+		</div>
+		
+	
+<div ng-if="showUserScore==1">
+	<div id="myValues" ng-show="myValue">				
+			<div class="items card-itemss">		
+				<div class="card stable-bg ink ink-dark">
+					<div class="item1 item-avatar item-text-wrap1" style="transform: rotate(-90deg);box-sizing: border-box;    margin: 0 0 0 0px;width: 380px;    height: 340px;">
+					   <h2><strong>{{myValue.id_user}} - {{myValue.name}}</strong> </h2>
+							<p class="ccc"> {{myValue.adres}} {{myValue.miejscowosc}}</p>
+							<p class="ccc"><strong>Tel.</strong> {{myValue.telefon}}</p>
+							<p class="ccc"><strong>{{getDayNames}}.</strong> {{myValue.dzien}}</p>
+						<a class="image" style="height: 265px;">
+							<span class="avatar logoImage" style="background-image: url('img/logo-full.png');"> </span>
+						</a>                  
+					   
+					</div>
+				</div>
+			</div>		
+	</div>
+</div>
+
+<div ng-if="showUserMobile==1" >
+	<div ng-show="errors">
+		<div class="centerS">
+			 <h2><strong><p class="ccc">{{errors}}</strong> </h2>
+			  <span class="imageCenter" > <img src="img/sad4.png"></span>
+		</div>
+	   
+	</div>	
+</div>
+
+	</ion-content>
+</ion-view>
+
