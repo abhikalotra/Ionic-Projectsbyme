@@ -1,0 +1,26 @@
+﻿<ion-view view-title="Login" align-title="left">
+    <ion-content style="background: url(img/login.jpg) center; background-size: cover;">
+        <div class="hero no-header flat">
+            <div class="content">
+                <div class="app-icon"></div>
+                <h1>Jakjesc</h1>
+            </div>
+        </div>
+		<form method ="post">   
+			<div class="list">
+				<ion-md-input ng-model="registrationForm.email" placeholder="Email"  highlight-color="balanced" type="email"  ></ion-md-input>
+				<ion-md-input ng-model="registrationForm.password" placeholder="Password" highlight-color="energized" type="password"></ion-md-input>
+			</div>
+		
+			<div class="padding">
+				<button  class="button button-full button-balanced ink" ng-click="registrationUser()">Register</button> 
+				
+				<!-- <input type="submit" name="submit" value="Register" ng-click="registrationUser()" class="button button-full button-balanced ink"> -->	
+				
+				<a ng-href="app.login" ui-sref="app.login" class="button button-full button-assertive ink">Login</a>
+				
+			</div>  
+		</form>
+		
+    </ion-content>
+</ion-view>

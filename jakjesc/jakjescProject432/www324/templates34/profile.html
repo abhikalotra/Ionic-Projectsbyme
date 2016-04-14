@@ -1,0 +1,29 @@
+ <ion-header-bar class="bar-balanced bar bar-header disable-user-behavior myheader">	
+	<div class="title title-left header-item" style="transform: translate3d(0px, 0px, 0px); right: 68px;">JakJeść.pl - <span>Witaj,</span>  {{resultDetails.name}}.</div>
+	<div class="buttons buttons-right header-item">
+		<span class="right-buttons">
+                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right">
+                </button>
+          </span>
+		</div>
+		
+ </ion-header-bar> 
+
+<ion-view view-title="Profile">
+    <!-- <ion-content ng-class="{expanded:$scope.isExpanded}"> -->
+    <ion-content>		
+		
+		<div class="tejao-main">
+			 <div class="tejo-1">Twój zestaw :</div>
+			 <div class="tejo-2">{{ resultDetails.nazwa }}</div>    
+			 <div class="tejo-3">Zamówienia pozostało dni :</div>
+			 <div class="tejo-4">Dni {{ remaingDay }}</div>
+		</div>	 
+				 
+		<div class="clanderDiv">
+			<div id='calendar'></div>
+		</div>
+    
+    </ion-content>
+</ion-view>
+ 

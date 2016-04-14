@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="E:\node\IonicTheme\demo\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d21058e1aa67f85014b0ef95140fd87b188ddc60">
+        <dex dex="E:\node\IonicTheme\demo\platforms\android\build\intermediates\pre-dexed\debug\classes-7c127532d3af9a06ca5283fb7e0cd60783e636bf.jar" />
+    </item>
+    <item
+        jar="E:\node\jakjesc\jakjescProject\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3f104d01cb47ed0ecefae9fd3b3262f3f3c322ff">
+        <dex dex="E:\node\jakjesc\jakjescProject\platforms\android\build\intermediates\pre-dexed\debug\classes-ffdc7d5099a72e3b3b3ac9c99e308ce2a77cc479.jar" />
+    </item>
+
+</items>

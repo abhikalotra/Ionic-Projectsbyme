@@ -1,0 +1,477 @@
+/* General
+==================================*/
+h1 {
+    color: #fff;
+    text-shadow: 0 1px 0px #000;
+    /* font-size: 42px; */
+}
+
+
+/* Utilities
+==================================*/
+.title-bordered {
+    border-top: solid 2px #bbb;
+    padding-top: 30px;
+}
+
+p {
+    color: #555;
+    margin: 0 0 25px;
+}
+
+.scroll {
+    height: 100%;
+}
+
+
+/* Menu
+==================================*/
+.menu .bar.bar-header.expanded {
+    transition: all .5s ease-in-out;
+}
+
+.menu-open .bar.bar-header.expanded {
+    background-color: #222;
+}
+
+.menu h2 {
+    bottom: 0;
+    font-size: 18px;
+    left: 16px;
+    position: absolute;
+}
+
+.menu .avatar {
+    height: 88px;
+    width: 88px;
+}
+
+.menu.menu-left * {
+    font-weight: bold;
+}
+
+.menu-open .ion-navicon {
+    transform: rotate(-360deg);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.menu-open .ion-navicon:before {
+    content: "\f2ca";
+}
+
+
+/* Login
+==================================*/
+.app-icon {
+  background: #ffffff url("../img/logo-ful.png") no-repeat scroll center center / 95% auto;
+  height: 165px;
+  margin: 0 auto 6%;
+  opacity: 0.8;
+}
+
+.social-login {
+    position: fixed;
+    bottom: 0;
+}
+
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+
+
+.logoImage{
+height: 134px !important;
+width: 310px !important;  
+ background-repeat: no-repeat !important;
+ background-position: center !important;
+ background-size: contain !important;
+ border-radius: 0% !important;
+ display: inline-block !important;
+ left: 0 !important;
+ position: absolute !important;
+}
+.paddingleft{
+    padding-left: 0px !important;
+}
+
+p.ccc {
+    text-align: center;
+}
+.centerS {
+    width: 100%;
+}
+span.imageCenter {
+    width: 60%;
+    float: right;
+}
+span.imageCenter img {
+    width: 35%;
+}
+.item1 h2 {
+    color: black !important;
+}
+
+
+
+/* my css menu class  ------------ start*/
+.navsubNav a.item-content {
+    padding: 0 !important;
+}
+.navsubNav{
+  background-clip: padding-box;
+  /* background-image: url("../img/arrow-n.png"); */
+  background-origin: padding-box;
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: 10px auto;
+  margin: 0;
+  min-height: auto !important;
+  padding: 10% 16% 0 ;
+  text-transform: capitalize;
+  font-weight: normal;
+}
+.menu p.sessionEmail {
+  bottom: -4px;
+  color: #ffffff;
+  font-size: 16px;
+  left: 110px;
+  position: absolute;
+  text-transform: capitalize;
+}
+.menu h2.sessionName {
+  font-size: 18px;
+  left: 108px;
+  position: absolute;
+  top: 0;
+}
+.navsubNavhead {
+  font-size: 17px;
+  padding: 6px 18px;
+  }
+.golu {
+  background: #00A72B;
+  border-radius: 50%;
+  clear: both;
+  float: left;
+  height: 10px;
+  margin: 5px 8px 0 0 ;
+  width: 10px;
+}
+
+
+.minHieghtSide {
+    height: 51px;
+    background: rgba(208, 206, 206, 0.51);
+}
+
+.menu .bar.bar-header.expanded {
+    box-shadow: none;
+    min-height: 86px;
+    color: #fff;
+}
+
+.navsubNavhead a.item-content {
+    padding: 0 !important;
+}
+.flotleftPad{
+padding-left: 18px !important;
+}
+/* my css menu class  ------------ end*/
+.bar-assertive-900 {
+    background: #01A72B !important;
+}
+.container_s {
+  margin: 0 auto;
+  max-width: 980px;
+  width: 100%;
+  padding: 2%;
+  box-sizing: border-box;
+}
+ .center_logo {
+  text-align: center;
+}
+.center_logo img {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 1% 8%;
+}
+ .center_logo img {
+    box-shadow: none;
+} 
+.logo_tw1 img {
+    box-shadow: none;
+} 
+.logo_tw2 img {
+    box-shadow: none;
+}
+.after-logo-text {
+  text-align: center;
+  width: 100%;
+}
+
+.witold_menu {
+  font-size: 20px;
+  line-height: normal;
+}
+.sniadaine_1 {
+  padding: 1% 0;
+  text-align: center;
+  width: 100%;
+}
+.sniadaine_1 p {
+  line-height: 30px;
+}
+.biale-text {
+  color: #948a37;
+  font-size: 20px;
+}
+.logo_two-box {
+  float: left;
+  padding: 4% 0;
+  width: 100%;
+}
+
+.logo_tw1 {
+  width: 50%;
+  float: left;
+}
+.logo_tw2 {
+  width: 50%;
+  float: left;
+}
+.logo_tw1 > img {
+  float: left;
+  max-width: 100%;
+  padding: 0 2% 0 0;
+}
+.logo_tw2 > img {
+  float: left;
+  max-width: 100%;
+  padding: 0 4% 0 0;
+}
+@media (max-width:700px) {
+.logo_tw1, .logo_tw2 {
+  width: 100%;
+  padding: 2% 0;
+}
+}
+@media (max-width:360px) {
+.logo_tw1, .logo_tw2 {
+  text-align:center;
+}
+	
+.logo_tw1 img, .logo_tw2 img {
+  float: none;
+}
+}
+</style>
+
+/* STJ  new style start */ 
+
+ion-side-menu.menu.menu-right {
+  background: #292929!important;
+}
+.stable-bg.has-expanded-header {
+  top: 0 !important;
+  background: #292929;
+  color:#fff;
+}
+.scroll ul li.navsubNavhead {
+  color: #e7e7e7;
+  font-size: 20px;
+  padding: 0 0 12% 4%;
+  
+}
+ .navsubNavhead .menu-close.navsubNav {
+  background-size: 10px auto;
+  border-bottom: 1px solid;
+  margin: 8% 6% 0 16%;
+  padding: 0 0 4% 0;
+  text-transform: capitalize;
+} 
+a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
+  /* background: #fe7b0f !important; */
+}
+.menu-close.navsubNavhead h4 {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.golu_dzis {
+  display: block;
+  font-weight: normal;
+  width: 94%;
+}
+.golu_dzis img {
+  float: left;
+  margin: 1px 6px 0 0;
+  padding: 0;
+}
+span.golu_dzis p {
+  border-bottom: 1px solid #ffffff;
+  color: #ffffff;
+  float: left;
+  padding: 0 0 8%;
+  width: 87%;
+}
+
+.item-md-label {
+  padding: 30px 30px 0 0 !important;
+}
+.scroll .ng-pristine.ng-valid.ng-valid-email {
+  margin: 40px 0 0;
+}
+.scroll .hero.no-header {
+  height: 260px;
+}
+.padding .button.button-full.button-assertive.ink {
+  background-color: rgba(242, 114, 4, 0.8);
+}
+.md-input.ng-pristine.ng-untouched.ng-valid.ng-valid-email, .md-input.ng-pristine.ng-valid.ng-valid-email.ng-touched {
+  background-color: rgba(6, 156, 46, 0.8);
+}
+.item.item-input.item-md-label span.input-label {
+  font-size: 14px;
+  letter-spacing: normal;
+  opacity: 1;
+}
+.item-md-label .hightlight {
+  width: 92%;
+}
+.title.title-left.header-item {
+  font-size: 16px;
+}
+.title.title-left.header-item  span {
+  font-size: 16px;
+  font-weight: normal;
+}
+.items.card-items .card.stable-bg.ink.ink-dark {
+  background: #ffffff ;
+  box-shadow: none;
+}
+p.dz_menu {
+  color: #00a31b;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 4% 0 1%;
+}
+p.zestwa1600 {
+  color: #fb7100;
+  font-size: 27px;
+  padding: 2% 0 0 0;
+}
+.witold_menu {
+  font-size: 18px;
+  line-height: 26px;
+}
+.logo_tw2 h2, .logo_tw1 h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;    
+}
+.logo_tw1 p, .logo_tw2 p {
+    font-style: italic;
+    font-size: 14px;
+    line-height: normal;
+    letter-spacing: normal;
+}
+.JakJescMargin{
+    left: 0 !important;
+	font-size: 28px !important;
+    font-weight: bold;
+}
+.clanderDiv {
+    width: 100%;
+    padding: 0px 7px;
+}
+.tejao-main {
+    float: left;
+    width: 100%;
+    padding: 4% 6%;
+	margin-top: 12%;	
+}
+ .tejo-1, .tejo-3 {
+  color: #33CD5F;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 2% 0;
+  text-align: center;
+}
+.tejo-2, .tejo-4  {    
+    color: #fd7300;
+    text-align: center;
+    font-size: 24px;
+    padding: 2% 0;
+	font-weight: normal;
+}
+.fc-toolbar .fc-left {
+  float: left;
+  width: 100%;
+}
+.fc-toolbar .fc-left h2 {
+  padding: 8% 0;
+  width: 100%;
+}
+.fc-prev-button.fc-button.fc-state-default.fc-corner-left {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border-right: 1px solid #ffffff;
+  font-size: 24px;
+  height: 95px;
+  margin: 0;
+  position: absolute;
+  left: 6px;
+  top: 207px;
+}
+.fc-today-button.fc-button.fc-state-default.fc-corner-left.fc-corner-right.fc-state-disabled, .fc-today-button.fc-button.fc-state-default.fc-corner-left.fc-corner-right{
+  display: none;
+}
+
+.fc-next-button.fc-button.fc-state-default.fc-corner-right {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border-left: 1px solid #ffffff;
+  font-size: 24px;
+  height: 95px;
+  margin: 0;
+  position: absolute;
+  right: 6px;
+  top: 207px;
+} 
+td.fc-event-container {
+    position: relative;
+    top: -23px;
+}
+a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
+    padding: 1px 36px 22px 9px;
+    position: absolute;
+    top: -2px;
+    z-index: -1;
+}
+
+td.fc-day-number {
+    font-size: 16px;
+}
+
+-moz-colors: #fff;

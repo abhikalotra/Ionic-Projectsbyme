@@ -1,0 +1,82 @@
+﻿  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+
+
+<ion-view view-title="Activity Kuriera">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+        <div class="item card-item">
+            <div  class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    <h1 style="color: black;">Kuriera</h1>                   
+                </div>
+            </div>
+        </div>
+	  <div class="item card-item">
+            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    <span class="avatar" style="background-image: url('img/Diet-Catering-in-Wroclaw.jpg');"></span>
+                    <strong>{{resultDetails.name}}</strong> {{resultDetails.email}}
+                    <div class="card-footer text-right">
+                        <div class="pull-left">
+							<p>{{resultDetails.adres}}</p>
+							<p>{{resultDetails.nazwa}}</p> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="item card-item">
+			<form method ="post"> 
+				<ion-md-input type="date" ng-model="KurieraForm.date" placeholder="Date" required></ion-md-input>
+					<button ng-click="KurieraDetails()" class="button button-full button-balanced ink">Kuriera</button>
+			</form>	
+		</div>
+
+ 
+<div ng-if="showUserScore==1">
+	<div id="myValues" ng-show="myValue"> 
+	
+	<div class="items card-items">		
+				<div class="card stable-bg ink ink-dark">
+					<div class="item1 item-avatar item-text-wrap1 paddingleft">                   
+					<div class="container">              
+					  <table class="table">
+						<thead>
+						  <tr>
+							<th>Imię i nazwisko</th>
+							<th>Ulica i numer</th>
+							<th>Telefon</th>
+							<th>Randka</th>
+							<th>Godziny</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr class="success">
+							<td> {{myValue.name}}</td>
+							<td> {{myValue.adres}}, {{myValue.kod_pocztowy}}, {{myValue.miejscowosc}}</td>
+							<td>{{myValue.telefon}}</td>
+							<td>{{myValue.dzien}}</td>
+							<td>{{myValue.godzina}}</td>
+						  </tr>				
+						</tbody>
+					  </table>
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-if="showUserMobile==1" >
+	<div ng-show="errors">
+		<div class="centerS">
+			 <h2><strong><p class="ccc">{{errors}}</strong> </h2>
+			  <span class="imageCenter" > <img src="img/sad4.png"></span>
+		</div>
+	   
+	</div>	
+</div>
+			
+	
+	</ion-content>
+</ion-view>

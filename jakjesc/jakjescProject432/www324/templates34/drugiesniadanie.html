@@ -1,0 +1,125 @@
+ <ion-header-bar class="bar-balanced">
+	<button class="button back-button buttons no-text button-clear header-item" ng-click="ionicGoBack()">
+<i class="icon ion-navicon-round"></i>
+	<!-- <div class="title title-left header-item" style="transform: translate3d(0px, 0px, 0px); right: 68px;">Drugie Śniadanie</div> -->
+	</button>
+	<div class="title title-left header-item" style="transform: translate3d(0px, 0px, 0px); right: 68px;">Drugie Śniadanie - <span>Witaj,</span> {{myValue.name}}.</div>
+ </ion-header-bar>
+
+<ion-view view-title="Drugie Śniadanie">
+    <ion-content  ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+       <!--  <div class="item card-item">
+            <div  class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap flotleftPad">
+                    <h1 style="color: black;">Drugie Śniadanie</h1>                   
+                </div>
+            </div>
+        </div>
+	  <div class="item card-item">
+            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    <span class="avatar" style="background-image: url('img/Diet-Catering-in-Wroclaw.jpg');"></span>
+                    <strong>{{resultDetails.name}}</strong> {{resultDetails.email}}
+                    <div class="card-footer text-right">
+                        <div class="pull-left">
+							<p>{{resultDetails.adres}}</p>
+							<p>{{resultDetails.nazwa}}</p> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="item card-item">
+			<form method ="post"> 
+				<ion-md-input type="date" ng-model="DrugieSniadanieForm.date" placeholder="Date" required></ion-md-input>
+					<button ng-click="DrugieSniadanieDetails()" class="button button-full button-balanced ink">Drugie Śniadanie</button>
+			</form>	
+		</div> -->
+
+ 
+<div ng-if="showUserScore==1">
+	<div id="myValues" ng-show="myValue"> 
+	
+	<div class="items card-items">		
+				<div class="card stable-bg ink ink-dark">
+					<div class="item1 item-avatar item-text-wrap1 paddingleft">                   
+				
+
+			  <div class="container_s"> 
+	    <div class="center_logo"><img src="img/logoSan.png"></div>
+		<div class="after-logo-text">
+		<p class="dz_menu">Dzisiejsze menu </p>
+			<p class="zestwa1600">{{myValue.nazwa_zestawu}} kcal</p>
+			
+			<p class="dz_menu">{{myValue.godzina}}</p>
+			<p class="zestwa1600">{{myValue.posilek_rodzaj}} ok. {{ myValue.suma_kalorii }}kcal</p>
+			
+			<p class="witold_menu">{{myValue.opis_dania}}</p>
+								 
+		<!-- <p class="witold_menu">{{myValue.name}}</p>
+		<p class="witold_menu">( {{ getDayNames }} {{myValue.dzien}}, {{myValue.nazwa_zestawu}}, 0 Kcal )</p> -->
+		</div>
+		<!-- <div class="sniadaine_1">
+		<p class="witold_menu"> {{myValue.posilek_rodzaj}} ( {{myValue.godzina}} ) {{myValue.opis_dania}} </p>
+		<p class="biale-text">{{myValue.suma_kalorii}} kcal: {{myValue.nazwa_dania}}</p>
+		</div> -->
+	
+		
+	<div class="logo_two-box">
+	<div class="logo_tw1">
+		<img src="img/s1.png">		
+		<h2>Pomarańczowa obwódka:</h2>
+		<p>posiłek przeznaczony do podgrzania
+		w temperaturze nieprzekraczającej
+		120 ° C. Przed podgrzaniem, folię
+		ochronną należy jedynie przebić
+		bez jej ściągnięcia.
+		</p>
+	</div>
+	<div class="logo_tw2">
+		<img src="img/s2.png">		
+		<h2>Zielona obwódka:</h2>
+		<p>posiłek nie wymaga podgrzania.
+		Zalecaną temperaturą spozycia jest
+		temperatura pokojowa.
+		</p>
+	</div>
+	</div>	
+		
+      </div>					 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-if="showUserMobile==1" >
+	<div ng-show="errors">
+		<div class="card stable-bg ink ink-dark">
+				<div class="item item-avatar item-text-wrap flotleftPad in in done">
+					<div class="centerS">
+						 <h2><strong><p class="ccc">{{errors}}</strong> </h2>
+						</div> 						
+				</div>
+			</div>
+		</div>	
+</div>
+		
+
+<div ng-if="Underdevelopment==1" >
+	<div ng-show="errors">
+		<div class="card stable-bg ink ink-dark">
+				<div class="item item-avatar item-text-wrap flotleftPad in in done">
+					<div class="centerS">
+					 <h2><strong><p class="ccc">{{Underdevelopment}}</strong> </h2>
+					</div> 				
+				</div>
+			</div>
+		</div>	
+</div>		
+			
+	
+	</ion-content>
+</ion-view>
+
