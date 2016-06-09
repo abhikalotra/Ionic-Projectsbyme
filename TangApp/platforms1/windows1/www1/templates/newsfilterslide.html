@@ -1,0 +1,60 @@
+﻿ <ion-header-bar  style="background: #93c22d;height: 105px;"  >	
+	<header class="hdr-bck-lg">   
+		<div class="back-arrow">  
+			<a ng-href="#" ng-click="ionicGoBack()"><img alt="Splash Logo" ng-src="img/back-arrow.png"></a>    
+			<h2>{{ 'NEWS' | translate }}</h2>
+		</div>
+		<div class="ba-logo">
+		  <img  alt="image" ng-src="img/tang-app-p.png">
+		</div>
+  </header>	
+ </ion-header-bar>
+ 
+<ion-view view-title="{{ 'NEWS' | translate }}" >  
+  <ion-content  style="top: 112px;" >
+ 
+ <section class="bck-lg sliderRadius">
+		
+	<ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false" >
+	  <ion-slide ng-repeat="newsSlide in newsSlideDetails">
+		<div class="box blue">
+			
+			<div class="sec-ab slide-min-height">
+			  <!-- <p>{{$index}}</p> -->
+			  <h1>{{newsSlide.post_title}}</h1>
+			   <p>{{newsSlide.post_date | limitTo: 10 | limitTo: -2 }}-{{newsSlide.post_date | limitTo: 7 | limitTo: -2 }}-{{newsSlide.post_date | limitTo: 4 | limitTo: -6 }} </p>
+			  <div class="nwes-img" ><img ng-if="newsSlide.post_img" src="{{newsSlide.post_img}}"></div> 
+			   <p  data-ng-bind-html="newsSlide.post_content"></p> 
+			  </div>
+		</div>		
+	  
+	  <div class="socil-icon">		
+		<div class="social-icon">
+		  <div class="tweet-wrapper">
+			<ul>
+				
+				<li>
+				<a href="#" abhi="https://twitter.com/intent/tweet?url={{newsSlide.url}}&hashtags=TangApp&text={{newsSlide.post_title}}&original_referer="  onclick="window.open(this.getAttribute('abhi'), '_system', 'location=yes'); return false;" alt="Twitter" style="width: 42px;" />
+				<img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" style="width: 42px;" />
+				</a>
+				</li>
+
+				<li><a href="#" facebookss="https://www.facebook.com/sharer/sharer.php?s=100&p[url]={{newsSlide.url}}&p[images][0]=&p[title]={{newsSlide.post_title}}&p[summary]=Description%20goes%20here!" onclick="window.open(this.getAttribute('facebookss'), '_system', 'location=yes'); return false;"><img src="img/fb.png"/></a></li>
+				
+				<ul>
+			</div>  
+		</div>
+		<div class="lg-img"><a href="#" urls="{{newsSlide.url}}" onclick="window.open(this.getAttribute('urls'), '_system', 'location=yes'); return false;"><img src="img/lglogo.png" alt="{{newsSlide.citta}}"></a>
+		</div>
+		</div> 	
+		
+	  </ion-slide>	
+	</ion-slide-box>	
+	 
+  </section>
+ 
+   </ion-content>
+</ion-view>
+
+
+ 

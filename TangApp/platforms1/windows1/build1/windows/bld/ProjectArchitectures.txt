@@ -1,0 +1,1 @@
+E:\node\ionic\tangApp\tangApp\platforms\windows\CordovaApp.Windows10.jsproj;neutral

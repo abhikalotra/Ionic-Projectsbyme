@@ -1,0 +1,36 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "tangApp"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "tangApp"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "tangApp"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "tangApp"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "tangApp"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "tangApp"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "tangApp"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "tangApp"
+        }
+    },
+    "dependent_plugins": {}
+}

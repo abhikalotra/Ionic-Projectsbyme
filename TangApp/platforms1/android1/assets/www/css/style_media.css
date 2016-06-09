@@ -1,0 +1,34 @@
+@media (max-width:320px) {
+.tang-logo img {
+ max-width:74%;
+}
+.media_cont_top {
+  top: 145px !important;
+}
+.boxes {
+    top: 150px;
+    left: 1%;
+    width: 310px;   
+}
+.boxesFestival, .boxesEvents {
+    left: 2%;
+    top: 30px;
+    width: 306px;
+ 
+}
+.tang-p h1 {
+  font-size: 20px;
+  margin: 2% 0;
+  padding: 6% 0 3% 10%;  
+}
+.tang-logo img {
+  padding: 6% 0;
+}
+.media_map-header {
+  margin: 34% 0 0;
+}
+div#map {
+    height: 245px;
+    width: 305px;
+}
+}

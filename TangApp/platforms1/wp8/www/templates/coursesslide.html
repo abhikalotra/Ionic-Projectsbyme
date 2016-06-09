@@ -1,0 +1,61 @@
+ <ion-header-bar  style="background: #93c22d;height: 131px;"  >	
+	<header class="hdr-bck-lg">   
+		<div class="back-arrow">  
+			<a ng-href="#" ng-click="ionicGoBack()"><img alt="Splash Logo" ng-src="img/back-arrow.png"></a>    
+			<h2>COURSES</h2>
+		</div>
+		<div class="ba-logo">
+		  <img  alt="image" ng-src="img/tang-app-p.png">
+		</div>
+  </header>	
+ </ion-header-bar>
+ 
+<ion-view view-title="COURSES" >  
+  <ion-content  style="top: 184px;" >
+ 
+ <section class="bck-lg">
+		
+	<ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false" >
+	  <ion-slide ng-repeat="coursesSlide in coursesSlideDetails">
+		<div class="box blue">
+			<div class="sec-ab">
+			  <!-- <p>{{$index}}</p> -->
+			   <h1>{{coursesSlide.titolo}}</h1>
+			  <p>{{coursesSlide.data_da}}  {{coursesSlide.citta}} </p> 			 
+			  
+			  <div class="nwes-img"><img  ng-if="coursesSlide.img" src="{{coursesSlide.img}}"></div> 
+			  
+			  <p data-ng-bind-html="coursesSlide.testo"></p>
+			</div>
+			
+		</div>		
+	    <div class="socil-icon">
+		
+		<div class="social-icon">
+		  <div class="tweet-wrapper">
+			<ul>
+				<li>
+				<a href="https://twitter.com/share?url={{coursesSlide.url}}&amp;text={{coursesSlide.citta}}&amp;hashtags=TangApp" target="_blank">
+				<img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" style="width: 42px;" />
+				</a>
+				</li>
+		
+				<!-- <li><a href="https://twitter.com/share" class="twitter-share-button" data-url="{{coursesSlide.url}}" data-text="{{coursesSlide.citta}}" data-via="TangApp" data-related="myName">Tweet</a></li> -->
+				
+				<li><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{coursesSlide.url}}&p[images][0]=&p[title]=Title%20Goes%20Here&p[summary]=Description%20goes%20here!" 
+				target="_blank" 
+				onclick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false"><img src="img/fb.png"/></a></li>
+				
+				<ul>
+			</div>  
+		</div>		 
+		   <div class="lg-img"><a ng-href="{{coursesSlide.url}}"><img src="img/lglogo.png" alt="{{coursesSlide.citta}}"></a></div>
+		</div> 
+			
+	  </ion-slide>	
+	</ion-slide-box>	
+	 
+  </section>
+ 
+   </ion-content>
+</ion-view>

@@ -1,0 +1,67 @@
+ <ion-header-bar  style="background: #93c22d;height: 105px;"  >	
+	<header class="hdr-bck-lg">   
+		<div class="back-arrow">  
+			<a ng-href="#" ng-click="ionicGoBack()"><img alt="Splash Logo" ng-src="img/back-arrow.png"></a>    
+			<h2>{{menuName}}</h2>
+		</div>
+		<div class="ba-logo">
+		  <img  alt="image" ng-src="img/tang-app-p.png">
+		</div>
+  </header>	
+ </ion-header-bar>
+ 
+<ion-view view-title="{{menuName}}" >  
+  <ion-content  style="top: 112px;" >
+ 
+ <section class="bck-lg sliderRadius">
+		
+	<ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false" >
+	  <ion-slide ng-repeat="festivalSlide in festivalSlideDetails">
+		<div class="box blue">
+			
+			<div class="sec-ab slide-min-height">
+			  <!-- <p>{{$index}}</p> -->
+			<h1>{{festivalSlide.titolo}}</h1>
+			<p>{{festivalSlide.data_da | limitTo: 10 | limitTo: -2 }}-{{festivalSlide.data_da | limitTo: 7 | limitTo: -2 }}-{{festivalSlide.data_da | limitTo: 4 | limitTo: -6 }}  {{festivalSlide.citta}} </p> 		 
+			  
+			  <div class="nwes-img" ><img ng-if="festivalSlide.img" src="{{festivalSlide.img}}"></div> 
+			   <p  data-ng-bind-html="festivalSlide.testo"></p> 
+			  <!-- <p ng-bind-html="festivalSlide.testo"></p>   -->
+			  </div>
+			
+			
+		</div>		
+	    <div class="socil-icon">
+		
+	<div class="socil-icon">		
+		<div class="social-icon">
+		  <div class="tweet-wrapper">
+			<ul>
+				
+				<li>
+				<a href="#" abhi="https://twitter.com/intent/tweet?url={{festivalSlide.url}}&hashtags=TangApp&text={{festivalSlide.titolo}}&original_referer="  onclick="window.open(this.getAttribute('abhi'), '_system', 'location=yes'); return false;" alt="Twitter" style="width: 42px;" />
+				<img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" style="width: 42px;" />
+				</a>
+				</li>
+
+				<li><a href="#" facebookss="https://www.facebook.com/sharer/sharer.php?s=100&p[url]={{festivalSlide.url}}&p[images][0]=&p[title]={{festivalSlide.titolo}}&p[summary]=Description%20goes%20here!" onclick="window.open(this.getAttribute('facebookss'), '_system', 'location=yes'); return false;"><img src="img/fb.png"/></a></li>
+				
+				<ul>
+			</div>  
+		</div>
+		<div class="lg-img"><a href="#" urls="{{festivalSlide.url}}" onclick="window.open(this.getAttribute('urls'), '_system', 'location=yes'); return false;"><img src="img/lglogo.png" alt="{{festivalSlide.citta}}"></a>
+		</div>
+		</div> 	
+		
+	  </ion-slide>	
+	</ion-slide-box>	
+	 
+  </section>
+ 
+   </ion-content>
+</ion-view>
+<script>
+$( document ).ready(function() {
+	$("table.tblprezzi tbody tr td h2.typeface-js strong").detach();
+ });
+</script>

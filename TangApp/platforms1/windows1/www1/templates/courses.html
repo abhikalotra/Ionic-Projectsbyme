@@ -1,0 +1,117 @@
+﻿
+ <ion-header-bar  style="background: #93c22d;height: 131px;"  >	
+	<header class="hdr-bck-lg">   
+		<div class="back-arrow">  
+			<a ng-href="#" ng-click="ionicGoBack()"><img alt="Splash Logo" ng-src="img/back-arrow.png"></a>    
+			<h2>COURSES</h2>
+		</div>
+		<div class="ba-logo">
+		  <img  alt="image" ng-src="img/tang-app-p.png">
+		</div>
+		
+	<section class="bck-lg">
+		  <div class="world-pin">	
+			<a href="#/coursesmap"><img  alt="image" ng-src="img/earth.png"></a>		  
+			<a href="#" class="lightbox"><img  alt="image" ng-src="img/pin_g.png"></a>	
+	  </div>  
+	  </section>  
+		
+  </header>	
+ </ion-header-bar>
+ 
+<ion-view view-title="COURSES" >  
+  <ion-content  style="top: 184px;">
+  
+ 
+  
+  <div class="backdrops"></div>
+  <div class="boxes">
+    <!-- <div class="close">Close</div> -->
+	
+		 <!-- <div ng-controller="ChildCtrl">		  -->
+			<form id="main_form_clear"  action="#" method="post">
+			
+				<section class="filter_sec">
+				 <header><p>Filter</p><img src="img/tang-app-p.png"></header>
+			
+					
+						<div class="filter_bdy"><p>DATE</p>			
+							 <div class="date_se">							
+								<input type="date" ng-model="newsForm.start_date" class="select_da" >
+								<input type="date" ng-model="newsForm.end_date"   class="select_da1" >						
+							</div>
+						</div>
+							 
+							<div class="filter_bdy">
+								<p>Filter By Text</p>
+									<div class="date_se2">						 
+										<input type="text" ng-model="newsForm.filter_text" placeholder="Enter Text"  class="filter_text" >
+									</div>
+							</div>		
+						<footer> 
+							<a class="cancel_ftre" href="#">Cancel</a>
+							<a class="clear" href="#">Clear</a>
+							 <a class="ok_ftras" href="#" ng-click="newsFilter()">ok</a> 
+							<!-- <button  class="ok_ftras">OK</button>    -->
+						</footer> 				
+					  </section>
+			  
+			  </form>
+		 <!-- </div> -->
+  </div>
+
+  
+
+
+ 	 
+		<div class="container" > 
+			<div ng-if="showUserScore==1">
+			<div id="myValues" ng-show="noRecordFound"> 
+			<section class="bck-lg">	
+			<div class="sec-ab"  style=" margin: 8px;" >
+			<h1>{{noRecordFound}}</h1>
+			</div> 	
+			</section>	
+			</div>
+		</div>  
+			
+			<section class="bck-lg">		
+			<div ng-if="filterShowData==1" >	
+				<div class="sec-ab" ng-repeat = "item in items" item = "item"  style=" margin: 8px;" >
+					<a ng-href="#/coursesslide/{{$index}}" class="textDecoration">					
+					<h1>{{item.titolo}}</h1>
+					<p >{{item.citta  }}</p>
+					<p >{{item.data_da | limitTo:10 }}</p>					
+					</a>
+				<hr>
+				</div> 
+			</div>
+		<ion-infinite-scroll ng-if = "!noMoreItemsAvailable" on-infinite = "loadMore()" distance = "10%"></ion-infinite-scroll>
+		
+		</section>
+			
+	 </div> 
+	
+	
+	 <div ng-if="filterShow==1">		
+			 <div class="sec-ab" ng-repeat="item in filterDetail"  style=" margin: 8px;" >
+				 <a ng-href="#/newsfilterslide/{{$index}}" class="textDecoration">	
+					<h1>{{item.post_title}}</h1>
+					<p >{{item.post_date | limitTo:10}}</p>
+					<h2>{{item.id}}</h2>
+				</a>
+				<hr>
+			</div>  		
+	</div>  
+	
+	
+	
+  
+   </ion-content>
+</ion-view>
+ <style>
+ a.textDecoration{
+text-decoration: none;
+}
+ </style>
+ 

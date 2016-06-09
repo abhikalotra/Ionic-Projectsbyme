@@ -1,0 +1,30 @@
+ <ion-header-bar  style="background: #93c22d;height: auto;"  >	
+	<header class="hdr-bck-lg">   
+		<div class="back-arrow">  
+			<a ng-href="#" ng-click="ionicGoBack()"><img alt="Splash Logo" ng-src="img/back-arrow.png"></a>    
+			<h2>{{ 'MAP' | translate }}</h2>
+		</div>
+		<div class="ba-logo">
+		  <img  alt="image" ng-src="img/tang-app-p.png">
+		</div>
+		
+		
+  </header>	
+ </ion-header-bar> 
+ 
+<ion-view view-title="{{ 'MAP' | translate }}" >  
+<section class="bck-lg1">
+  <div class="world-pin">
+<a href="#/events"><img  alt="image" ng-src="img/menu.png"></a>
+</div>  
+</section> 
+  <ion-content class="media_cont_top" style="top: 159px;">
+  <div class="container">
+	<section class="bck-lg borderRadius"> 
+		  <div class="mapBackground" >
+			<div id="map"></div>
+		  </div>
+	</section>
+  </div> 
+   </ion-content>
+</ion-view>

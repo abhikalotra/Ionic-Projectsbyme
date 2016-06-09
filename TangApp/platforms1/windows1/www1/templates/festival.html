@@ -1,0 +1,202 @@
+﻿ <ion-header-bar  style="background: #93c22d;height: auto;"  >	
+		<!-- pop up show -->
+	<div class="backdrops"></div>
+	 <div class="boxesFestival">
+				<form id="main_form_clear"  action="#" method="post">
+					<section class="filter_sec">
+						<header><p>{{ 'FILTER' | translate }}</p><img src="img/tang-app-p.png"></header>
+						<div class="filter_bdy"><p>{{ 'DATE' | translate }}</p>			
+						
+							<div class="date_se">							 
+								  <div class="date_se1">								 
+									<label>From</label>
+										<input type="date" ng-model="festivalForm.start_date" value="{{date}}"   class="select_da"  ng-if="hideValue==0">
+									
+										<input type="date" ng-model="festivalForm.start_date"    class="select_da" ng-if="hideValue==1">
+								  </div>	
+								  <div class="date_se2">		
+									<label>To</label>
+									<input type="date" ng-model="festivalForm.end_date" value="{{date2}}"  class="select_da1" ng-if="hideValue==0">	
+									<input type="date" ng-model="festivalForm.end_date"  class="select_da1" ng-if="hideValue==1">	
+								  </div>	
+							</div>							
+						</div>
+					 
+						<!-- <div class="filter_bdy">
+							<p>REGION orginal</p>
+								<div class="date_se4">						 
+									 <select ng-model="festivalForm.region">
+										<option value="" >{{ 'SELECT' | translate }}  REGION</option>
+										  <option value="{{city.codes}}" ng-repeat="city in region">{{city.name}}** {{city.codes}}</option>										 
+									</select>								
+								</div>
+						</div> -->
+						<div class="filter_bdy">
+							<p>REGION</p>
+								<div class="date_se4">									
+									<!-- <select ng-model="festivalForm.region" ng-options="city.codes as city.name for city in region">
+										<option value="" >{{ 'SELECT' | translate }}  REGION</option>
+									</select> -->
+									
+									<select ng-model="festivalForm.region" ng-options="city.codes as city.name for city in region" ng-if="hideValue==0">
+										<option value="" >{{ 'SELECT' | translate }}  REGION </option>
+									</select>
+									<select ng-model="festivalForm.region"  ng-if="hideValue==1">
+										<option value="" >{{ 'SELECT' | translate }}  REGION </option>
+										  <option value="{{city.codes}}" ng-repeat="city in region">{{city.name}}</option>
+									</select>	
+								</div>
+						</div>
+												 
+									 							
+								
+						
+						
+						<div class="filter_bdy">
+							<p>{{ 'PROVINCE' | translate }}</p>
+								<div class="date_se4">						 
+									<!-- <select ng-model="festivalForm.provincia">
+										<option value="" >{{ 'SELECT' | translate }} {{ 'PROVINCE' | translate }}</option>
+										  <option value="{{state.codes}}" ng-repeat="state in province">{{state.name}} ** {{state.codes}}</option>									 
+									</select> -->
+									<select ng-model="festivalForm.provincia" ng-options="state.codes as state.name for state in province" ng-if="hideValue==0">
+										<option value="" >{{ 'SELECT' | translate }} {{ 'PROVINCE' | translate }}</option>
+									</select>
+									<select ng-model="festivalForm.provincia" ng-if="hideValue==1">
+										<option value="" >{{ 'SELECT' | translate }} {{ 'PROVINCE' | translate }}</option>
+										  <option value="{{state.codes}}" ng-repeat="state in province">{{state.name}}</option>
+									</select>
+								</div>
+						</div>
+						<div class="filter_bdy">
+							<p>{{ 'FILTER_BY_Text' | translate }}</p>
+								<div class="date_se3">						 
+									<input type="text" ng-model="festivalForm.search" placeholder="Enter Text"  class="filter_text" >
+								</div>
+						</div>		
+						<footer> 
+						<a class="cancel_ftre" href="#">{{ 'CANCEL' | translate }}</a>
+						<a class="clear" href="#">{{ 'CLEAR' | translate }}</a>
+						 <a class="ok_ftras" href="#" ng-click="festivalFilter()">{{ 'OK' | translate }}</a> 
+						</footer> 				
+					</section>
+				</form>
+			</div> 
+		  <!-- pop up show end-->
+  
+	<header class="hdr-bck-lg">   
+		<div class="back-arrow">  
+			<a ng-href="#" ng-click="ionicGoBack()"><img alt="Splash Logo" ng-src="img/back-arrow.png"></a>    
+			<h2>{{menuName}}</h2>
+		</div>
+		<div class="ba-logo">
+		  <img  alt="image" ng-src="img/tang-app-p.png">
+		</div>
+		
+		 
+		
+  </header>	
+ </ion-header-bar>
+<ion-view view-title="{{menuName}}"  style=" background: #93c22d ">
+<section class="bck-lg1">
+		<div class="world-pin">
+			<a ng-if="mapShowData==1" href="#/festivalmap/{{menuName}}"><img  alt="image" ng-src="img/earth.png"></a>
+			<a ng-if="filterMapShowData==1" href="#/festivalfiltermap/{{menuName}}"><img  alt="image" ng-src="img/earth.png"></a>
+			
+			<a href="#" class="lightbox">
+				<img ng-if="filterImage==0" alt="image" ng-src="img/pin_g.png">
+				<img ng-if="filterImage==1"  alt="image" ng-src="img/filter_red_icon.png"></a>
+		</div>  
+	  </section> 
+  <ion-content class="media_cont_top" style="top: 158px;">
+  
+  <!-- pop up show start-->
+  
+  <!-- pop up show end-->
+ 
+  
+ <div class="container"> 
+	<div ng-if="showUserScore==1">
+		<div id="myValues" ng-show="noRecordFound"> 
+		<section class="bck-lg">	
+		 <div class="sec-ab"  style=" margin: 8px;" >
+			<h1>{{noRecordFound}}</h1>
+		</div> 	
+		</section>	
+		</div>
+	</div>
+		
+		<div class="height-scroller">
+		<div ng-if="filterShowData==1">
+			<section class="bck-lg borderRadius">
+				<div class="sec-ab" ng-repeat="item in items | limitTo:numberOfItemsToDisplay"  style=" margin: 8px;" >
+					<a ng-href="#/festivalslide/{{menuName}}/{{$index}}" class="textDecoration">
+						
+						<h1>{{item.titolo}}</h1>
+						<p>{{item.citta}}</p>
+						 <p >{{item.data_da | limitTo: 10 | limitTo: -2 }}-{{item.data_da | limitTo: 7 | limitTo: -2 }}-{{item.data_da | limitTo: 4 | limitTo: -6 }} </p>
+					</a>
+					<hr>
+				</div>								
+				<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="2%" class="testttt"></ion-infinite-scroll> 
+			</section> 
+		</div> 
+		</div>
+		 
+	<!--  <ion-list>
+        <ion-item class="item-avatar" ng-repeat="item in items">
+          <a ng-href="#/eventsslide/{{$index}}" class="textDecoration">	
+			  
+			 <h2>{{ item.titolo }} </h2>
+			  <p> {{ item.id }}  </p>
+			  <p>{{item.data_da}} {{item.citta}}</p> 
+		  </a>
+        </ion-item>
+      </ion-list>
+      
+	   <ion-infinite-scroll on-infinite="loadMore()" distance="5%"></ion-infinite-scroll>
+ -->
+	</div>	
+	
+	<div class="height-scroller-filter">
+		<section class="bck-lg borderRadius">
+			<div ng-if="filterShow==1">		
+					 <div class="sec-ab" ng-repeat="item in filterDetail"  style=" margin: 8px;" >
+						<a ng-href="#/festivalfilterslide/{{menuName}}/{{$index}}" class="textDecoration">	
+						<h1>{{item.titolo}}</h1>
+						<p>{{item.citta}}</p>
+						<p >{{item.data_da | limitTo: 10 | limitTo: -2 }}-{{item.data_da | limitTo: 7 | limitTo: -2 }}-{{item.data_da | limitTo: 4 | limitTo: -6 }}</p>
+						</a>
+						<hr>
+					</div>  		
+			</div>  
+		</section>
+	<div>
+		<!-- <section class="bck-lg">
+			<div ng-if="filterShow==1">		
+					 <div class="sec-ab" ng-repeat="item in filterDetail"  style=" margin: 8px;" >
+						<a ng-href="#/newsfilterslide/{{$index}}" class="textDecoration">	
+						<h1>{{item.titolo}}</h1>
+						<p>{{item.citta}}</p>
+						<p  >{{item.data_da}}</p>
+						</a>
+						<hr>
+					</div>  		
+			</div>  
+		</section>
+ -->
+		
+ 
+   </ion-content>
+</ion-view>
+  <style>
+ a.textDecoration{
+text-decoration: none;
+}
+.spinner svg {
+  width: 28px;
+  height: 28px;
+  stroke: #444;
+  fill: #444;
+}
+ </style>
