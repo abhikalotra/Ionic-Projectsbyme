@@ -1,0 +1,95 @@
+
+<ion-view title="" hide-nav-bar="true" cache-view="false" id="add" class=" ">
+
+    <div class="bar bar-header bar-positive">
+        <h1 class="title">{{pageTitle}}</h1>
+    </div>
+    <ion-content padding="true" style="background-color: #282a27;" class="manual-ios-statusbar-padding has-header">
+
+        <div class="inner_new">
+            <div class="search search-1">
+                <label>Currency From</label>
+                <div class="icon_bg">     
+                    <select ng-model="addCurrencyrate.currency_from">
+                        <option  value="">Select Currency </option>
+                        <option ng-repeat="currencyFrom in currency_from" ng-selected="select.from_currency == currencyFrom.id" value="{{currencyFrom.id}}">
+                            {{currencyFrom.name}} 
+                        </option>
+                    </select>
+                </div>
+            </div>
+<!--            <div class="search search-1">
+                <label>Ask</label>
+                <div class="icon_bg plus_minus" >
+                    <input type="text"  ng-model="addCurrencyrate.ask" id="curreny_ask" ng-click="showPopup(true)" readonly>
+                        <a class="plus" href="" ng-click="inc_dec(true)">+</a>
+                    <a class="minus" href="" ng-click="inc_dec(false)">-</a>
+                </div>
+            </div>
+            <div class="search search-1">
+                <label>Bid</label>
+                <div class="icon_bg plus_minus" >
+                    <input type="text"  ng-model="addCurrencyrate.bid" id="curreny_bid" ng-click="showPopup(false)" readonly>
+                        <a class="plus" href="" ng-click="inc_dec(true)">+</a>
+                    <a class="minus" href="" ng-click="inc_dec(false)">-</a>
+                </div>
+            </div>-->
+               <div class="search search-1">
+                <label>Ask</label>
+                <div class="icon_bg plus_minus" >
+                    <input type="text"  ng-model="addCurrencyrate.ask" id="curreny_ask">
+                    <a class="plus" href="" ng-click="inc_dec(true)">+</a>
+                    <a class="minus" href="" ng-click="inc_dec(false)">-</a>
+                </div>
+            </div>
+                <div class="search search-1">
+                <label>Bid</label>
+                <div class="icon_bg plus_minus" >
+                    <input type="text"  ng-model="addCurrencyrate.bid" id="curreny_bid">
+                    <a class="plus" href="" ng-click="bid_inc_dec(true)">+</a>
+                    <a class="minus" href="" ng-click="bid_inc_dec(false)">-</a>
+                </div>
+            </div>
+            
+            <div class="search search-1">
+                <label>Currency To</label>
+                <div class="icon_bg" >
+                    <select  id="currency_to"  ng-model="addCurrencyrate.currency_to">
+                        <option  value="">Select Currency</option>
+                        <option ng-repeat="currencyTo in currency_from" ng-selected="select.to_currency == currencyTo.id" value="{{currencyTo.id}}">{{currencyTo.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search search-1">
+                <label>Date</label>
+                <div class="icon_bg" ng-click="openDateOrTimePicker('date');">
+                    <span class="ion-calendar"></span>
+                    <input type="text" id="currency_date" ng-model="addCurrencyrate.date" readonly/>
+                </div>
+            </div>
+            <div class="search search-1">
+                <label>Time</label>
+                <div class="icon_bg" ng-click="openDateOrTimePicker('time');">
+                    <span class="ion-calendar"></span>
+                    <input type="text" id="currency_time" ng-model="addCurrencyrate.time" readonly/>
+                </div>
+            </div>
+            <span style="display: none;" id="currency_id">{{addCurrencyrate.id}}</span>
+            <button class="button button-light  button-block  custom-button-save" ng-click="addCurrencyrateForm()"  id="currencySubmitButton" >{{buttonText}}</button>
+            <!--<button ng-show="buttonText === 'UPDATE'" class="button button-light  button-block  custom-button-save" ng-click="delete(addCurrencyrate.id)">DELETE</button>-->
+
+        </div>
+        <div>
+        </div>
+
+    </ion-content>
+</ion-view>
+
+<style>
+
+
+    input[type=number]::-webkit-inner-spin-button {
+        opacity: 1
+    }
+</style>
+

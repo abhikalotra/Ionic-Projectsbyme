@@ -1,0 +1,43 @@
+<ion-view title="" cache-view="false" id="market" class=" ">
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px;">Iraqi Borsa</div>
+        <img src="img/header_logo.png" style="margin-left: 25px !important;" width="35px" height="35px">
+    </ion-header-bar>
+    <ion-content padding="true" class="manual-ios-statusbar-padding services has-header" style="background-color: #282a27;" >
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefreshMarkets()">
+        </ion-refresher>
+        <div class="search showcurrency_search">
+            <label style="width: 100%; display: block; height: 25px">Update Ask/Bid</label>
+            <button style="width: 48%; float: left !important; border-radius: 5px !important;" ng-click="showPopup(true)">Ask</button>
+            <button style="width: 48%; float: right !important; border-radius: 5px !important;" ng-click="showPopup(false)">Bid</button>
+        </div>
+        <div class="inner_new">
+            <div class="read_more"><a class="currency_add" href="#/welcome/marketadd" ng-click="save()">ADD NEW</a></div>
+        </div>
+        <ul>
+            <div class="top-headings">
+                <p class="left-heading">Name</p>
+                <p class="center-heading" style="margin-right: 10px;">Bid</p>
+                <p class="right-heading" style="margin-right: 10px;">Ask</p>
+            </div>
+            <br class="clear">
+            <ion-list class="ad1" ng-repeat="market in markets" ng-click="update(market)">
+                <div class="left_data">
+                    <h2>{{market.title}}</h2>
+                </div>
+                <div class="right_data">
+                    <div class="update">
+                        <a style=" min-width: 60px !important; text-align: center">{{market.ask}}</a>
+                        <a style=" min-width: 60px !important; text-align: center">{{market.bid}}</a>
+                    </div>
+                </div>
+                <br class="clear">
+            </ion-list>
+        </ul>
+    </ion-content>
+</ion-view>

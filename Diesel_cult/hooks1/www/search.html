@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  
+
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady() {
+                getProductlist();
+            }
+
+        </script>
+
+        <script>
+            var selectedProduct;
+            Storage.prototype.getObject = function (key) {
+                var value = this.getItem(key);
+                return value && JSON.parse(value);
+            };
+            Storage.prototype.setObject = function (key, value) {
+                this.setItem(key, JSON.stringify(value));
+            };
+            function getProductlist() {
+                var productList = new Array();
+                productList = localStorage.getObject("product_list");
+
+                $("#tags").autocomplete({
+                    minLength: 1,
+                    source: productList,
+                    select: function (event, ui) {
+                        $("#project").val(ui.item.label);
+                        $("#product-id").val(ui.item.pid);
+                        for (var i = 0; i < productList.length; i++) {
+                            if (productList[i].pid === ui.item.pid) {
+                                var x = new myFunction(productList[i].pid, productList[i].label, productList[i].pbrand, productList[i].pdescription, productList[i].pstyleMiles, productList[i].pavailableQuantity, productList[i].pimagesArray);
+                                localStorage.setObject("product", x);
+                                window.location = "product_detail.html";
+                            }
+                        }
+                        return false;
+                    }
+                }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                    return $("<li>")
+                            .append("<a>" + item.label + "</a>")
+                            .appendTo(ul.addClass("search_suggestions"));
+                };
+            }
+            function myFunction(id, name, brand, description, styleMiles, availableQuantity, images)
+            {
+                this.id = id;
+                this.name = name;
+                this.brand = brand;
+                this.description = description;
+                this.styleMiles = styleMiles;
+                this.availableQuantity = availableQuantity;
+                this.imagesArray = images;
+                this.image = images[0];
+            }
+//            function searchbtn() {
+//                if (proID != null) {
+//                    alert("ntoy");
+//
+//                } else {
+//                    alert("dd");
+//                }
+//            }
+
+        </script>
+        <script>
+            setTimeout(function () {
+                $('#divId').fadeIn();
+            }, 3000);
+            function closePopup()
+            {
+                $('#divId').fadeOut();
+            }
+        </script>  
+    </head>
+
+    <body id="search" style="background:#f5f4f0;">
+
+        <header class="header_main">
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <a href="products.html"><div class="header_inner_text_upper_menu_icon"><img src="assets/images/black_back.png"></div></a>
+                    <div class="header_inner_text_upper_title">Search</div> 
+                </div>
+            </div> 
+        </header>
+
+        <div class="search_bar ui-widget" >
+            <input id="tags" placeholder="Type Here..." class="main_search_bar" >
+            <input type="hidden" id="product-id">
+
+            <button  onclick="searchbtn();" class="main_search_button"><img src="assets/images/search.png"></button>
+        </div>
+
+        <div class="bottom_tabs">
+            <a href="profile.html"><div class="bottom_tabs_one"><img src="assets/images/member.png"><br>Members</div></a>
+            <a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>InStore</div></a>
+            <a href="login.html"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+            <a href="more.html"><div class="bottom_tabs_one"><img src="assets/images/more.png"><br>More</div></a>
+        </div>
+
+        <!--<script src="assets/js/jquery.js"></script>-->
+    </body>
+</html>

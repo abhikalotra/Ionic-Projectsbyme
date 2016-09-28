@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="assets/js/apis.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            var isFadeIn = false;
+            document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener('backbutton', onBackKeyDown, false);
+
+            function onDeviceReady() {
+                localStorage.removeItem("isLogin");
+                localStorage.removeItem("auth");
+                localStorage.removeItem("customer_id");
+                localStorage.removeItem("miles");
+                localStorage.removeItem("user_name");
+                localStorage.removeItem("user_group");
+                localStorage.removeItem("user_mobile");
+                localStorage.removeItem("user_email");
+            }
+            function onBackKeyDown() {
+                if (isFadeIn) {
+                    closePopup();
+                } else {
+                    navigator.app.exitApp();
+                }
+            }
+            $(function () {
+
+                $("#login_btn").click(function () {
+                    var networkState = navigator.connection.type;
+                    if ($("#mobile_text").val() === "" && $("#password_text").val() === "")
+                        window.plugins.toast.show('Fields cannot be blank.', 'short', 'bottom');
+                    else if ($("#mobile_text").val() === "")
+                        window.plugins.toast.show('Please enter the mobile number.', 'short', 'bottom');
+                    else if ($("#password_text").val() === "")
+                        window.plugins.toast.show('Please enter the password.', 'short', 'bottom');
+                    else
+                    {
+                        if (networkState == "none")
+                            window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                        else {
+                            var xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><login><userName></userName><mobileNumber>' + $("#mobile_text").val() + '</mobileNumber>  <email></email>  <password>' + $("#password_text").val() + '</password>  <company>Diesel</company></login>';
+                            postData("auth", xmldata, function (data) {
+                                window.plugins.spinnerDialog.hide();
+                                localStorage.setItem("auth", btoa($("#mobile_text").val() + ":" + $("#password_text").val()));
+                                localStorage.setItem("isLogin", true);
+                                window.plugins.toast.show('Successfully logged in', 'short', 'bottom');
+                                $(data).find("id").each(function () {
+                                    localStorage.setItem("customer_id", $(this).text());
+                                });
+                                window.location = "category.html";
+                            });
+                        }
+                    }
+                });
+            });
+
+            function sendOPT() {
+                var networkState = navigator.connection.type;
+
+                if ($("#mobile_number").val() === "")
+                    window.plugins.toast.show('Please enter the mobile number.', 'short', 'bottom');
+                else {
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        var isRegister = localStorage.getItem("isRegister");
+                        var xmldata;
+                        xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><user><userName></userName><mobileNumber>' + $("#mobile_number").val() + '</mobileNumber>  <email></email>  <rProId></rProId>  <company>Diesel</company></user>';
+                        postData("otpByUserDetails", xmldata, function (data) {
+                            window.plugins.spinnerDialog.hide();
+                            if (isRegister == "false") {
+                                var msg = $(data).find("details").text();
+                                if (msg.length === 0) {
+                                    $('#otpdivId').fadeIn();
+                                    $('#divId').fadeOut();
+                                } else {
+                                    window.plugins.toast.show("User does not exist.", 'short', 'bottom');
+                                }
+                            } else {
+                                $('#otpdivId').fadeIn();
+                                $('#divId').fadeOut();
+                            }
+
+                        });
+                    }
+                }
+            }
+
+            $(function () {
+                $("#otp_btn").click(function () {
+                    var networkState = navigator.connection.type;
+
+                    if ($("#otp_text").val() === "")
+                        window.plugins.toast.show('Please enter otp.', 'short', 'bottom');
+                    else if ($("#otp_text").val().length >= 4) {
+                        if (networkState == "none")
+                            window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                        else {
+                            var isRegister = localStorage.getItem("isRegister");
+                            localStorage.setItem("user_mobile", $("#mobile_number").val());
+
+                            if (isRegister == "true") {
+                                var xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><CustOtp><otp>' + $("#otp_text").val() + '</otp><contactNumber>' + $("#mobile_number").val() + '</contactNumber><companyName>Diesel</companyName></CustOtp>';
+                                postData("validateOtp", xmldata, function (data) {
+                                    window.plugins.spinnerDialog.hide();
+                                    window.location = "enter_password.html";
+                                });
+                            } else {
+                                localStorage.setItem("idfhdings", $("#otp_text").val());
+                                window.location = "enter_password.html";
+                            }
+                        }
+                    } else {
+                        window.plugins.toast.show('Please enter valid otp.', 'short', 'bottom');
+                    }
+
+                });
+            });
+            function closePopup() {
+                $('#divId').fadeOut("", function () {
+                    isFadeIn = false;
+                });
+            }
+            function showDiv(isRegister) {
+                localStorage.setItem("isRegister", isRegister);
+                $('#divId').fadeIn("", function () {
+                    isFadeIn = true;
+                });
+            }
+            function closeOtpPopup() {
+                $('#otpdivId').fadeOut("", function () {
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div style="display:none;" id="divId" class="model_black_area">
+            <div class="model_black_area_white">
+                <div onClick="closePopup()" class="popup_button_close">X</div>
+                <p>Please verify your mobile number registered with us. We shall send a 4-digit verification code.</p>
+                <div class="mobile_number_form">
+                    <select class="country_code_select">
+                        <option selected>+91</option>
+                        <option>234</option>
+                        <option>12</option>
+                        <option>24</option>
+                    </select>
+                    <input type="tel" maxlength="13" class="mobile_number_main"  id="mobile_number" placeholder="Mobile Number">
+                </div>
+                <button onclick="sendOPT();" class="enter_button">Submit</button>
+            </div>
+        </div>
+
+        <div style="display:none;" id="otpdivId" class="model_black_area">
+            <div class="model_black_area_white">
+                <div onClick="closeOtpPopup()" class="popup_button_close">X</div>
+                <p>Please enter the 4-digit verification code.</p>
+                <div class="mobile_number_form">
+                    <input  type="number" max="4" id="otp_text" min="4" class="mobile_otp_main" placeholder="OTP Code">
+                </div>
+                <button id="otp_btn" class="enter_button">Submit</button>
+                <p style="color: #313131; border-bottom: none; margin-top:10px;  text-align:center;width: 100%" onclick="sendOPT();">Resend OTP</p>
+            </div>
+        </div>
+
+        <div class="login_screen">
+            <div class="login_logo"><img src="assets/images/deisel_cult_logo.png"></div>
+            <div class="login_forms_outer">
+                <input  id="mobile_text" type="tel" maxlength="13" placeholder="Mobile" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mobile'" class="login_forms">
+                <input id="password_text" type="password" placeholder="PASSWORD" class="login_forms password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PASSWORD'">
+                <p style="color: white;text-align:center;width: 100%; font-size: 14px" class="margin_top" onClick="showDiv('false')">Forgot Password?</p>
+            </div>
+            <div class="login_screen_buttons">
+                <button id="login_btn" class="login_button">Login</button><br>
+                <p style="color: white;text-align:center;width: 100%"  onClick="showDiv('true')">New user? Sign up</p>
+            </div>
+        </div>
+        <script src="assets/js/jquery.js"></script>
+    </body>
+</html>

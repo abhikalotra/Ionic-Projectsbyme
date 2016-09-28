@@ -1,0 +1,271 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="assets/js/apis.js"></script>
+
+        <script>
+            Storage.prototype.setObject = function (key, value) {
+                this.setItem(key, JSON.stringify(value));
+            };
+            Storage.prototype.getObject = function (key) {
+                var value = this.getItem(key);
+                return value && JSON.parse(value);
+            };
+            var imgUri = "";
+            var pictureSource;
+            var destinationType;
+            var user_dob;
+            var dateOptions = {
+                date: new Date(),
+                mode: 'date', // or 'time'
+//                minDate: (new Date("1950 01 01").valueOf()),
+//                maxDate: (new Date("2000 12 31").valueOf()),
+                minDate: new Date(),
+                allowOldDates: true,
+                allowFutureDates: false,
+                doneButtonLabel: 'DONE',
+                doneButtonColor: '#F2F3F4',
+                cancelButtonLabel: 'CANCEL',
+                cancelButtonColor: '#000000'
+            };
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+                getProfile();
+                pictureSource = navigator.camera.PictureSourceType;
+                destinationType = navigator.camera.DestinationType;
+            }
+            function onPhotoDataSuccess(imageData) {
+                var smallImage = document.getElementById('profile_img');
+//                smallImage.style.display = 'block';
+                smallImage.src = "data:image/jpeg;base64," + imageData;
+                imgUri = imageData;
+            }
+            function capturePhoto() {
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, {quality: 100,
+                    destinationType: destinationType.DATA_URL, sourceType: pictureSource.CAMERA,
+                    correctOrientation: true, encodingType: navigator.camera.EncodingType.JPEG,
+                    targetHeight: 350
+                });
+            }
+
+            function capturePhotoEdit() {
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, {quality: 20, allowEdit: true,
+                    destinationType: destinationType.DATA_URL});
+            }
+            function getPictureFromGallery() {
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, {quality: 70,
+                    destinationType: destinationType.DATA_URL, sourceType: pictureSource.PHOTOLIBRARY
+                });
+            }
+
+            function getPhoto(source) {
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, {quality: 100,
+                    destinationType: destinationType.FILE_URI,
+                    sourceType: source});
+            }
+
+            function onFail(message) {
+
+            }
+
+            function getProfile() {
+                var cust_profile = localStorage.getObject("cust_profile");
+//                var url = 'allcustomer/' + localStorage.getItem("customer_id");
+//                fetchData(url, function (data) {
+//                    window.plugins.spinnerDialog.hide();
+                var smallImage = document.getElementById('profile_img');
+                smallImage.style.display = 'block';
+                smallImage.src = "data:image/jpeg;base64," + cust_profile.image;
+                imgUri = cust_profile.image;
+                $("#customer_id").html(cust_profile.cid);
+                $("#mobile").val(cust_profile.user_mobile);
+                $("#email").val(cust_profile.user_email);
+                $("#first_name").val(cust_profile.fname);
+                $("#last_name").val(cust_profile.lname);
+                $("#city").val(cust_profile.user_city);
+                $("#pincode").val(cust_profile.user_pincode);
+                $("#dob").val(cust_profile.user_dob)
+                user_dob = cust_profile.user_dob;
+                $("#group").val(cust_profile.user_group);
+                $("#address1").val(cust_profile.user_address);
+                $("#address2").val(cust_profile.user_address_2);
+                var gen = cust_profile.user_gender;
+                if (gen === 'M' || gen === "Male" || gen === "MALE" || gen === "male" || gen === 'm')
+                    $("#male").attr('selected', 'selected');
+                else
+                    $("#female").attr('selected', 'selected');
+                $("#occupation").val(cust_profile.user_occupation);
+                $("#group").val(cust_profile.user_group);
+//                });
+            }
+
+            $(function () {
+                $("#dob").click(function () {
+//                    if (user_dob !== "") {
+//                        dateOptions.date = (new Date(user_dob.replace(/-/g, " ")).valueOf());
+////                        dateOptions.minDate = (new Date(user_dob.replace(/-/g, " ")).valueOf())-10;
+//                    }
+                    window.plugins.datePicker.show(dateOptions, function (date) {
+                        var dob = dateFormat(date);
+                        $("#dob").val(dob);
+                    });
+                })
+            });
+            $(function () {
+                $("#redeem").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "products.html";
+                    }
+                })
+            });
+            $(function () {
+                $("#save_btn").click(function () {
+                    if ($("#first_name").val() == "")
+                        window.plugins.toast.show('Please enter the first name.', 'short', 'bottom');
+                    else if ($("#last_name").val() == "")
+                        window.plugins.toast.show('Please enter the last name.', 'short', 'bottom');
+                    else if ($("#email").val() == "")
+                        window.plugins.toast.show('Please enter the email address.', 'short', 'bottom');
+                    else if ($("#mobile").val() == "")
+                        window.plugins.toast.show('Please enter the mobile number.', 'short', 'bottom');
+                    else if ($("#mobile").val().length < 10 || $("#mobile").val().length > 13)
+                        window.plugins.toast.show('Please enter the valid mobile number.', 'short', 'bottom');
+                    else if (!isValidMail($("#email").val()))
+                        window.plugins.toast.show('Please enter the valid email address.', 'short', 'bottom');
+                    else {
+                        var networkState = navigator.connection.type;
+                        if (networkState == "none")
+                            window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                        else {
+                            var xmldata = '<customer><id>' + localStorage.getItem("customer_id") + '</id><contactNumber>' + $("#mobile").val() + '</contactNumber><email>' + $("#email").val() + '</email><firstName>' + $("#first_name").val() + '</firstName><lastName>' + $("#last_name").val() + '</lastName><dob>' + $("#dob").val() + '</dob> <addressLine1>' + $("#address1").val() + '</addressLine1> <addressLine2>' + $("#address2").val() + '</addressLine2><city>' + $("#city").val() + '</city><pincode>' + $("#pincode").val() + '</pincode><companyName>DIESEL</companyName><companyId>7</companyId><activeFlag>Y</activeFlag><offerFlag>Y</offerFlag> <images><image></image><image /> </images><gender>' + $("#gender").val() + '</gender><occupation>' + $("#occupation").val() + '</occupation> <udf5>' + imgUri + ' </udf5> </customer>';
+                            var url = 'customer';
+                            postData(url, xmldata, function (data) {
+                                window.plugins.spinnerDialog.hide();
+                                window.plugins.toast.show('Profile successfully updated', 'long', 'bottom');
+                                window.location = "profile.html";
+                            });
+                        }
+                    }
+                });
+            });
+            function dateFormat(date) {
+                var d = new Date(date),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear();
+                if (month.length < 2)
+                    month = '0' + month;
+                if (day.length < 2)
+                    day = '0' + day;
+                return [year, month, day].join('-');
+            }
+            function isValidMail(email) {
+                var mailPattern = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+                return mailPattern.test(email)
+            }
+
+        </script>  
+        <script>
+            function closePopup()
+            {
+                $('#divId').fadeOut();
+            }
+            function showDiv()
+            {
+                $('#divId').fadeIn();
+            }
+        </script>
+    </head>
+
+    <body style="background:#f5f4f0;">
+
+        <div style="display:none;" id="divId" onClick="closePopup()" class="model_black_area">
+            <div style="height:197px; padding:0;" class="model_black_area_white">
+                <div class="image_select_title">Profile Photo</div>
+                <div class="image_select_options">
+                    <div class="image_select_options_camera"><img src="assets/images/gallery.jpg" onclick="getPictureFromGallery();"><br>Gallery</div>
+                    <div class="image_select_options_camera"><img src="assets/images/camera.jpg" onClick="capturePhoto();"><br>Camera</div>
+                </div>
+
+            </div>
+        </div>
+
+        <header class="header_main">
+            <div class="header_inner">
+                <div class="header_inner_text_upper">
+                    <a href="profile.html"><div class="header_inner_text_upper_menu_icon"><img src="assets/images/black_back.png"></div></a><!-- header_inner_text_upper_menu_icon close -->
+                    <div class="header_inner_text_upper_title">Edit Profile</div>
+                </div>
+            </div>
+        </header>
+
+
+
+        <div class="profile_detail tab-content">
+
+            <div id="edit_detail" style="padding-bottom:10px;" role="tabpanel" class="member_detail_show tab-pane active">
+                <div class="member_detail_show_title">Primary Info</div>
+                <div class="profile_update_form">
+                    <img onClick="showDiv()" id="profile_img" src="">
+                </div>
+
+                <label>First Name</label>
+                <input type="text" id="first_name" class="edit_profile_form" value="">
+
+                <label>Last Name</label>
+                <input type="text" id="last_name" class="edit_profile_form" value="">
+
+                <label>Mobile</label>
+                <input type="tel" id="mobile" class="edit_profile_form" value="">
+                <label>Date Of Birth</label>
+                <div style="position: relative">
+                    <input type="text" id="dob" class="edit_profile_form" value="" readonly>
+                    <img class="calendar_icon" src="assets/images/calendar.png">
+                </div>
+                <label>Email</label>
+                <input type="email" id="email" class="edit_profile_form" value="">
+
+                <label>City</label>
+                <input type="text" id="city" class="edit_profile_form" value="">
+
+                <label>Address 1</label>
+                <textarea rows="4" id="address1" class="edit_profile_form" cols="50"></textarea>
+                <label>Address 2</label>
+                <textarea rows="4" id="address2" class="edit_profile_form" cols="50"></textarea>
+
+                <label>Pin Code</label>
+                <input type="text" id="pincode" class="edit_profile_form" value="">
+                <div class="member_detail_show_title">Other Info</div>
+
+                <label>Gender</label>
+                <select id="gender" class="edit_profile_form">
+                    <option id ="male" selected="">Male</option>
+                    <option id="female" >Female</option>
+                </select>
+                <label>Occupation</label>
+                <input id="occupation" type="text" class="edit_profile_form" value="">
+                <div class="save_button">
+                    <a id="save_btn">Save</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a  id="redeem"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a onclick="logout();"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+
+    </body>
+</html>

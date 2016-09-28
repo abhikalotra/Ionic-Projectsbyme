@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script src="assets/js/jquery.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady() {
+                window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                products();
+            }
+
+        </script>
+        <script>
+            var xmlObject;
+            Storage.prototype.setObject = function (key, value) {
+                this.setItem(key, JSON.stringify(value));
+            };
+            function products() {
+                $("#user_membership").html(localStorage.getItem("user_group"));
+                $("#user_name").html(localStorage.getItem("user_name"));
+                $("#user_id").html(localStorage.getItem("customer_id"));
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://59.181.101.224:8080/ril/service/redeemCatalogue",
+                    contentType: "application/xml",
+                    dataType: "XML",
+                    success: onSuccess,
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.status === 409) {
+                            $(jqXHR.responseText).find("errorMsg").each(function () {
+                                window.plugins.spinnerDialog.hide();
+                                window.plugins.toast.show($(this).text(), 'long', 'bottom');
+                            });
+                        }
+                        if (jqXHR.status === 0) {
+                            window.plugins.spinnerDialog.hide();
+                            window.plugins.toast.show('There is some problem. please try again later.', 'long', 'bottom');
+                        }
+                    }});
+            }
+
+            function onSuccess(data) {
+                xmlObject = data;
+                output_format = 'jpg';
+                var productList = new Array();
+                var productImagesArray = new Array();
+                var imgArray = new Array();
+                var productLenght;
+                $(xmlObject).find("images").find("image").each(function () {
+
+                });
+                $(data).find("style").each(function () {
+                    $("#instore").html($(this).index() + 1);
+                    productLenght = $(this).index() + 1;
+                });
+
+                for (var i = 0; i < productLenght; i++) {
+                    var container = $("#products");
+
+                    var productImagesArray = new Array();
+                    $(data).find("images").eq(i).find("image").each(function () {
+                        productImagesArray.push($(this).text());
+                    });
+
+                    var proObj = new product($(data).find("style").eq(i).find("id").text(), $(data).find("style").eq(i).find("name").text(), $(data).find("style").eq(i).find("brand").text()
+                            , $(data).find("style").eq(i).find("description").text(), $(data).find("style").eq(i).find("styleMiles").text(), $(data).find("style").eq(i).find("availableQuantity").text(), productImagesArray);
+                    productList.push(proObj);
+                    container.append('<div class="products_show_left_one"> <div class="products_show_left_one_validity"><span class="product_valid">VaLID:<span>' + $(data).find("style").eq(i).find("validDate").text() + '<span></span><br class="clear"></div><div class="products_show_left_one_image" ><a  onclick="productDetail(' + $(data).find("style").eq(i).index() + ');"><img src="' + $(data).find("style").eq(i).find("images").find(":first-child").text() + '"></a></div> <div class="products_show_left_one_miles"><span>' + $(data).find("style").eq(i).find("styleMiles").text() + '<span> MILES</div><div class="products_show_left_one_title"><div class="products_show_left_one_title_name">' + $(data).find("style").eq(i).find("name").text() + '</div><div class="products_show_left_one_cart"><img src="assets/images/cart_icon.png"></div></div></div>');
+                }
+
+                localStorage.setObject("product_list", productList);
+                window.plugins.spinnerDialog.hide();
+
+            }
+
+            function productDetail(id)
+            {
+                var imagesArray = new Array();
+                $(xmlObject).find("images").eq(id).find("image").each(function () {
+                    imagesArray.push($(this).text());
+                });
+                var x = new myFunction($(xmlObject).find("id").eq(id).text(), $(xmlObject).find("name").eq(id).text(), $(xmlObject).find("brand").eq(id).text()
+                        , $(xmlObject).find("description").eq(id).text(), $(xmlObject).find("styleMiles").eq(id).text(), $(xmlObject).find("availableQuantity").eq(id).text(), imagesArray);
+
+                localStorage.setObject("product", x);
+                window.location = "product_detail.html";
+            }
+            function myFunction(id, name, brand, description, styleMiles, availableQuantity, images)
+            {
+                this.id = id;
+                this.name = name;
+                this.brand = brand;
+                this.description = description;
+                this.styleMiles = styleMiles;
+                this.availableQuantity = availableQuantity;
+                this.imagesArray = images;
+                this.image = images[0];
+            }
+
+            function product(id, name, brand, description, styleMiles, availableQuantity, images) {
+
+                var productobj = {pid: id,
+                    label: name,
+                    pbrand: brand,
+                    pdescription: description,
+                    pstyleMiles: styleMiles,
+                    pavailableQuantity: availableQuantity,
+                    pimagesArray: images};
+                return productobj;
+            }
+        </script>
+    </head>
+
+    <body id="product" style="background:#f5f4f0;">
+
+        <header>
+            <div class="header_inner">
+                <div class="header_inner_text_upper">
+                    <div class="header_inner_text_upper_title">Diesel catalog</div>
+                    <div class="header_inner_text_upper_search_icon"><a href="search.html"><img src="assets/images/search.png"></a></div>
+                </div>
+
+                <div class="sub_header">
+                    <span class="pull-left">In Store - <strong id="instore" ></strong> Products</span>
+                    <select class="pull-right sort_options">
+                        <option selected>Sort By</option>
+                        <option>Highest Miles</option>
+                        <option>Lowest Miles</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div id="seach_bar_main" role="tabpanel" class="user_profile_card collapse">
+                <div class="user_profile_card_inner">
+                    <div class="user_profile_card_inner_upper">
+                        <div class="user_profile_card_inner_upper_one"><img src="assets/images/logo.png"></div>
+                        <div class="user_profile_card_inner_upper_one pull-right"><strong>Cult</strong><br><span id="user_membership"></span> Cult</div>
+                    </div>
+                    <div class="user_profile_card_inner_bottom">
+                        <div class="user_profile_card_inner_upper_one pull-right"><img src="assets/images/bar.png"></div>
+                        <div class="user_profile_card_inner_upper_one"><span id="user_id"></span><br><strong id="user_name"></strong></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="arrow_header"><a role="button" data-toggle="collapse" data-parent="#seach_bar_main" href="#seach_bar_main" aria-expanded="true"><img id="myImage" onclick="changeImage()" src="assets/images/arrow_plus.png"></a></div>
+        </header>
+
+        <div class="products_show">
+            <div class="products_show_left" id="products"></div>
+        </div>
+
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a href="login.html"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+
+
+
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script>
+                function changeImage() {
+                    var image = document.getElementById('myImage');
+                    if (image.src.match("assets/images/arrow_minus.png")) {
+                        image.src = "assets/images/arrow_plus.png";
+                    } else {
+                        image.src = "assets/images/arrow_minus.png";
+                    }
+                }
+        </script>
+    </body>
+</html>

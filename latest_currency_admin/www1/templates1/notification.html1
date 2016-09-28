@@ -1,0 +1,65 @@
+<ion-view title="" cache-view="false" hide-nav-bar="true" id="add" class=" ">
+<!--    <div class="bar bar-header bar-positive">
+        <h1 class="title">Notification</h1>
+        <button  class="drop-btn" ng-click="popover.show($event)"></button> 
+    </div>-->
+
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px;">Notification</div>
+        <img src="img/header_logo.png" style="margin-left: 25px !important;" width="35px" height="35px">
+    </ion-header-bar>
+    <ion-content padding="true" style="background-color: #282a27;" class="manual-ios-statusbar-padding has-header">
+
+        <div class="inner_new">
+            <div class="search">
+                <label>Notification Title</label>
+                <div class="icon_bg">
+                    <input type="text"  ng-model="notification.title" id="notification_name"/>
+                </div>
+            </div>
+            <div class="search">
+                <label>Message</label>
+                <div class="icon_bg">          
+                    <textarea rows="4" cols="50" ng-model="notification.message"></textarea>
+                </div>
+            </div>
+            <div class="search search-1">
+                <label>Notification Sound</label>
+                <div class="icon_bg">
+                    <select ng-model="notification.sound">
+                        <option  value="">Select Sound </option>
+                        <option value="0">Sound 1</option>
+                        <option value="1">Sound 2</option>
+                        <option value="2">Sound 3</option>
+                    </select>                
+                </div>
+            </div>
+
+            <button class="button button-light  button-block  custom-button-save" id="send_to_all" ng-click="submitButton(true)">SEND TO ALL</button>
+            <div class="heading">
+                <div class="divider_login">
+                    <hr>
+                    <p>OR</p>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <div class="search search-1">
+                <label>Select Users</label>
+                <div class="icon_bg">
+                    <select multiple ng-model="notification.selectedUsers">
+                        <option ng-repeat="user in notification.users" value="{{user.id}}">{{user.username}}</option>
+                    </select>                
+                </div>
+            </div>
+            <button class="button button-light  button-block  custom-button-save" id="send" ng-click="submitButton(false)">SEND</button>
+        </div>
+        <div>
+        </div>
+
+    </ion-content>
+</ion-view>

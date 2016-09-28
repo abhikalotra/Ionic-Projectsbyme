@@ -1,0 +1,43 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ionicframework.currencyexchange173121"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.ionicframework.currencyexchange173121"
+        },
+        "cordova-plugin-datepicker": {
+            "PACKAGE_NAME": "com.ionicframework.currencyexchange173121"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.currencyexchange173121"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.currencyexchange173121"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ionicframework.currencyexchange173121"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.currencyexchange173121"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.ionicframework.currencyexchange173121"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.currencyexchange173121"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "789664744070",
+            "PACKAGE_NAME": "com.ionicframework.currencyexchange173121"
+        }
+    },
+    "dependent_plugins": {}
+}

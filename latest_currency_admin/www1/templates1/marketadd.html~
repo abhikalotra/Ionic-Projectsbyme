@@ -1,0 +1,108 @@
+<ion-view title="" hide-nav-bar="true"  cache-view="false" id="marketadd" class=" ">
+    <!--    <div class="bar bar-header bar-positive">
+            <img src="img/header_logo.png" width="35px" height="35px">
+            <h1 class="title">{{pageTitle}}</h1>
+            <button  class="drop-btn" ng-click="popover.show($event)"></button> 
+        </div>-->
+
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px;">{{pageTitle}}</div>
+        <img src="img/header_logo.png" style="margin-left: 25px !important;" width="35px" height="35px">
+    </ion-header-bar>
+
+
+    <ion-content padding="true" style="background-color: #282a27;" class="manual-ios-statusbar-padding has-header">
+        <div class="inner_new">
+            <div class="search">
+                <label>Title</label>
+                <div class="icon_bg">
+                    <input type="text" id="title" ng-model="updatedata.title"/>
+                </div>
+            </div>
+
+            <div class="search">
+                <label>Arabic Title</label>
+                <div class="icon_bg">
+                    <input type="text" id="arabic_title" ng-model="updatedata.title_ar"/>
+                </div>
+            </div>
+
+            <div class="search">
+                <label>Kurdish Title</label>
+                <div class="icon_bg">
+                    <input type="text" id="kurdish_title" ng-model="updatedata.title_ku"/>
+                </div>
+            </div>
+
+
+            <div class="search">
+                <label>Ask</label>
+                <div class="icon_bg plus_minus" >
+                    <input type="text"  ng-model="updatedata.ask" id="ask">
+                    <div class="value_change_btn">
+                        <a class="plus" href="" ng-click="inc_dec(true)">+</a>
+                        <a class="minus" href="" ng-click="inc_dec(false)">-</a>
+                    </div>
+                </div>
+            </div>
+            <div class="search">
+                <label>Bid</label>
+                <div class="icon_bg plus_minus" >
+                    <input type="text"  ng-model="updatedata.bid" id="bid">
+                    <div class="value_change_btn">
+                        <a class="plus" href="" ng-click="bid_inc_dec(true)">+</a>
+                        <a class="minus" href="" ng-click="bid_inc_dec(false)">-</a>
+                    </div>
+                </div>
+            </div>
+
+            <!--            <div class="search">
+                            <label>Ask</label>
+                            <div class="icon_bg">
+                                <input type="number" id="ask" ng-model="updatedata.ask"/>
+                            </div>
+                        </div>
+                        <div class="search">
+                            <label>Bid</label>
+                            <div class="icon_bg">
+                                <input type="number" id="bid" ng-model="updatedata.bid"/>
+                            </div>
+                        </div>-->
+
+
+            <!--            <div class="search">
+                            <label>Unit Price</label>
+                            <div class="icon_bg">
+                                <input type="number" id="unit_price" ng-model="updatedata.unit_price"/>
+                            </div>
+                        </div>
+                        <div class="search">
+                            <label>Current Value</label>
+                            <div class="icon_bg">
+                                <input type="number" id="current_value" ng-model="updatedata.current_value"/>
+                            </div>
+                        </div>
+                        <div class="search">
+                            <label>Purchase Value</label>
+                            <div class="icon_bg">
+                                <input type="number" id="purchase_value" ng-model="updatedata.purchase_value"/>
+                            </div>
+                        </div>
+                        <div class="search">
+                            <label>Gain/Less</label>
+                            <div class="icon_bg">
+                                <input type="number" id="gain_loss" ng-model="updatedata.gain_loss"/>
+                            </div>
+                        </div>-->
+            <span style="display: none;" id="market_id">{{updatedata.id}}</span>
+            <br/>   <button class="button button-light  button-block  custom-button-save" id="submitButton" ng-click="submitButton()">{{buttonText}}</button>
+
+            <br/> <button ng-show="buttonText === 'UPDATE'" class="button button-light  button-block  custom-button-save" ng-click="delete(updatedata.id)">DELETE</button>
+        </div>
+        <div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,53 @@
+<ion-view view-title="Welcome"  id="home" class=" ">
+    <!--    <div class="bar bar-header bar-positive">
+            <h1 class="title">Welcome</h1>
+            <button  class="drop-btn" ng-click="popover.show($event)"></button> 
+        </div>-->
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px;">Welcome</div>
+        <img src="img/header_logo.png"  width="35px" height="35px">
+    </ion-header-bar>
+
+
+    <ion-content padding="true"  style="background: url(img/m6SCigNFRYOSKB6OpqKj_background.jpg) no-repeat center;background-size:cover;" class="manual-ios-statusbar-padding services has-header">
+
+        <div class="inner_page">
+
+            <div class="currencyrate" ng-click="onServiceClick('ads')">
+                <div class="currencyrate_inner">
+                    <img src="img/imageads1234.png"/><br>
+                    Ads
+                </div>
+            </div>
+
+            <div class="currencyrate" ng-click="onServiceClick('showCurrency')">
+                <div class="currencyrate_inner">
+                    <img src="img/currencyrate.png"/><br>
+                    Kurdistan
+                    Market
+                </div>
+            </div>
+
+            <div class="currencyrate" ng-click="onServiceClick('iraqimarket')">
+                <div class="currencyrate_inner">
+                    <img src="img/iraqimarket.png"/><br>
+                    Iraqi 
+                    Borsa 
+                </div>
+            </div>
+
+            <div class="currencyrate" ng-click="onServiceClick('manageUserOptions')">
+                <div class="currencyrate_inner">
+                    <img src="img/users.png"/><br>
+                    Users
+                </div>
+            </div>
+
+            <br class="clear">
+
+        </div>
+
+    </ion-content>
+</ion-view>

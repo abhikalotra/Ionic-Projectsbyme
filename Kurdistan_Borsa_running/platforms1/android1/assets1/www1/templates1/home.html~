@@ -1,0 +1,44 @@
+<ion-view title="Home" hide-nav-bar="true" id="home" class=" ">
+<div class="bar bar-header bar-positive">
+   <h1 class="title">Welcome</h1>
+</div>
+    <ion-content padding="true"  style="background: url(img/m6SCigNFRYOSKB6OpqKj_background.jpg) no-repeat center;background-size:cover;" class="manual-ios-statusbar-padding services">
+  
+<div class="inner_page">
+
+<div class="currencyrate" ng-click="onServiceClick('ads')">
+<div class="currencyrate_inner">
+<img src="img/imageads1234.png"/><br>
+Ads
+</div>
+</div>
+
+<div class="currencyrate" ng-click="onServiceClick('currency')">
+<div class="currencyrate_inner">
+<img src="img/currencyrate.png"/><br>
+Currency 
+Rates
+</div>
+</div>
+
+<div class="currencyrate" ng-click="onServiceClick('markets')">
+<div class="currencyrate_inner">
+<img src="img/iraqimarket.png"/><br>
+Iraqi
+Markets
+</div>
+</div>
+
+<div class="currencyrate" ng-click="onServiceClick('users')">
+<div class="currencyrate_inner">
+<img src="img/users.png"/><br>
+Users
+</div>
+</div>
+
+<br class="clear">
+
+</div>
+
+    </ion-content>
+</ion-view>

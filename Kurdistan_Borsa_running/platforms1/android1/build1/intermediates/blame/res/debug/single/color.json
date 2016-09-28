@@ -1,0 +1,66 @@
+[
+    {
+        "merged": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Currency-Exchange-customer/platforms/android/build/intermediates/res/merged/debug/color/common_plus_signin_btn_text_light.xml",
+        "source": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Currency-Exchange-customer/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_plus_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Currency-Exchange-customer/platforms/android/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_dark.xml",
+        "source": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Currency-Exchange-customer/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/home/intel/node/ionic/Kurdistan_Borsa_running/platforms/android/build/intermediates/res/merged/debug/color/common_plus_signin_btn_text_dark.xml",
+        "source": "/home/intel/node/ionic/Kurdistan_Borsa_running/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_plus_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Kurdistan Borsa/platforms/android/build/intermediates/res/merged/debug/color/common_plus_signin_btn_text_light.xml",
+        "source": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Kurdistan Borsa/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_plus_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/home/intel/node/ionic/Kurdistan Borsa running/platforms/android/build/intermediates/res/merged/debug/color/common_plus_signin_btn_text_light.xml",
+        "source": "/home/intel/node/ionic/Kurdistan Borsa running/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_plus_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Kurdistan Borsa/platforms/android/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_dark.xml",
+        "source": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Kurdistan Borsa/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Kurdistan Borsa/platforms/android/build/intermediates/res/merged/debug/color/common_plus_signin_btn_text_dark.xml",
+        "source": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Kurdistan Borsa/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_plus_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Currency-Exchange-customer/platforms/android/build/intermediates/res/merged/debug/color/common_plus_signin_btn_text_dark.xml",
+        "source": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Currency-Exchange-customer/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_plus_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/home/intel/node/ionic/Kurdistan Borsa running/platforms/android/build/intermediates/res/merged/debug/color/common_plus_signin_btn_text_dark.xml",
+        "source": "/home/intel/node/ionic/Kurdistan Borsa running/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_plus_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/home/intel/node/ionic/Kurdistan_Borsa_running/platforms/android/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_dark.xml",
+        "source": "/home/intel/node/ionic/Kurdistan_Borsa_running/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/home/intel/node/ionic/Kurdistan_Borsa_running/platforms/android/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_light.xml",
+        "source": "/home/intel/node/ionic/Kurdistan_Borsa_running/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Currency-Exchange-customer/platforms/android/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_light.xml",
+        "source": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Currency-Exchange-customer/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/home/intel/node/ionic/Kurdistan Borsa running/platforms/android/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_dark.xml",
+        "source": "/home/intel/node/ionic/Kurdistan Borsa running/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/home/intel/node/ionic/Kurdistan Borsa running/platforms/android/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_light.xml",
+        "source": "/home/intel/node/ionic/Kurdistan Borsa running/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/home/intel/node/ionic/Kurdistan_Borsa_running/platforms/android/build/intermediates/res/merged/debug/color/common_plus_signin_btn_text_light.xml",
+        "source": "/home/intel/node/ionic/Kurdistan_Borsa_running/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_plus_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Kurdistan Borsa/platforms/android/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_light.xml",
+        "source": "/root/Manish/Currency  exchange app/Currency-Exchange  working/Latest-Currency-Exchange/Kurdistan Borsa/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.2/res/color/common_google_signin_btn_text_light.xml"
+    }
+]

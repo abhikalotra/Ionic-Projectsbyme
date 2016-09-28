@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/database.js"></script>
+        <script type="text/javascript" charset="utf-8" src="assets/js/apis.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener('backbutton', onBackKeyDown, false);
+
+
+            function onDeviceReady() {
+                var networkState = navigator.connection.type;
+                if (networkState == "none")
+                    window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                else {
+                    window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                    localStorage.removeItem("sort")
+                    createDB();
+                    getProfile();
+                    getProducts();
+                }
+            }
+            function onBackKeyDown() {
+                navigator.app.exitApp();
+            }
+        </script>
+        <script>
+
+            Storage.prototype.setObject = function (key, value) {
+                this.setItem(key, JSON.stringify(value));
+            };
+            Storage.prototype.getObject = function (key) {
+                var value = this.getItem(key);
+                return value && JSON.parse(value);
+            };
+
+            function getProfile() {
+                var url = 'allcustomer/' + localStorage.getItem("customer_id");
+                fetchData(url, function (data) {
+                    window.plugins.spinnerDialog.hide();
+                    var username;
+                    $("#customer_id").html($(data).find("id").text());
+                    localStorage.setItem("user_mobile", $(data).find("contactNumber").text());
+                    localStorage.setItem("user_email", $(data).find("email").text());
+                    username = $(data).find("firstName").text();
+                    username = username + ' ' + $(data).find("lastName").text();
+                    localStorage.setItem("user_group", $(data).find("membership").text());
+                    var pointsEarned = $(data).find("pointsEarned").text();
+                    var pointsBurned = $(data).find("pointsBurned").text();
+                    var totalPoints = +pointsEarned - +pointsBurned;
+//                    $("#miles").html($(data).find("pointsEarned").text());
+                    $("#miles").html(totalPoints);
+
+                    localStorage.setItem("miles", totalPoints);
+                    localStorage.setItem("user_gender", $(data).find("gender").text());
+                    $("#user_occupation").html($(data).find("occupation").text());
+                    localStorage.setItem("user_name", username);
+                });
+            }
+
+            function getProducts() {
+                var url = 'redeemCatalogue/';
+                fetchData(url, function (data) {
+                    window.plugins.spinnerDialog.hide();
+                    var productList = new Array();
+                    var productImagesArray = new Array();
+                    var productLenght;
+                    $(data).find("style").each(function () {
+                        $("#instore").html($(this).index() + 1);
+                        productLenght = $(this).index() + 1;
+                    });
+
+                    for (var i = 0; i < productLenght; i++) {
+                        var productImagesArray = new Array();
+                        $(data).find("images").eq(i).find("image").each(function () {
+                            productImagesArray.push($(this).text());
+                        });
+                        var proObj = new product($(data).find("style").eq(i).find("id").text(),
+                                $(data).find("style").eq(i).find("name").text(),
+                                $(data).find("style").eq(i).find("brand").text(),
+                                $(data).find("style").eq(i).find("description").text(),
+                                $(data).find("style").eq(i).find("styleMiles").text(),
+                                $(data).find("style").eq(i).find("availableQuantity").text(), productImagesArray,
+                                $(data).find("style").eq(i).find("validDate").text());
+                        productList.push(proObj);
+                    }
+                    localStorage.setObject("product_list", productList);
+                    localStorage.setObject("products_list", productList);
+                    window.plugins.spinnerDialog.hide();
+                });
+            }
+
+            function product(id, name, brand, description, styleMiles, availableQuantity, images, validdate) {
+                var productobj = {pid: id,
+                    label: name,
+                    pbrand: brand,
+                    pdescription: description,
+                    pstyleMiles: styleMiles,
+                    pavailableQuantity: availableQuantity,
+                    pimagesArray: images,
+                    pValidDate: validdate,
+                    pImage: images[0]};
+                return productobj;
+            }
+
+            $(function () {
+                $("#redeem").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "products.html";
+                    }
+                })
+            });
+
+            $(function () {
+                $("#transactions").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "transactions.html";
+                    }
+                })
+            });
+
+            $(function () {
+                $("#profile").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "profile.html";
+                    }
+                })
+            });
+        </script>
+    </head>
+    <body style="background:#f5f4f0;">
+
+        <header>
+            <div class="header_inner">
+                <div class="header_inner_text_upper">
+                    <div class="header_inner_text_upper_title">Diesel</div>
+                    <div class="header_inner_text_upper_search_icon"><a  onclick="logout();"><img src="assets/images/out.png"></a></div>
+                </div>
+                <div class="sub_header">
+                    <span class="pull-left">Style Miles: <strong id="miles"></strong></span>
+                </div>
+            </div>
+        </header>
+        <div class="main_category">
+            <a  id="redeem"><div class="main_category_one background redeem"><div class="main_category_one_inner">Redeem</div></div></a>
+            <a  id="transactions"><div class="main_category_one background history"><div class="main_category_one_inner">History</div></div></a>
+            <a  id="profile"><div class="main_category_one background profile"><div class="main_category_one_inner">My Profile</div></div></a>
+            <div class="main_category_one background news_board" ><div class="main_category_one_inner">News board</div></div>
+            <a href="more.html"><div class="main_category_one background more"><div class="main_category_one_inner">More Options</div></div></a>
+        </div>
+
+    </body>
+</html>

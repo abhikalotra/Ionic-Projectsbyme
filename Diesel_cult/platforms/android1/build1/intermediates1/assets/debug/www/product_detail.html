@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="assets/js/database.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady() {
+                getProductDetail();
+            }
+
+        </script>
+        <script>
+            var aQuantity;
+            Storage.prototype.getObject = function (key) {
+                var value = this.getItem(key);
+                return value && JSON.parse(value);
+            };
+
+            function getProductDetail() {
+                var xmlObject = localStorage.getObject("product");
+                var selector = $(".sort_options");
+                var sliderImages = $("#slider_images");
+                var circleContainer = $(".carousel-indicators");
+                aQuantity = xmlObject.availableQuantity;
+                $("#product_name").html(xmlObject.name);
+                $("#miles").html(xmlObject.styleMiles);
+//                $("#brand").html(xmlObject.brand);
+                $("#description").html(xmlObject.description);
+                var stock = document.getElementById("stock_tag");
+                if (xmlObject.availableQuantity > 0) {
+                    stock.innerHTML = "Availability";
+                    if (xmlObject.availableQuantity < 10) {
+                        for (var i = 1; i <= xmlObject.availableQuantity; i++) {
+                            selector.append(' <option>' + i + '</option>');
+                        }
+                    } else if (xmlObject.availableQuantity > 10) {
+                        for (var i = 1; i <= 10; i++) {
+                            selector.append(' <option>' + i + '</option>');
+                        }
+                    }
+                } else {
+                    stock.innerHTML = "Out of stock";
+                    stock.style.color = "red";
+                    $(".sort_options").prop('disabled', 'disabled');
+                }
+                for (var i = 0; i < xmlObject.imagesArray.length; i++) {
+                    if (i === 0) {
+                        sliderImages.append('<div class="item active"><a href="#carousel-example-generic" data-slide="next"><img src="' + xmlObject.imagesArray[i] + '"></a></div>');
+                        circleContainer.append('<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>');
+                    } else {
+                        sliderImages.append('<div class="item"><a href="#carousel-example-generic" data-slide="next"><img src="' + xmlObject.imagesArray[i] + '"></a></div>');
+                        circleContainer.append('<li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>');
+                    }
+                }
+            }
+
+            $(function () {
+                $("#add_to_Cart").click(function () {
+                    if (aQuantity > 0) {
+                        setData($(".sort_options").val(), function () {
+                            window.plugins.toast.show('Product has been added into the cart.', 'long', 'bottom');
+                        });
+                    } else
+                        window.plugins.toast.show('Product is out of stock.', 'long', 'bottom');
+                });
+            });
+
+            $(function () {
+                $("#buy").click(function () {
+                    if (aQuantity > 0) {
+                        setData($(".sort_options").val(), function () {
+                            window.location = "orders.html";
+                        });
+                    } else
+                        window.plugins.toast.show('Product is out of stock.', 'long', 'bottom');
+                });
+            });
+
+            $(function () {
+                $("#redeem").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "products.html";
+                    }
+                })
+            });
+
+        </script>
+    </head>
+    <body style="background:#fff;">
+
+        <header style="position:static; border:none;" class="header_main">
+            <div class="header_inner">
+                <div class="header_inner_text_upper">
+                    <div class="header_inner_text_upper_menu_icon"><a href="products.html"><img src="assets/images/black_back.png"></a></div>
+                    <div class="header_inner_text_upper_title" id="product_name"></div>
+                    <div class="header_inner_text_upper_search_icon"><a href="search.html"><img src="assets/images/search.png"></a></div>
+                </div>
+            </div>
+        </header>
+
+        <div style="height:380px;" class="profile_pic_details">
+            <div class="profile_pic_details_image">
+
+                <div id="carousel-example-generic" class="carousel slide product_slider" data-ride="carousel">
+                    <ol class="carousel-indicators"></ol>
+                    <div id="slider_images" class="carousel-inner" role="listbox">
+                    </div>
+                </div>
+                <div style="bottom:0 !important;" class="profile_pic_details_image_detail_header diesel_id_detail">
+                    <div style="color:#333;" class="profile_pic_details_image_detail_header_back">Miles <strong id="miles" ></strong></div>
+                    <div style="color:#333;" class="profile_pic_details_image_detail_header_back pull-right"><strong id="stock_tag" style="color:green;"></strong></div>
+                    <br class="clear">
+                </div>
+            </div>
+        </div>
+
+        <div class="profile_pic_details_text">
+            <div class="profile_pic_details_text_one">
+                <div class="profile_pic_details_text_inner_icon"><img src="assets/images/quantity.png"></div>
+                <div class="profile_pic_details_text_inner"><strong>Quantity</strong>
+                    <select style="margin-left:10px;" class="sort_options">
+                    </select>
+                </div>
+            </div>
+
+            <!--            <div class="profile_pic_details_text_one">
+                            <div class="profile_pic_details_text_inner_icon"><img src="assets/images/brand.png"></div>
+                            <div class="profile_pic_details_text_inner"><strong>Brand </strong>: <span id="brand"> </span></div>
+                        </div>-->
+
+            <div class="profile_pic_details_text_one">
+                <div class="profile_pic_details_text_inner_icon"><img src="assets/images/about.png"></div>
+                <div class="profile_pic_details_text_inner"><strong id ="description" ></strong></div>
+            </div>
+
+            <div class="bottom_buttons_show">
+                <a id="buy" >  <button class="footer_buttons">Redeem Now</button></a>
+                <a id="add_to_Cart"><button class="footer_buttons">Add to cart</button></a>
+            </div>
+        </div>
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a id="redeem" ><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a onclick="logout();"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+    </body>
+</html>

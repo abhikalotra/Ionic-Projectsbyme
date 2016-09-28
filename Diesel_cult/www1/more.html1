@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener('backbutton', onBackKeyDown, false);
+            function onBackKeyDown() {
+                window.location = "category.html";
+            }
+            $(function () {
+                $("#profile").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "profile.html";
+                    }
+                })
+            });
+
+        </script>   
+        <script>
+            function closePopup()
+            {
+                $('#divId').fadeOut();
+            }
+            function showDiv()
+            {
+                $('#divId').fadeIn();
+            }
+        </script>
+    </head>
+
+    <body style="background:#f5f4f0;">
+
+
+        <div style="display:none;" id="divId" class="model_black_area">
+            <div style="height:197px;" class="model_black_area_white">
+                <p>Are you sure you want to logout?</p>
+                <a href="login.html"><button class="enter_button">Yes</button></a>
+                <a onclick="closePopup()" href="#"><button style="margin-top:10px;" class="enter_button">No</button></a>
+            </div><!-- model_black_area_white close -->
+        </div><!-- model_black_area close -->
+
+
+
+        <header class="header_main">
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <a href="category.html"><div class="header_inner_text_upper_menu_icon"><img src="assets/images/black_back.png"></div></a><!-- header_inner_text_upper_menu_icon close -->
+                    <div class="header_inner_text_upper_title">More Options</div><!-- header_inner_text_upper_title close -->
+                </div><!-- header_inner_text_upper close -->
+            </div><!-- header_inner close -->
+        </header>
+
+
+
+        <div style="padding-top:65px; height:auto; padding-bottom:49px;" class="more_category">
+            <a id="profile"><div class="more_category_one"><div class="more_category_one_inner"><img src="assets/images/profile.png"><br>My Profile</div><!-- more_category_one_inner close --></div></a><!-- more_category_one close -->
+            <a href="feedback.html" ><div class="more_category_one"><div class="more_category_one_inner"><img src="assets/images/offers.png"><br>Feedback</div><!-- more_category_one_inner close --></div></a><!-- more_category_one close -->
+            <a href="contact.html" ><div class="more_category_one"><div class="more_category_one_inner"><img src="assets/images/messages.png"><br>Contact us</div><!-- more_category_one_inner close --></div></a><!-- more_category_one close -->
+            <a href="howdieselwork.html"><div class="more_category_one"><div class="more_category_one_inner"><img src="assets/images/how_work.png"><br>How does Diesel Cult work? </div><!-- more_category_one_inner close --></div></a><!-- more_category_one close -->
+            <a href="terms.html"><div class="more_category_one"><div class="more_category_one_inner"><img src="assets/images/terms.png"><br>terms & conditions</div><!-- more_category_one_inner close --></div></a><!-- more_category_one close -->
+            <a href="faq.html"><div class="more_category_one"><div class="more_category_one_inner"><img src="assets/images/faqs.png"><br>Faqs</div><!-- more_category_one_inner close --></div></a><!-- more_category_one close -->
+
+            <br class="clear">
+        </div>
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a onclick="logout();"> <div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+
+    </body>
+</html>

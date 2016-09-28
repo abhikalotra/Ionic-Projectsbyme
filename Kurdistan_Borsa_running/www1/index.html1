@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title ></title>
+        
+<!--
+		<link rel="stylesheet" href="css/{{default_direction}}-app.css">
+-->
+		
+
+        <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/apis.js"></script>
+
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+        <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+        <script src="cordova.js"></script>
+        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/custom.css">
+        <script src="js/angular-translate.min.js"></script>
+
+        <script src="js/angular-translate-loader-static-files.js"></script>
+
+        <style>
+            .wid{
+				
+                width: 100%;
+            }
+        </style>
+        <style type="text/css">
+			
+            textarea {
+                resize: none;
+            }
+            .platform-ios .manual-ios-statusbar-padding{
+                padding-top:20px;
+            }
+            .manual-remove-top-padding{
+                padding-top:0px; 
+            }
+            .manual-remove-top-padding .scroll{
+                padding-top:0px !important;
+            }
+            ion-list.manual-list-fullwidth div.list, .list.card.manual-card-fullwidth {
+                margin-left:-10px;
+                margin-right:-10px;
+            }
+            ion-list.manual-list-fullwidth div.list > .item, .list.card.manual-card-fullwidth > .item {
+                border-radius:0px;
+                border-left:0px;
+                border-right: 0px;
+            }
+        </style>
+
+        <script src="js/app.js"></script>
+        <script src="js/controllers.js"></script>
+        <!--<script src="js/services.js"></script>-->
+        <!--<script src="js/directives.js"></script>-->
+ 
+
+
+
+    </head>
+    <body  ng-app="starter" animation="slide-left-right-ios7"  ng-controller="AppCtrl"  class="platform-android">
+		
+	
+    <ion-nav-view>
+        <div ng-if="hasAds == true">
+            <ion-footer-bar align-title="left" class="bar-assertive adsfooter">
+                <ion-slide-box auto-play="true" does-continue="true"  class="wid" show-pager="false">
+                    <ion-slide ng-repeat="ad in ads">
+                        <img src="{{ad.image}}" width="100%" height="90px">
+                    </ion-slide>
+                </ion-slide-box>
+            </ion-footer-bar>
+        </div>
+    </ion-nav-view>
+    
+    
+	<link rel="stylesheet" ng-href="css/{{ default_direction }}-app.css">
+</body>
+
+</html>

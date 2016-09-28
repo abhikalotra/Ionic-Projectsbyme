@@ -1,0 +1,63 @@
+<ion-view title="" id="ads" cache-view="false" class=" ">
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px;">Customers  ({{manageUserData.length}})</div>
+        <img src="img/header_logo.png" style="margin-left: 25px !important;" width="35px" height="35px">
+    </ion-header-bar>
+    <ion-content padding="true" class="manual-ios-statusbar-padding services has-header" style="background-color: #282a27;" >
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefreshUsers()">
+        </ion-refresher>
+        <div class="inner_new">
+            <div style="float: left; margin-top: 10px; padding: 10px 12px;" class="read_more">
+				<!-- <button class="button button-light  button-block  custom-button-save" ng-click="sortBy('mycolor')"> 
+				 <span class="sortorder" ng-show="propertyName === 'mycolor'" ng-class="{reverse: reverse}">SORT BY</span>-->
+
+					<button class="button button-light  button-block  custom-button-save" ng-click="sortBy('mycolor')"> SORT BY 
+                    <span class="sortorder" ng-show="propertyName === 'mycolor'" ng-class="{reverse: reverse}"></span>
+				</button>
+
+            </div>
+
+            <div class="read_more"><a href="#/welcome/addManageUser" ng-click="save()">ADD NEW</a></div>
+        </div>
+        <ul>
+			
+            <ion-list class="ad1" ng-repeat="manageData in manageUserData | orderBy:propertyName:reverse">
+			<!--<ion-list class="ad1" ng-repeat="manageData in manageUserData | orderBy: 'mycolor' ">-->
+
+                <div class="left_data">
+                    <h2 style="margin-left: 5px; color: #fff; margin-right: 10px;">{{$index + 1}}</h2>
+                    <img src="img/inner_img.png" ng-src="{{manageData.image}}">
+
+                    <h2  style="margin-left: 5px; color:{{manageData.mycolor}}"  ng-class="{'pending_users': manageData.is_active == 0}"  >{{manageData.username}}</h2>
+<!--                    <h2  style="margin-left: 5px; color:{{manageData.mycolor}}"    >{{manageData.username}}</h2>-->
+                </div>
+                <div class="right_data">
+                    <div class="update"><a href="#/welcome/addManageUser" ng-click="update(manageData)">Update</a> <a href="#" ng-click="delete(manageData)">Delete</a></div>
+                </div>
+                <br class="clear">
+            </ion-list>
+        </ul>
+        <script id="templates/search.html" type="text/ng-template">
+            <ion-modal-view id="dialog">
+            <ion-header-bar class="bar bar-header bar-positive search-bar">
+            <h1 class="title">Search </h1>
+            <button class="button button-clear button-primary" ng-click="modal.remove()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">            
+            <div class="list">
+            <label class="item item-input">
+            <input auto-complete ui-items="data" ng-model="searchtext" class="inputclass" placeholder="Search" ng-change="searchlocations()">
+            </label>
+            </div>
+            <div id="menu-list"></div>
+            </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+    <button class="button button-float" ng-click="openModal()"><i class="search-icn"></i></button>
+</ion-view>

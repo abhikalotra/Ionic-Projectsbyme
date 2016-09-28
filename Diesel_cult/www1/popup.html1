@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Diesel Cult</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="assets/css/custom.css">
+</head>
+<script>
+setTimeout(function(){
+                    $('#divId').fadeIn();
+                    }, 3000);
+					function closePopup()
+					{
+$('#divId').fadeOut();					}			
+</script>
+<body style="background:#f5f4f0;">
+
+
+<div id="divId" style="display:none;" class="model_black_area">
+<div style="height:150px;" class="model_black_area_white">
+<p>You don’t have sufficient Styles Miles<br> to buy product.</p>
+<a onclick="closePopup()" href="#"><button class="enter_button">ok</button></a>
+</div><!-- model_black_area_white close -->
+</div><!-- model_black_area close -->
+
+
+
+
+<header>
+<div class="header_inner">
+<div class="header_inner_text_upper">
+<div class="header_inner_text_upper_menu_icon"><img src="assets/images/menu.png"></div><!-- header_inner_text_upper_menu_icon close -->
+<div class="header_inner_text_upper_title">Diesel catalog</div><!-- header_inner_text_upper_title close -->
+<div class="header_inner_text_upper_search_icon"><img src="assets/images/search.png"></div><!-- header_inner_text_upper_search_icon close -->
+</div><!-- header_inner_text_upper close -->
+
+<div class="sub_header">
+<span class="pull-left">InStore - <strong>450</strong> Products</span>
+<select style="margin-left:10px;" class="pull-right sort_options">
+<option selected>Validity</option>
+<option>Low</option>
+<option>High</option>
+</select>
+<select class="pull-right sort_options">
+<option selected>Sort By</option>
+<option>Low Price</option>
+<option>High Price</option>
+</select>
+</div><!-- sub_header close -->
+</div><!-- header_inner close -->
+
+
+<div id="seach_bar_main" role="tabpanel" class="user_profile_card collapse">
+<!--<div class="slidearrow">
+<div class="heading"><p class="pull-left">DIESEL</p><p class="text-right">Cult</p></div>
+<div class="heading_b"><p class="sub_text">Higher Cult</p></div>
+<div class="box_inner">
+<div class="price">750</div>
+<div class="clear"></div>
+<div style="height:20px;"></div>
+<div class="col-md-6 sub_text_price">
+<div class="pull-left"><p class="sub_text_price">1100333330001115</p><p>Sumit bhatia</p></div></div>
+<div class="col-md-6">
+<div><img class="img-responsive pull-right image_bar" src="assets/images/bar.png"></div></div>
+</div>
+</div>-->
+</div>
+
+
+<div class="arrow_header"><a role="button" data-toggle="collapse" data-parent="#seach_bar_main" href="#seach_bar_main" aria-expanded="true"><img id="myImage" onclick="changeImage()" src="assets/images/arrow_plus.png"></a></div><!-- arrow_header close -->
+</header>
+
+
+<div class="products_show">
+<div class="products_show_left">
+<div class="products_show_left_one">
+<div class="products_show_left_one_validity">
+<span class="product_valid">VaLID:31-DEC-2015</span>
+<span class="product_valid_favour text-right"><img src="assets/images/favourite.png"></span>
+<br class="clear">
+</div><!-- products_show_left_one_validity close -->
+<div class="products_show_left_one_image"><img src="assets/images/product1.png"></div><!-- products_show_left_one_image close -->
+<div class="products_show_left_one_miles">4850 MILES</div><!-- products_show_left_one_miles close -->
+<div class="products_show_left_one_title">
+<div class="products_show_left_one_title_name">TheBlondeSalad blogger posts
+her key pieces from our winter</div><!-- products_show_left_one_title_name close -->
+<div class="products_show_left_one_cart"><img src="assets/images/cart_icon.png"></div><!-- products_show_left_one_cart close -->
+</div><!-- products_show_left_one_title close -->
+</div><!-- products_show_left_one close -->
+
+<div class="products_show_left_one">
+<div class="products_show_left_one_validity">
+<span class="product_valid">VaLID:31-DEC-2015</span>
+<span class="product_valid_favour text-right"><img src="assets/images/favourite.png"></span>
+<br class="clear">
+</div><!-- products_show_left_one_validity close -->
+<div class="products_show_left_one_image"><img src="assets/images/product2.png"></div><!-- products_show_left_one_image close -->
+<div class="products_show_left_one_miles">4850 MILES</div><!-- products_show_left_one_miles close -->
+<div class="products_show_left_one_title">
+<div class="products_show_left_one_title_name">TheBlondeSalad blogger posts
+her key pieces from our winter</div><!-- products_show_left_one_title_name close -->
+<div class="products_show_left_one_cart"><img src="assets/images/cart_icon.png"></div><!-- products_show_left_one_cart close -->
+</div><!-- products_show_left_one_title close -->
+</div><!-- products_show_left_one close -->
+
+<div class="products_show_left_one">
+<div class="products_show_left_one_validity">
+<span class="product_valid">VaLID:31-DEC-2015</span>
+<span class="product_valid_favour text-right"><img src="assets/images/favourite.png"></span>
+<br class="clear">
+</div><!-- products_show_left_one_validity close -->
+<div class="products_show_left_one_image"><img src="assets/images/product3.png"></div><!-- products_show_left_one_image close -->
+<div class="products_show_left_one_miles">4850 MILES</div><!-- products_show_left_one_miles close -->
+<div class="products_show_left_one_title">
+<div class="products_show_left_one_title_name">TheBlondeSalad blogger posts
+her key pieces from our winter</div><!-- products_show_left_one_title_name close -->
+<div class="products_show_left_one_cart"><img src="assets/images/cart_icon.png"></div><!-- products_show_left_one_cart close -->
+</div><!-- products_show_left_one_title close -->
+</div><!-- products_show_left_one close -->
+
+<div class="products_show_left_one">
+<div class="products_show_left_one_validity">
+<span class="product_valid">VaLID:31-DEC-2015</span>
+<span class="product_valid_favour text-right"><img src="assets/images/favourite.png"></span>
+<br class="clear">
+</div><!-- products_show_left_one_validity close -->
+<div class="products_show_left_one_image"><img src="assets/images/product4.png"></div><!-- products_show_left_one_image close -->
+<div class="products_show_left_one_miles">4850 MILES</div><!-- products_show_left_one_miles close -->
+<div class="products_show_left_one_title">
+<div class="products_show_left_one_title_name">TheBlondeSalad blogger posts
+her key pieces from our winter</div><!-- products_show_left_one_title_name close -->
+<div class="products_show_left_one_cart"><img src="assets/images/cart_icon.png"></div><!-- products_show_left_one_cart close -->
+</div><!-- products_show_left_one_title close -->
+</div><!-- products_show_left_one close -->
+
+</div><!-- products_show_left close -->
+
+
+<div class="products_show_left border_none">
+
+<div class="products_show_left_one">
+<div class="products_show_left_one_validity">
+<span class="product_valid">VaLID:31-DEC-2015</span>
+<span class="product_valid_favour text-right"><img src="assets/images/favourite.png"></span>
+<br class="clear">
+</div><!-- products_show_left_one_validity close -->
+<div class="products_show_left_one_image"><img src="assets/images/product5.png"></div><!-- products_show_left_one_image close -->
+<div class="products_show_left_one_miles">4850 MILES</div><!-- products_show_left_one_miles close -->
+<div class="products_show_left_one_title">
+<div class="products_show_left_one_title_name">TheBlondeSalad blogger posts
+her key pieces from our winter</div><!-- products_show_left_one_title_name close -->
+<div class="products_show_left_one_cart"><img src="assets/images/cart_icon.png"></div><!-- products_show_left_one_cart close -->
+</div><!-- products_show_left_one_title close -->
+</div><!-- products_show_left_one close -->
+
+<div class="products_show_left_one">
+<div class="products_show_left_one_validity">
+<span class="product_valid">VaLID:31-DEC-2015</span>
+<span class="product_valid_favour text-right"><img src="assets/images/favourite.png"></span>
+<br class="clear">
+</div><!-- products_show_left_one_validity close -->
+<div class="products_show_left_one_image"><img src="assets/images/product6.png"></div><!-- products_show_left_one_image close -->
+<div class="products_show_left_one_miles">4850 MILES</div><!-- products_show_left_one_miles close -->
+<div class="products_show_left_one_title">
+<div class="products_show_left_one_title_name">TheBlondeSalad blogger posts
+her key pieces from our winter</div><!-- products_show_left_one_title_name close -->
+<div class="products_show_left_one_cart"><img src="assets/images/cart_icon.png"></div><!-- products_show_left_one_cart close -->
+</div><!-- products_show_left_one_title close -->
+</div><!-- products_show_left_one close -->
+
+<div class="products_show_left_one">
+<div class="products_show_left_one_validity">
+<span class="product_valid">VaLID:31-DEC-2015</span>
+<span class="product_valid_favour text-right"><img src="assets/images/favourite.png"></span>
+<br class="clear">
+</div><!-- products_show_left_one_validity close -->
+<div class="products_show_left_one_image"><img src="assets/images/product1.png"></div><!-- products_show_left_one_image close -->
+<div class="products_show_left_one_miles">4850 MILES</div><!-- products_show_left_one_miles close -->
+<div class="products_show_left_one_title">
+<div class="products_show_left_one_title_name">TheBlondeSalad blogger posts
+her key pieces from our winter</div><!-- products_show_left_one_title_name close -->
+<div class="products_show_left_one_cart"><img src="assets/images/cart_icon.png"></div><!-- products_show_left_one_cart close -->
+</div><!-- products_show_left_one_title close -->
+</div><!-- products_show_left_one close -->
+
+<div class="products_show_left_one">
+<div class="products_show_left_one_validity">
+<span class="product_valid">VaLID:31-DEC-2015</span>
+<span class="product_valid_favour text-right"><img src="assets/images/favourite.png"></span>
+<br class="clear">
+</div><!-- products_show_left_one_validity close -->
+<div class="products_show_left_one_image"><img src="assets/images/product2.png"></div><!-- products_show_left_one_image close -->
+<div class="products_show_left_one_miles">4850 MILES</div><!-- products_show_left_one_miles close -->
+<div class="products_show_left_one_title">
+<div class="products_show_left_one_title_name">TheBlondeSalad blogger posts
+her key pieces from our winter</div><!-- products_show_left_one_title_name close -->
+<div class="products_show_left_one_cart"><img src="assets/images/cart_icon.png"></div><!-- products_show_left_one_cart close -->
+</div><!-- products_show_left_one_title close -->
+</div><!-- products_show_left_one close -->
+
+</div><!-- products_show_left close -->
+
+
+</div><!-- products_show close -->
+
+
+<div class="bottom_tabs">
+<a href="profile.html"><div class="bottom_tabs_one"><img src="assets/images/member.png"><br>Members</div></a><!-- bottom_tabs_one close -->
+<a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>InStore</div></a><!-- bottom_tabs_one close -->
+<!--<a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/offer.png"><br>Coupons</div></a><!-- bottom_tabs_one close -->
+<a href="login.html"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a><!-- bottom_tabs_one close -->
+<a href="more.html"><div class="bottom_tabs_one"><img src="assets/images/more.png"><br>More</div></a><!-- bottom_tabs_one close -->
+</div><!-- bottom_tabs close -->
+
+
+
+<!-- jquery link -->
+<script src="assets/js/jquery.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script>
+function changeImage() {
+    var image = document.getElementById('myImage');
+    if (image.src.match("assets/images/arrow_minus.png")) {
+        image.src = "assets/images/arrow_plus.png";
+    } else {
+        image.src = "assets/images/arrow_minus.png";
+    }
+}
+</script>
+</body>
+</html>

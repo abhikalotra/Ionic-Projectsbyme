@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+//            document.addEventListener('backbutton', onBackKeyDown, false);
+
+            function onDeviceReady() {
+                window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                getHistory();
+            }
+//            function onBackKeyDown() {
+//                window.location = "more.html";
+//            }
+
+        </script>
+        <script>
+            var xmlObject;
+
+            function getHistory() {
+                var url = 'http://59.181.101.224:8080/ril/service/customer/sales/' + localStorage.getItem("customer_id");
+//                var url = 'http://59.181.101.224:8080/ril/service/customer/sales/2';
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    contentType: "application/xml",
+                    dataType: "XML",
+                    success: onSuccess,
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.status === 409) {
+                            $(jqXHR.responseText).find("errorMsg").each(function () {
+                                window.plugins.spinnerDialog.hide();
+                                window.plugins.toast.show($(this).text(), 'long', 'bottom');
+                            });
+                        }
+                        if (jqXHR.status === 0) {
+                            window.plugins.spinnerDialog.hide();
+                            window.plugins.toast.show('There is some problem. please try again later.', 'long', 'bottom');
+                        }
+                    }});
+            }
+            function onSuccess(data) {
+                window.plugins.spinnerDialog.hide();
+                $("#miles").html(localStorage.getItem("miles"));
+                var history_list = $("#history_list");
+                $(data).find("salesDto").each(function () {
+                    history_list.append('<div style="padding:0 15px;" class="product_cart"><div class="total_view"><span class="pull-left"><strong>Classic Cult</strong></span><br class="clear"></div><div style="border:none;" class="total_view"><span class="pull-left">Earn: <span>' + $(this).find("pointsEarned").text() + '</span> Style Miles / &#8377; <span>' + $(this).find("billAmount").text() + '</span> </span><br class="clear"></div></div>');
+                });
+            }
+
+        </script>
+    </head>
+    <body style="background:#f5f4f0;">
+
+        <header style="position:static; border-bottom:#ddd solid 1px;">
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <a href="products.html"><div class="header_inner_text_upper_menu_icon">
+                            <img src="assets/images/black_back.png"></div></a>
+                    <div class="header_inner_text_upper_title">History</div>
+                </div>
+                <div class="sub_header">
+                    <span class="pull-left">Style Miles: <strong id="miles" ></strong></span>
+                </div>
+            </div>
+        </header>
+
+        <div id = "history_list" class="product_cart_all">
+
+        </div>
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a href="login.html"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+
+    </body>
+</html>

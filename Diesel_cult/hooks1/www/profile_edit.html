@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+        <script>
+            var imgUri = null;
+            var pictureSource;
+            var destinationType;
+
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady() {
+                window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                getProfile();
+                pictureSource = navigator.camera.PictureSourceType;
+                destinationType = navigator.camera.DestinationType;
+            }
+            function onPhotoDataSuccess(imageData) {
+                var smallImage = document.getElementById('profile_img');
+                smallImage.style.display = 'block';
+                smallImage.src = "data:image/jpeg;base64," + imageData;
+                imgUri = imageData;
+            }
+            function capturePhoto() {
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, {quality: 50,
+                    destinationType: destinationType.DATA_URL});
+            }
+
+            function capturePhotoEdit() {
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, {quality: 20, allowEdit: true,
+                    destinationType: destinationType.DATA_URL});
+            }
+
+            function getPhoto(source) {
+                navigator.camera.getPicture(onPhotoURISuccess, onFail, {quality: 50,
+                    destinationType: destinationType.FILE_URI,
+                    sourceType: source});
+            }
+
+            function onFail(message) {
+
+            }
+
+
+            function getProfile() {
+                var url = 'http://59.181.101.224:8080/ril/service/allcustomer/' + localStorage.getItem("customer_id");
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    contentType: "application/xml",
+                    dataType: "XML",
+                    success: onSuccess,
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.status === 409) {
+                            $(jqXHR.responseText).find("errorMsg").each(function () {
+                                window.plugins.spinnerDialog.hide();
+                                window.plugins.toast.show($(this).text(), 'long', 'bottom');
+                            });
+                        }
+                        if (jqXHR.status === 0) {
+                            window.plugins.spinnerDialog.hide();
+                            window.plugins.toast.show('There is some problem. please try again later.', 'long', 'bottom');
+                        }
+                    }});
+            }
+
+            function onSuccess(data)
+            {
+                window.plugins.spinnerDialog.hide();
+                $("#profile_img").attr('src', $(data).find("images").find(":first-child").text());
+                $("#customer_id").html($(data).find("id").text());
+                $("#mobile").val($(data).find("contactNumber").text());
+                $("#email").val($(data).find("email").text());
+                $("#first_name").val($(data).find("firstName").text());
+                $("#last_name").val($(data).find("lastName").text());
+                $("#city").val($(data).find("city").text());
+                $("#pincode").val($(data).find("pincode").text());
+                $("#group").val($(data).find("membership").text());
+                var gen = $(data).find("gender").text();
+                if (gen === 'M' || gen === "Male" || gen === "MALE" || gen === "male" || gen === 'm') {
+                    $("#male").attr('selected', 'selected');
+                } else {
+                    $("#female").attr('selected', 'selected');
+                }
+
+                $("#occupation").val($(data).find("occupation").text());
+                $("#group").val($(data).find("membership").text());
+            }
+
+
+            $(function () {
+                $("#save_btn").click(function () {
+                    window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                    var xmldata = '<customer><id>' + localStorage.getItem("customer_id") + '</id><contactNumber>' + $("#mobile").val() + '</contactNumber><email>' + $("#email").val() + '</email><firstName>' + $("#first_name").val() + '</firstName><lastName>' + $("#last_name").val() + '</lastName><city>' + $("#city").val() + '</city><pincode>' + $("#pincode").val() + '</pincode><companyName>Diesel</companyName><activeFlag>Y</activeFlag><offerFlag>Y</offerFlag> <images><image>http://zblogged.com/wp-content/uploads/2015/11/17.jpg</image><image /> </images><gender>' + $("#gender").val() + '</gender><occupation>' + $("#occupation").val() + '</occupation> </customer>';
+                    var url = 'http://59.181.101.224:8080/ril/service/customer';
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: xmldata,
+                        contentType: "application/xml",
+                        dataType: "XML",
+                        success: onSuccess,
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            if (jqXHR.status === 409) {
+                                $(jqXHR.responseText).find("errorMsg").each(function () {
+                                    window.plugins.spinnerDialog.hide();
+                                    window.plugins.toast.show($(this).text(), 'long', 'bottom');
+                                });
+                            }
+                            if (jqXHR.status === 0) {
+                                window.plugins.spinnerDialog.hide();
+                                window.plugins.toast.show('There is some problem. please try again later.', 'long', 'bottom');
+                            }
+                        }});
+                });
+                function onSuccess(data, jqXHR) {
+                    window.plugins.spinnerDialog.hide();
+                    window.plugins.toast.show('profile successfully updated', 'long', 'bottom');
+                    window.location = "profile.html";
+                }
+
+            });
+
+        </script>  
+        <script>
+            function closePopup()
+            {
+                $('#divId').fadeOut();
+            }
+            function showDiv()
+            {
+                $('#divId').fadeIn();
+            }
+        </script>
+    </head>
+
+    <body style="background:#f5f4f0;">
+
+        <div style="display:none;" id="divId" onClick="closePopup()" class="model_black_area">
+            <div style="height:197px; padding:0;" class="model_black_area_white">
+
+                <div class="image_select_title">Profile Photo</div>
+
+                <div class="image_select_options">
+                    <div class="image_select_options_camera"><img src="assets/images/gallery.jpg"><br>Gallery</div>
+                    <div class="image_select_options_camera"><img src="assets/images/camera.jpg"><br>Camera</div>
+                </div>
+
+            </div>
+        </div>
+
+        <header class="header_main">
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <a href="more.html"><div class="header_inner_text_upper_menu_icon"><img src="assets/images/black_back.png"></div></a><!-- header_inner_text_upper_menu_icon close -->
+                    <div class="header_inner_text_upper_title">Edit Profile</div>
+                </div>
+            </div>
+        </header>
+
+
+
+        <div class="profile_detail tab-content">
+
+            <div id="edit_detail" style="padding-bottom:10px;" role="tabpanel" class="member_detail_show tab-pane active">
+
+                <div class="member_detail_show_title">Primary Info</div>
+
+                <div class="profile_update_form">
+                    <img onClick="showDiv()" id="profile_img" src="">
+                </div>
+
+
+                <label>First Name</label>
+                <input type="text" id="first_name" class="edit_profile_form" value="">
+
+                <label>Last Name</label>
+                <input type="text" id="last_name" class="edit_profile_form" value="">
+
+                <label>Mobile</label>
+                <input type="text" id="mobile" class="edit_profile_form" value="">
+
+                <label>Email</label>
+                <input type="text" id="email" class="edit_profile_form" value="">
+
+                <label>City</label>
+                <input type="text" id="city" class="edit_profile_form" value="">
+
+                <label>Pin Code</label>
+                <input type="text" id="pincode" class="edit_profile_form" value="">
+                <div class="member_detail_show_title">Other Info</div>
+
+                <label>Gender</label>
+                <select id="gender" class="edit_profile_form">
+                    <option id ="male" selected="">Male</option>
+                    <option id="female" >Female</option>
+                </select>
+
+                <label>Occupation</label>
+                <input id="occupation" type="text" class="edit_profile_form" value="">
+
+                <div class="save_button">
+                    <a id="save_btn">Save</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a href="login.html"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+
+    </body>
+</html>

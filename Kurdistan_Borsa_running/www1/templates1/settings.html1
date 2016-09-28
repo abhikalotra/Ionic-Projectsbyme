@@ -1,0 +1,28 @@
+<ion-view view-title="Settings">
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px;">{{"SETTINGS"| translate}}</div>
+        <img src="img/header_logo.png"  width="35px" height="35px">
+    </ion-header-bar>
+    <ion-content padding="true" id="settings" style="background-color: #282a27; padding-left: 10px; padding-right: 10px; padding-bottom: 75px;"  class="manual-ios-statusbar-padding services">
+
+        <div class="inner_new">
+            <div class="search search-1">
+                <label>{{"CHANGE_APP_LANGUAGE"| translate}}</label>
+                <div class="icon_bg">
+                    <select ng-model="settings.language" ng-change="onLanguageChanged()">
+                        <option  value="">{{"SELECT_LANGUAGE"| translate}}</option>
+                        <option value="en">English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="ku">Kurdish</option>
+                    </select>                
+                </div>
+            </div>
+            <button style="position: absolute; left:0; bottom: 0px;" class="button button-light  button-block  custom-button-save" id="savesetting_btn" ng-click="saveSettingBtn()">{{"SAVE_SETTINGS"| translate}}</button>
+
+        </div>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,95 @@
+<ion-view title="" cache-view="false" id="ads" class=" ">
+
+    <!--    <div class="bar bar-header bar-positive">
+            <h1 class="title">Kurdistan Market</h1>
+            <button  class="drop-btn" ng-click="popover.show($event)"></button> 
+        </div>-->
+
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px;">Kurdistan Market</div>
+        <img src="img/header_logo.png" style="margin-left: 25px !important;" width="35px" height="35px">
+    </ion-header-bar>
+    <ion-content id="showcurrencies" padding="true" class="manual-ios-statusbar-padding services has-header" style="background-color: #282a27;" >
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefreshCurrencies()">
+        </ion-refresher>
+        <div class="search showcurrency_search">
+            <label style="width: 100%; display: block; height: 25px">Update Ask/Bid</label>
+            <!--            <div>
+                            <input type="number" id="update_all_amount" ng-click="openModal()" ng-model="number.val">
+                            <button ng-click="updateAmount()">Update All</button>             
+                            <select class="ask_bid" ng-model="currencyRecords.updatedValue">
+                                <option value="" selected="">Select</option>
+                                <option value="1">Ask</option>
+                                <option value="2">Bid</option>
+                            </select>
+                        </div>-->
+            <button style="width: 48%; float: left !important; border-radius: 5px !important;" ng-click="showPopup(true)">Ask</button>
+            <button style="width: 48%; float: right !important; border-radius: 5px !important;" ng-click="showPopup(false)">Bid</button>
+
+        </div>
+
+        <div class="inner_new">
+            <div class="read_more"><a  class="currency_add" href="#/welcome/currencyrate" ng-click="save()">ADD NEW</a></div>
+        </div>
+        <ul>
+            <div class="top-headings">
+                <p class="left-heading">From</p>
+                <p class="left-heading-left">To</p>
+                <p class="center-heading" style="margin-right: 10px;">Bid</p>
+                <p class="right-heading" style="margin-right: 10px;">Ask</p>
+            </div>
+            <br class="clear">
+            <div class="ad1">
+                <ion-list  ng-repeat="currencyRecord in currencyRecords" ng-click="update(currencyRecord)">
+                    <div class="left_data">
+                        <div class="img_circle"><img src="img/inner_img.png" ng-src="http://kurdistanborsa.com/currency_exchange/assets/images/flags/64x64/{{currencyRecord.from_flag}}"></div>
+                        <div style="min-width:100px; text-align: center; float: left;"> <h2 style="margin-left: 5px; color: #fff">{{currencyRecord.from_currency_code}}</h2>
+                        <p style="margin-left: 5px;  font-size: 19px;   color: #339900;"> /<p>
+                        <h2 style="margin-left: 5px;  color: #fff;">{{currencyRecord.to_currency_code}}</h2>
+                        </div>
+                        <div class="img_circle"><img style="margin-left: 5px;" src="img/inner_img.png" ng-src="http://kurdistanborsa.com/currency_exchange/assets/images/flags/64x64/{{currencyRecord.to_flag}}"></div>
+                    </div>
+                  
+                    <div class="right_data">
+                        <div class="update">
+                            <a style=" min-width: 60px !important; text-align: center" >{{currencyRecord.ask}}</a> 
+                            <a style=" min-width: 60px !important; text-align: center">{{currencyRecord.bid}}</a>
+                        </div>
+                    </div>
+                    <br class="clear">
+                </ion-list>
+            </div>
+        </ul>
+
+        <script id="templates/search.html" type="text/ng-template">
+
+            <ion-modal-view id="dialog" class="custom_model">
+            <ion-header-bar class="bar bar-header bar-positive search-bar">
+            <h1 class="title">Ask/Bid</h1>
+            <button class="button button-clear button-primary" ng-click="modal.remove()">Cancel</button>
+            </ion-header-bar>            
+            <div class="scroll_all">
+            <div ng-repeat="a in b track by $index">
+            <ul class="custom_row">
+            <li>{{a}}</li>
+            <div class="btn_right">
+            <button ng-click="increment($index)" class="value_btn">+</button>
+            <button ng-click="decrement($index)" class="value_btn">-</button>
+            </div>
+            </ul>
+            </div>
+            </div>
+            </ion-content>
+            <button class="submit_btn_popup" ng-click="pickValue();">OK</button>
+            </ion-modal-view>
+
+        </script>
+
+
+    </ion-content>
+</ion-view>

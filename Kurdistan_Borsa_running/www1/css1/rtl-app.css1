@@ -1,0 +1,26 @@
+
+ion-content {
+ direction: rtl;
+  }
+
+.update {
+    float: left !important;
+}
+.left_data {
+    float: right !important;
+}
+.left-heading {
+    float: right !important;
+}
+.left-heading-left {
+    float: right !important;
+}
+.center-heading {
+    float: left !important;
+    position: absolute;
+    left: 77px;
+}
+.right-heading {
+    float: left !important;
+}
+

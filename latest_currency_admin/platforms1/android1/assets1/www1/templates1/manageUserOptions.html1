@@ -1,0 +1,37 @@
+<ion-view title="Home" hide-nav-bar="true" cache-view="false" id="home" class=" ">
+    <!--    <div class="bar bar-header bar-positive">
+            <h1 class="title">Manage Users</h1>
+            <button  class="drop-btn" ng-click="popover.show($event)"></button> 
+        </div>-->
+
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px;">Manage Users</div>
+        <img src="img/header_logo.png" style="margin-left: 25px !important;" width="35px" height="35px">
+    </ion-header-bar>
+    <ion-content padding="true" class="manual-ios-statusbar-padding services has-header" style="background-color: #282a27;" >
+
+        <div class="inner_new">
+
+            <div class="manageusers" ng-click="manageUser(true)">
+
+                <div class="customer_inner">
+                    <img src="img/users.png"><br>
+                    Customers
+                </div>
+            </div>
+
+            <div class="manageusers" ng-click="manageUser(false)">
+                <div class="customer_inner">
+                    <img src="img/users.png"><br>
+                    Companies
+                </div>
+            </div>
+
+
+        </div>
+
+    </ion-content>
+</ion-view>

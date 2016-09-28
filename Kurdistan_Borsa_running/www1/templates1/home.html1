@@ -1,0 +1,26 @@
+<ion-view title="Home" hide-nav-bar="true" id="home" class=" ">
+
+    <ion-content padding="true" style="background-color: #282a27;"  class="manual-ios-statusbar-padding services">
+  
+<div class="inner_page">
+    <ion-slide-box auto-play="true" does-continue="true">
+  <ion-slide>
+    <img src="img/01.jpg">
+  </ion-slide>
+  <ion-slide>
+    <img src="img/01.jpg">
+  </ion-slide>
+  <ion-slide>
+    <img src="img/01.jpg">
+  </ion-slide>
+</ion-slide-box>
+    
+    
+    <div class="bottom_buttons" ng-click="onServiceClick('iraqi_borsa')">Iraqi Borsa </div>
+    <div class="bottom_buttons" ng-click="onServiceClick('kurdistan_market')">Kurdistan Markets</div>
+<br class="clear">
+
+</div>
+
+    </ion-content>
+</ion-view>

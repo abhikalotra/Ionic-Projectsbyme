@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <!-- Latest compiled and minified CSS -->
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="assets/css/custom.css">
+    </head>
+    <body style="background:#f5f4f0;">
+
+        <header class="header_main">
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <a href="more.html"><div class="header_inner_text_upper_menu_icon"><img src="assets/images/black_back.png"></div></a><!-- header_inner_text_upper_menu_icon close -->
+                    <div class="header_inner_text_upper_title">TERMS & CONDITIONS</div><!-- header_inner_text_upper_title close -->
+                </div><!-- header_inner_text_upper close -->
+            </div><!-- header_inner close -->
+        </header>
+
+
+        <div class="term-below">
+            <div class="term-below-content">
+                <ol type="1">
+                    <li>Diesel Fashion India Reliance Pvt. Ltd, (a division of Reliance Brands Pvt. Limited) reserves the right to add, amend, change alter or terminate this programme including the structure of awards, without notice.</li>
+                    <li>Benefits available through programme partners may change from time to time or be withdrawn without prior information. Diesel Fashion India Reliance Pvt. Ltd, (a division of Reliance Brands Pvt. Limited shall not be responsible for any liabilities arising from such situations. Diesel Fashion India Pvt. Ltd. shall not be responsible regarding the quality of benefits through its alliance partners.</li>
+                    <li>
+                        The merchandise redeemed against style miles cannot be returned or exchanged.</li>
+                    <li>Fulfilment of redemption requests against products in the Diesel Cult catalogue are subject to availability of the product and company terms/ restrictions at the time of the redemption.</li>
+                    <li>Any dispute arising would be subject to exclusive jurisdiction of competent courts in Mumbai only.</li>
+                    <li>Diesel Fashion India Reliance Pvt. Ltd. reserves the right to substitute products in case of non-availability of any item(s) in the current catalogue.</li>
+                </ol>
+            </div>
+            <br class="clear">
+        </div>
+
+
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a><!-- bottom_tabs_one close -->
+            <a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a><!-- bottom_tabs_one close -->
+            <!--<a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/offer.png"><br>Coupons</div></a><!-- bottom_tabs_one close -->
+
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a onclick="logout();"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a><!-- bottom_tabs_one close --><!-- bottom_tabs_one close -->
+        </div><!-- bottom_tabs close -->
+
+
+
+        <!-- jquery link -->
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="assets/js/bootstrap.min.js"></script>
+
+    </body>
+</html>

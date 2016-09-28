@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script src="assets/js/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener('backbutton', onBackKeyDown, false);
+
+            function onDeviceReady() {
+
+                products();
+            }
+
+            function onBackKeyDown() {
+                window.location = "category.html";
+            }
+        </script>
+        <script>
+//            var xmlObject;
+            Storage.prototype.setObject = function (key, value) {
+                this.setItem(key, JSON.stringify(value));
+            };
+
+            Storage.prototype.getObject = function (key) {
+                var value = this.getItem(key);
+                return value && JSON.parse(value);
+            };
+            function products() {
+                var sort = localStorage.getItem("sort");
+                if (sort == 1)
+                    $("#high_miles").attr('selected', 'selected');
+                else if (sort == 2)
+                    $("#low_miles").attr('selected', 'selected');
+                else if (sort == 0)
+                    $("#default").attr('selected', 'selected');
+                else
+                    $("#sort_by").attr('selected', 'selected');
+
+
+
+                $("#user_membership").html(localStorage.getItem("user_group"));
+                $("#user_name").html("Available Style Miles: " + localStorage.getItem("miles"));
+//                $("#user_id").html(localStorage.getItem("customer_id"));
+                var productsss = new Array();
+                productsss = localStorage.getObject("product_list");
+                var container = $("#products");
+                $("#instore").html(productsss.length);
+                for (var i = 0; i < productsss.length; i++) {
+                    container.append('<div class="products_show_left_one"> <div class="products_show_left_one_validity"><span class="product_valid"><span><span></span><br class="clear"></div><div class="products_show_left_one_image" ><a  onclick="productDetail(' + productsss[i].pid + ');"><img src="' + productsss[i].pImage + '"></a></div> <div class="products_show_left_one_miles"><span>' + productsss[i].pstyleMiles + '<span> MILES</div><div class="products_show_left_one_title"><div class="products_show_left_one_title_name">' + productsss[i].label + '</div><div class="products_show_left_one_cart"><img src="assets/images/cart_icon.png"></div></div></div>');
+                }
+            }
+
+
+            function productDetail(id) {
+                var selectedProduct = new Array();
+                selectedProduct = localStorage.getObject("product_list");
+                for (var i = 0; i < selectedProduct.length; i++) {
+                    if (selectedProduct[i].pid == id) {
+                        var x = new myFunction(selectedProduct[i].pid, selectedProduct[i].label, selectedProduct[i].pbrand
+                                , selectedProduct[i].pdescription, selectedProduct[i].pstyleMiles,
+                                selectedProduct[i].pavailableQuantity, selectedProduct[i].pimagesArray);
+                        localStorage.setObject("product", x);
+                        window.location = "product_detail.html";
+                    }
+                }
+
+            }
+            function myFunction(id, name, brand, description, styleMiles, availableQuantity, images) {
+                this.id = id;
+                this.name = name;
+                this.brand = brand;
+                this.description = description;
+                this.styleMiles = styleMiles;
+                this.availableQuantity = availableQuantity;
+                this.imagesArray = images;
+                this.image = images[0];
+            }
+            $(function () {
+                $("#redeem").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "products.html";
+                    }
+                })
+            });
+
+            function getVal(select) {
+                var sortProducts = new Array();
+                if (select.value == 1) {
+                    sortProducts = localStorage.getObject("product_list");
+                    sortProducts.sort(sortByHighMiles);
+                    $("#high_miles").attr('selected', 'selected');
+                    localStorage.setItem("sort", select.value);
+                } else if (select.value == 2) {
+                    sortProducts = localStorage.getObject("product_list");
+                    sortProducts.sort(sortByLowMiles);
+                    $("#low_miles").attr('selected', 'selected');
+                    localStorage.setItem("sort", select.value);
+                } else if (select.value == 0) {
+                    sortProducts = localStorage.getObject("products_list");
+                    $("#default").attr('selected', 'selected');
+                    localStorage.setItem("sort", select.value);
+                }
+                localStorage.setObject("product_list", sortProducts);
+                window.location = "products.html";
+
+            }
+            function sortByHighMiles(a, b) {
+                var aN = a.pstyleMiles;
+                var bN = b.pstyleMiles;
+                return bN - aN;
+            }
+            function sortByLowMiles(a, b) {
+                var aN = a.pstyleMiles;
+                var bN = b.pstyleMiles;
+                return aN - bN;
+            }
+        </script>
+    </head>
+
+    <body id="product" style="background:#f5f4f0;">
+
+        <header>
+            <div class="header_inner">
+                <div class="header_inner_text_upper">
+                    <div class="header_inner_text_upper_menu_icon"><a href="category.html"><img src="assets/images/black_back.png"></a></div>
+                    <div class="header_inner_text_upper_title">Diesel Catalogue</div>
+                    <div class="header_inner_text_upper_search_icon"><a href="search.html"><img src="assets/images/search.png"></a></div>
+                </div>
+
+                <div class="sub_header">
+                    <span class="pull-left">In Store - <strong id="instore" ></strong> Products</span>
+                    <select  onchange="getVal(this);" class="pull-right sort_options">
+                        <option id="sort_by"   disabled selected hidden  >Sort By</option>
+                        <option id="default"  value="0">Relevance</option>
+                        <option id="high_miles"  value="1">Highest Miles</option>
+                        <option id="low_miles" value="2">Lowest Miles</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div id="seach_bar_main" role="tabpanel" class="user_profile_card collapse">
+                <div class="user_profile_card_inner">
+                    <div class="user_profile_card_inner_upper">
+                        <div class="user_profile_card_inner_upper_one"><img src="assets/images/logo.png"></div>
+                        <div class="user_profile_card_inner_upper_one pull-right"><strong>Cult</strong><br><span id="user_membership"></span> Cult</div>
+                    </div>
+                    <div class="user_profile_card_inner_bottom">
+                        <div class="user_profile_card_inner_upper_one pull-right"></div>
+                        <div class="user_profile_card_inner_upper_one"><span id="user_id"></span><br><strong id="user_name"></strong></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="arrow_header"><a role="button" data-toggle="collapse" data-parent="#seach_bar_main" href="#seach_bar_main" aria-expanded="true">
+                    <img id="myImage" onclick="changeImage()" src="assets/images/arrow_plus.png"></a></div>
+        </header>
+
+        <div class="products_show">
+            <div class="products_show_left" id="products"></div>
+        </div>
+
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a id="redeem"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a onclick="logout();"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+
+
+
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script>
+                function changeImage() {
+                    var image = document.getElementById('myImage');
+                    if (image.src.match("assets/images/arrow_minus.png")) {
+                        image.src = "assets/images/arrow_plus.png";
+                    } else {
+                        image.src = "assets/images/arrow_minus.png";
+                    }
+                }
+        </script>
+    </body>
+</html>

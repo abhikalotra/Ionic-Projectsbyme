@@ -1,0 +1,91 @@
+<ion-view title="Page" hide-nav-bar="true" id="login" cache-view="false" class=" ">
+
+    <ion-content scroll="true" padding="true" style="background: url(img/m6SCigNFRYOSKB6OpqKj_background.jpg) no-repeat center;background-size:cover; padding-bottom: 75px;" class="manual-ios-statusbar-padding">
+        <ion-scroll delegate-handle="calendarScroll" direction="y">  <div>
+        <h3 class="login_heading">{{"IRAQI_LOGIN"| translate}}</h3>
+        <div class="header_top" style="background: url(img/login_upper_img.png) no-repeat center;background-size:cover; padding:10px 20px 30px 20px;">
+            <div class="top_logo">
+                <img src="img/logo.png" width="180" height="180" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 15px; ">
+            </div>
+            <div id="page-form1" class="list custom-form">
+                <label class="item item-input item-floating-label " id="page-input1" name="username"/>
+                <input type="text" placeholder="{{'USERNAME'| translate}}" ng-model="loginData.username">
+                </label>
+                <div class="spacer" style="width: 300px; height: 15px;"></div>
+                <label class="item item-input item-floating-label " id="page-input2" name="password">
+                    <input type="password" placeholder="{{'PWD'| translate}}" ng-model="loginData.password" required/>
+                </label>
+            </div>
+            <button id="login-button1" class=" button button-light  button-block button-outline custom-button" ng-click="login();">{{"LOGIN"| translate}}</button>
+            <div>
+            </div>
+            <div class="heading">
+                <p ng-click="forgot()">{{"FORGOT_PWD"| translate}}</p>
+                <div class="divider_login" ng-show="loginData.signup_option == 1" >
+                    <hr>
+                    <p>{{"OR"| translate}}</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="create" ng-show="loginData.signup_option == 1">
+            <span style="" class="circle-left"><img src="img/circle.png"></span>
+            <button  id="login-button1" class=" button button-light  button-block button-outline custom-button-create" ng-click="openModal();">{{"CREATE_ACCOUNT"| translate}}</button>
+            <span class="circle-right"><img src="img/circle.png"></span>
+        </div>
+</div></ion-scroll> 
+        <script id="templates/search.html" type="text/ng-template">
+            <ion-modal-view id="dialog">
+            <ion-header-bar class="bar bar-header bar-positive search-bar">
+            <h1 class="title">{{"SIGN_UP"| translate}}</h1>
+            <button class="button button-clear button-primary" ng-click="modal.remove()">{{"CANCEL"| translate}}</button>
+            </ion-header-bar>
+            <ion-content class="padding" style="background-color: #282a27;">                  
+            <div class="inner_new">
+            <div class="search">
+            <label>{{"USERNAME"| translate}}</label>
+            <div class="icon_bg">
+            <input type="text" id="signup_username" ng-model="signup.username"/>
+            </div>
+            </div>
+            <div class="search">
+            <label>{{"PWD"| translate}}</label>
+            <div class="icon_bg">
+            <input type="password" id="signup_pwd" ng-model="signup.password"/>
+            </div>
+            </div>
+            <div class="search">
+            <label>{{"MOBILE"| translate}}</label>
+            <div class="icon_bg">
+            <input type="tel" id="signup_mobile" ng-model="signup.mobile"/>
+            </div>
+            </div>
+<!--
+     <div class="search">
+            <label>{{"USER_TYPE"| translate}}</label>
+            <div class="icon_bg">
+            <ion-radio class="iscustorcomp"  value="cust" ng-model="signup.isuserorcompany">{{"SIGN_UP_AS_CUSTOMER"| translate}}</ion-radio>
+            <p style="width:100%; text-align:center; margin:0 !important;">{{"OR"| translate}}</p>
+            <ion-radio  class="iscustorcomp"  value="comp" ng-model="signup.isuserorcompany">{{"SIGN_UP_AS_COMPANY"| translate}}</ion-radio>
+            </div>
+            </div>
+           
+-->
+            <div style="margin-top: 50px;" class="search">
+            <h3  style="color:#fff;">{{loginData.info}}</h3>  
+            </div>
+            <div class="search">
+            <h3 style="color:#fff;">{{loginData.contact}}</h3>  
+            </div>
+            <button style="margin-top: 50px;" class="button button-light  button-block  custom-button-save"  ng-click="submitSignUp()">{{"SUBMIT"| translate}}</button>
+            </div>
+
+            </ion-content>
+            </ion-modal-view>
+
+        </script>
+
+    </ion-content>
+
+</ion-view>
+

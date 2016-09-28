@@ -1,0 +1,28 @@
+<ion-view title="Home" hide-nav-bar="true" id="home" class=" ">
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px;">Settings</div>
+        <img src="img/header_logo.png" style="margin-left: 25px !important;" width="35px" height="35px">
+    </ion-header-bar>
+    <ion-content padding="true" id="settings" style="background-color: #282a27; padding-left: 10px; padding-right: 10px;"  class="manual-ios-statusbar-padding services">
+        <div class="inner_new">
+            <ion-checkbox ng-model="settings.is_signup_option">Sign up option for users.</ion-checkbox>
+            <ion-checkbox ng-model="settings.is_login_required">User login required.</ion-checkbox>
+            <div class="search">
+                <label>Change info on sign up</label>
+                <div class="icon_bg">
+                    <textarea ng-model="settings.manage_info"></textarea>
+                </div>
+            </div>
+            <div class="search">
+                <label>Change Contact Number</label>
+                <div class="icon_bg">
+                    <textarea ng-model="settings.manage_contacts"></textarea>
+                </div>
+            </div>
+            <button class="button button-light  button-block  custom-button-save" id="savesetting_btn" ng-click="saveSettingBtn()">Save Settings</button>
+        </div>
+    </ion-content>
+</ion-view>

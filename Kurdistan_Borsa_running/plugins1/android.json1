@@ -1,0 +1,49 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "cordova-plugin-datepicker": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "789664744070",
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.ionicframework.kurdistan"
+        }
+    },
+    "dependent_plugins": {}
+}

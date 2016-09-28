@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+
+        <script>
+            $(function () {
+                $("#submit_btn").click(function () {
+                    if ($("#membership_id").val() === "" && $("#membership_id").val() === "")
+                        window.plugins.toast.show('Please enter the Membership id.', 'short', 'bottom');
+                    else if ($("#message").val() === "" && $("#message").val() === "")
+                        window.plugins.toast.show('Please enter the message.', 'short', 'bottom');
+                    else {
+                        var networkState = navigator.connection.type;
+                        if (networkState == "none")
+                            window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                        else {
+                            var emailSubject = "Feedback from - " + $("#membership_id").val();
+                            var emailBody = "<b>Membership ID: </b>" + $("#membership_id").val() + "<br/><b>Message: </b>" + $("#message").val();
+                            window.plugins.EmailComposer.showEmailComposerWithCallback(function () {}, emailSubject, emailBody, ["customercare_dieselindia@diesel.com"], [], [], true, null, null);
+                        }
+                    }
+
+                });
+            });
+
+            $(function () {
+                $("#reset_btn").click(function () {
+                    $("#membership_id").val('');
+                    $("#message").val('');
+                })
+            })
+
+        </script>
+
+    </head>
+    <body style="background:#f5f4f0;">
+
+        <header class="header_main">
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <a href="more.html"><div class="header_inner_text_upper_menu_icon"><img src="assets/images/black_back.png"></div></a><!-- header_inner_text_upper_menu_icon close -->
+                    <div class="header_inner_text_upper_title">Feedback</div><!-- header_inner_text_upper_title close -->
+                </div><!-- header_inner_text_upper close -->
+            </div><!-- header_inner close -->
+        </header>
+
+
+        <div class="feedback_form">
+            <input type="text" style="text-transform:none !important;" class="mobile_number_form_all" placeholder="MEMBERSHIP ID*" id="membership_id">
+            <textarea class="mobile_number_form_all message_form" style="text-transform:none !important;" placeholder="MESSAGE" id="message"></textarea>
+        </div><!-- feedback_form close -->
+
+
+        <div class="bottom_buttons_show">
+            <button class="footer_buttons" id="submit_btn" >Submit</button>
+            <button class="footer_buttons" id="reset_btn">reset</button>
+        </div><!-- bottom_buttons_show close -->
+
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a><!-- bottom_tabs_one close -->
+            <a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a><!-- bottom_tabs_one close -->
+            <!--<a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/offer.png"><br>Coupons</div></a><!-- bottom_tabs_one close -->
+
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a onclick="logout();"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a><!-- bottom_tabs_one close --><!-- bottom_tabs_one close -->
+        </div><!-- bottom_tabs close -->
+
+
+    </body>
+</html>

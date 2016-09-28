@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+
+    </head>
+    <body style="background:#f5f4f0;">
+
+        <header class="header_main">
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <a href="more.html"><div class="header_inner_text_upper_menu_icon"><img src="assets/images/black_back.png"></div></a><!-- header_inner_text_upper_menu_icon close -->
+                    <div class="header_inner_text_upper_title">Ask and you shall be answered<br> (FAQs)</div><!-- header_inner_text_upper_title close -->
+                </div><!-- header_inner_text_upper close -->
+            </div>
+        </header>
+
+        <div class="term-below">
+            <div class="term-below-content">
+
+                <div style="padding:15px;">
+                    <strong>Q.</strong> Is there a membership fee for this program?<br>
+                    <strong>A.</strong> There is NO membership fee for the Diesel Cult.<br><br>
+                    <strong>Q.</strong> How long is membership valid?<br>
+                    <strong>A.</strong> Membership is valid for three years from the date of enrolment. To know more about your membership, log in to the Cult App or check at your nearest Diesel Store.<br><br>
+
+                    <strong>Q.</strong> What is the procedure for acquiring the exclusive benefits and privileges against my membership?<br>
+                    <strong>A.</strong>  Below are the procedure for acquiring the benefits and privileges.
+                    <li>For redemption of Style Miles on special Cult merchandise, simply log on to your Diesel Cult app.</li>
+                    <li>You can visit our store and just tell them your registered mobile number or Cult ID for any kind of special assistance at the store.</li>
+                    <li>You can call in to book an appointment with your stylist or personal shopper a day in advance. You can request the blocking of a trial room at least two hours before your arrival.</li>
+                    <li>Bookings for the VIP room at Juhu and After hours Shopping can be requested for 24 hours in advance.</li>
+                    <li>The booking will be for the appointment day only. It will become null and void the next day.</li>
+                    <li>To make all your exclusive bookings and appointments, please call the respective store numbers.</li>
+                    <li>Alternatively, a mail can be dropped at <a href="mailto:customercare_dieselindia@diesel.com">customercare_dieselindia@diesel.com</a> with your request.</li><br>
+
+                    <strong>Q.</strong> From when will the Style Miles get calculated?<br>
+                    <strong>A.</strong> The Style Miles are calculated from the day you become a Classic or Higher Cult member.<br><br>
+
+                    <strong>Q.</strong> Can I exchange/return any Diesel merchandise which I have bought with my style miles?<br>
+                    <strong>A.</strong> No. The merchandise redeemed against Style Miles cannot be exchanged or returned.<br><br>
+
+                    <strong>Q.</strong> Can I redeem my Style Miles for cash?<br>
+                    <strong>A.</strong> No. Style Miles cannot be redeemed for cash. They can only be redeemed for Diesel merchandise from the Cult Catalogue.<br><br>
+
+                    <strong>Q.</strong> How can I check my current style miles?<br>
+                    <strong>A.</strong> The Style Miles can be checked:
+
+                    <li>On your Diesel Cult app</li>
+                    <li>At the store: Just provide your Cult ID or the registered mobile number and get your Style Miles statement</li>
+                    <li>Email: You can also email us at <a href="mailto:customercare_dieselindia@diesel.com">customercare_dieselindia@diesel.com</a></li><br>
+
+                    <strong>Q.</strong> How soon will style miles get updated to my account?<br>
+                    <strong>A.</strong> The Style Miles get updated to your account within 48 hours of your last purchase.<br><br>
+
+                    <strong>Q.</strong> How can I communicate and change in my address or phone number?<br>
+                    <strong>A.</strong> You can update the same in the ‘My Profile’ section of the Diesel Cult app or email us at <a href="mailto:customercare_dieselindia@diesel.com">customercare_dieselindia@diesel.com</a><br><br>
+
+                    <strong>Q.</strong> How can I get in touch with customer care for more queries regarding my membership?<br>
+                    <strong>A.</strong> You can email us at <a href="mailto:customercare_dieselindia@diesel.com">customercare_dieselindia@diesel.com</a>. Our Cult executive will call you back for assistance.
+                </div>
+
+
+            </div>
+            <br class="clear">
+        </div>
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a><!-- bottom_tabs_one close -->
+            <a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a><!-- bottom_tabs_one close -->
+            <!--<a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/offer.png"><br>Coupons</div></a><!-- bottom_tabs_one close -->
+
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a onclick="logout();"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a><!-- bottom_tabs_one close --><!-- bottom_tabs_one close -->
+        </div><!-- bottom_tabs close -->
+    </body>
+</html>

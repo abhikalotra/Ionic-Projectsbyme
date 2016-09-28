@@ -1,0 +1,69 @@
+<ion-view title="" cache-view="false" id="market" class=" ">
+
+    <div class="bar bar-header bar-positive">
+        <h1 class="title">Iraqi Borsa</h1>
+    </div>
+    <ion-content padding="true" class="manual-ios-statusbar-padding services has-header" style="background-color: #282a27;" >
+        <div class="search showcurrency_search">
+            <label style="width: 100%; display: block; height: 25px">Update Ask/Bid</label>
+            <!--            <div>
+                            <input type="number" id="update_all_amount" ng-click="openModal()">
+                            <button ng-click="updateAmount()">Update All</button>             
+                            <select class="ask_bid" ng-model="markets.updatedValue">
+                                <option value="" selected="">Select</option>
+                                <option value="1">Ask</option>
+                                <option value="2">Bid</option>
+                            </select>
+                        </div>-->
+            <button style="width: 48%; float: left !important; border-radius: 5px !important;" ng-click="showPopup(true)">Ask</button>
+            <button style="width: 48%; float: right !important; border-radius: 5px !important;" ng-click="showPopup(false)">Bid</button>
+        </div>
+
+        <div class="inner_new">
+            <div class="read_more"><a class="currency_add" href="#/welcome/marketadd" ng-click="save()">ADD NEW</a></div>
+        </div>
+        <ul>
+<!--            <div class="top-headings">
+                <p class="left-heading">Name</p>
+                <p class="center-heading" style="margin-right: 10px;">Bid</p>
+                <p class="right-heading" style="margin-right: 10px;">Ask</p>
+            </div>-->
+
+            <br class="clear">
+            <ion-list class="ad1" ng-repeat="market in markets">
+                <div class="left_data">
+                    <h2>{{market.title}}</h2>
+                </div>
+               <div class="right_data">
+                        <div class="update">
+                            <a href="#/welcome/marketadd" ng-click="update(market)">Update</a> 
+                            <a href="#" ng-click="delete(market)">Delete</a></div>
+                    </div>
+                <br class="clear">
+            </ion-list>
+        </ul>
+<!--        <script id="templates/search.html" type="text/ng-template">
+
+            <ion-modal-view id="dialog" class="custom_model">
+            <ion-header-bar class="bar bar-header bar-positive search-bar">
+            <h1 class="title">Ask/Bid</h1>
+            <button class="button button-clear button-primary" ng-click="modal.remove()">Cancel</button>
+            </ion-header-bar>            
+            <div class="scroll_all">
+            <div ng-repeat="a in b track by $index">
+            <ul class="custom_row">
+            <li>{{a}}</li>
+            <div class="btn_right">
+            <button ng-click="increment($index)" class="value_btn">+</button>
+            <button ng-click="decrement($index)" class="value_btn">-</button>
+            </div>
+            </ul>
+            </div>
+            </div>
+            </ion-content>
+            <button class="submit_btn_popup" ng-click="pickValue();">OK</button>
+            </ion-modal-view>
+
+        </script>-->
+    </ion-content>
+</ion-view>

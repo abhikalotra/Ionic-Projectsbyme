@@ -1,0 +1,284 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="assets/js/database.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="assets/js/apis.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            var isFadeIn = false;
+            document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener('backbutton', onBackKeyDown, false);
+            var product;
+            Storage.prototype.setObject = function (key, value) {
+                this.setItem(key, JSON.stringify(value));
+            };
+
+            Storage.prototype.getObject = function (key) {
+                var value = this.getItem(key);
+                return value && JSON.parse(value);
+            };
+
+            function onDeviceReady() {
+                getCart();
+            }
+
+            function onBackKeyDown() {
+                if (isFadeIn)
+                    closePopup();
+                else
+                    window.location = "products.html";
+            }
+
+
+            function getCart() {
+                $("#total_miles").html(localStorage.getItem("miles"));
+                getSqlResultSet(function () {
+                    product = result;
+                    var pay_miles = 0;
+                    var length = product.rows.length;
+                    if (length > 0) {
+                        var cart_container = $("#show_apend_product");
+                        for (var i = 0; i < length; i++) {
+                            cart_container.append('<div class="product_cart"><div style="z-index:9;" class="product_cart_image"><a onclick="productDetail(' + product.rows.item(i).id + ');"><img src="' + product.rows.item(i).image + '"></a></div><div class="product_cart_text"><div class="product_cart_text_detail">' + product.rows.item(i).productName + '<br><span>' + product.rows.item(i).productDescription + '</span></div><div class="product_cart_text_remove_price"><div class="quantity_form_cart"><input disabled type="text" value="' + product.rows.item(i).quantity + '" maxlength="2" class="quantity_form"></div><span class="price"><strong>Miles <span>' + product.rows.item(i).miles + '</span></strong></span><span class="remove"><a  onclick="removeProduct(' + product.rows.item(i).id + ');">Remove</a></span><br class="clear"></div></div><br class="clear"></div>');
+                            pay_miles = +pay_miles + +product.rows.item(i).pay;
+                        }
+                        $("#pay_miles").html(pay_miles);
+                        $("#available_miles").html(Math.abs(localStorage.getItem("miles") - pay_miles));
+                        available_miles = Math.abs(localStorage.getItem("miles") - pay_miles);
+                        localStorage.setItem("available_miles", available_miles);
+                    } else
+                        window.plugins.toast.show('No product.', 'short', 'bottom');
+                });
+            }
+
+            function removeProduct(id) {
+                window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                removeCartProduct(id, function () {
+                    window.plugins.spinnerDialog.hide();
+                    location.reload();
+                });
+            }
+
+            function productDetail(id) {
+
+//                 getProduct(id, function () {
+//                        var x = new myFunction(result.rows.item(0).id, result.rows.item(0).productName, result.rows.item(0).productBrand
+//                                , result.rows.item(0).productDescription, result.rows.item(0).miles,
+//                                result.rows.item(0).productName, result.rows.item(0).productName);
+//                        localStorage.setObject("product", x);
+//                        window.location = "product_detail.html";
+//                    });
+                var selectedProduct = new Array();
+                selectedProduct = localStorage.getObject("product_list");
+                for (var i = 0; i < selectedProduct.length; i++) {
+                    if (selectedProduct[i].pid == id) {
+                        var x = new myFunction(selectedProduct[i].pid, selectedProduct[i].label, selectedProduct[i].pbrand
+                                , selectedProduct[i].pdescription, selectedProduct[i].pstyleMiles,
+                                selectedProduct[i].pavailableQuantity, selectedProduct[i].pimagesArray);
+                        localStorage.setObject("product", x);
+                        window.location = "product_detail.html";
+                    }
+                }
+
+            }
+
+            function myFunction(id, name, brand, description, styleMiles, availableQuantity, images) {
+                this.id = id;
+                this.name = name;
+                this.brand = brand;
+                this.description = description;
+                this.styleMiles = styleMiles;
+                this.availableQuantity = availableQuantity;
+                this.imagesArray = images;
+                this.image = images[0];
+            }
+            $(function () {
+                $("#redeem").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "products.html";
+                    }
+                })
+            });
+            function sendOPT() {
+                if (product.rows.length > 0) {
+                    if (localStorage.getItem("available_miles") <= localStorage.getItem("miles")) {
+                        var networkState = navigator.connection.type;
+                        if (networkState == "none")
+                            window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                        else {
+                            var xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><user>  <userName></userName>  <mobileNumber>' + localStorage.getItem("user_mobile") + '</mobileNumber>  <email></email>  <rProId></rProId>  <company>Diesel</company></user>';
+                            postData("otpByUserDetails", xmldata, function (data) {
+                                window.plugins.spinnerDialog.hide();
+                                $('#otpdivId').fadeIn();
+                                window.plugins.toast.show('Please enter the otp.', 'short', 'bottom');
+                            });
+                        }
+                    } else {
+                        window.plugins.toast.show('You do not have sufficient points.', 'short', 'bottom');
+                    }
+                } else {
+                    window.plugins.toast.show('Cart is empty', 'short', 'bottom');
+                }
+            }
+
+            $(function () {
+
+                $("#otp_btn").click(function () {
+                    if ($("#otp_text").val() == "")
+                        window.plugins.toast.show('Please enter the otp.', 'short', 'bottom');
+                    else {
+
+//                         var xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><CustOtp><otp>' + $("#otp_text").val() + '</otp><contactNumber>' + $("#mobile_number").val() + '</contactNumber><companyName>Diesel</companyName></CustOtp>';
+//                        postData("validateOtp", xmldata, function (data) {
+//                            window.plugins.spinnerDialog.hide();
+                        var container = "<redeemItems>";
+                        var length = product.rows.length;
+                        for (var i = 0; i < length; i++) {
+                            container += '<item><redeemItemId>' + product.rows.item(i).id + '</redeemItemId><itemQuantity>' + product.rows.item(i).quantity + '</itemQuantity></item>';
+                        }
+                        container += "</redeemItems>";
+                        var xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><redeem><customerId>' + localStorage.getItem("customer_id") + '</customerId><otp>' + $("#otp_text").val() + '</otp><cashierId>100</cashierId><storeCode>1</storeCode><notes>Cult App Test</notes>' + container.toString() + '</redeem>';
+                        postData("redeemItem", xmldata, function (data) {
+                            $('#otpdivId').fadeOut();
+                            window.plugins.spinnerDialog.hide();
+                            window.plugins.toast.show('Successfully ordered', 'short', 'bottom', function (a) {
+                                removeCart(function () {
+                                    window.location = "category.html";
+                                });
+                            }, function (b) {});
+
+                        });
+//                        });
+
+//                        
+//                        if (otpCode == $("#otp_text").val()) {
+//                            var container = "<itemList>";
+//                            var length = product.rows.length;
+//                            for (var i = 0; i < length; i++) {
+//                                container += '<item><redeemItemId>' + product.rows.item(i).id + '</redeemItemId><itemQuantity>' + product.rows.item(i).quantity + '</itemQuantity></item>';
+//                            }
+//                            container += "</itemList>";
+//                            var xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><redeem><customerId>' + localStorage.getItem("customer_id") + '</customerId> <otp>' + otpCode + '</otp><cashierId>100</cashierId><storeCode>1</storeCode><notes>Cult App Test</notes>' + container.toString() + '</redeem>';
+//                            postData("redeemItem", xmldata, function (data) {
+//                                $('#otpdivId').fadeOut();
+//                                window.plugins.spinnerDialog.hide();
+//                                window.plugins.toast.show('Successfully ordered', 'short', 'bottom', function (a) {
+//                                    removeCart(function () {
+//                                        window.location = "products.html";
+//                                    });
+//                                }, function (b) {});
+//
+//                            });
+//                        } else
+//                            window.plugins.toast.show('Invalid One Time Password (OTP) entered.', 'short', 'bottom');
+                    }
+                });
+            });
+
+            function closePopup() {
+                $('#divId').fadeOut("", function () {
+                    isFadeIn = false;
+                });
+            }
+            function showDiv() {
+                if (product.rows.length > 0) {
+                    if (localStorage.getItem("available_miles") <= localStorage.getItem("miles")) {
+                        $('#otpdivId').fadeIn("", function () {
+                            isFadeIn = true;
+                        });
+                    } else {
+                        window.plugins.toast.show('You do not have sufficient points.', 'short', 'bottom');
+                    }
+
+                } else
+                    window.plugins.toast.show('cart is empty...', 'short', 'bottom');
+            }
+            function closeOtpPopup() {
+                $('#otpdivId').fadeOut("", function () {
+                });
+            }
+        </script>
+    </head>
+    <body  style="background:#f5f4f0;">
+
+        <div style="display:none;" id="divId"  class="model_black_area">
+            <div class="model_black_area_white">
+                <div onClick="closePopup()" class="popup_button_close">X</div>
+                <p>Please verify your mobile number registered with us. We shall send a 4-digit verification code.</p>
+                <div class="mobile_number_form">
+                    <select class="country_code_select">
+                        <option selected>+91</option>
+                        <option>234</option>
+                        <option>12</option>
+                        <option>24</option>
+                    </select>
+                    <input type="number" maxlength="10" class="mobile_number_main"  id="mobile_number" placeholder="Mobile Number">
+                </div>
+                <button id="mobile_btn" class="enter_button">Submit</button>
+            </div>
+        </div>
+
+        <div style="display:none;" id="otpdivId" class="model_black_area">
+            <div class="model_black_area_white">
+                <div onClick="closeOtpPopup()" class="popup_button_close">X</div>
+                <p>Please enter the 4-digit verification code.</p>
+                <div class="mobile_number_form">
+                    <input type="number" max="4" id="otp_text" min="4" class="mobile_otp_main" placeholder="OTP Code">
+                </div>
+                <a><button id="otp_btn" class="enter_button">Submit</button></a>
+                <p style="color: #313131; border-bottom: none; margin-top:10px;  text-align:center;width: 100%" onclick="sendOPT();">Resend OTP</p>
+            </div>
+        </div>
+
+        <header style="position:relative;" class="header_main">
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <a href="product_detail.html"><div class="header_inner_text_upper_menu_icon"><img src="assets/images/black_back.png"></div></a>
+                    <div class="header_inner_text_upper_title">My Orders</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="product_cart_all" id="show_apend_product"></div>
+
+        <div class="product_cart_all">
+            <div style="padding:0 15px;" class="product_cart">
+                <div class="total_view">
+                    <span class="pull-left">Total</span>
+                    <span class="pull-right"><span id="total_miles"></span> Miles</span>
+                    <br class="clear">
+                </div>
+                <div class="total_view">
+                    <span class="pull-left"><strong>You Pay</strong></span>
+                    <span class="pull-right"><strong><span id="pay_miles"></span> Miles</strong></span>
+                    <br class="clear">
+                </div>
+                <div style="border:none;" class="total_view">
+                    <span class="pull-left"><strong>Available Balance</strong></span>
+                    <span class="pull-right"><strong><span id="available_miles"></span> Miles</strong></span>
+                    <br class="clear">
+                </div>
+            </div>
+        </div>
+        <div style="margin-bottom:-70px;" class="bottom_buttons_show">
+            <button onclick="sendOPT();" class="footer_buttons">redeem</button>
+        </div>
+        <br class="clear">
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a id="redeem"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a onclick="logout();"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+    </body>
+</html>

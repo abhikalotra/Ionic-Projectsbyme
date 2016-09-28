@@ -1,0 +1,84 @@
+<ion-view title="Page" hide-nav-bar="true" id="login" class=" ">
+    <ion-content padding="true" style="background: url(img/m6SCigNFRYOSKB6OpqKj_background.jpg) no-repeat center;background-size:cover;" class="manual-ios-statusbar-padding">
+
+        <div class="header_top" style="background: url(img/login_upper_img.png) no-repeat center;background-size:cover; padding:10px 20px 30px 20px;">
+            <div class="top_logo">
+                <img src="img/logo.png" width="180" height="180" style="display: block; margin-left: auto; margin-right: auto;">
+            </div>
+            <div id="page-form1" class="list custom-form">
+                <label class="item item-input item-floating-label " id="page-input1" name="email" required/>
+                <input type="text" placeholder="Username" ng-model="loginData.email">
+                </label>
+                <div class="spacer" style="width: 300px; height: 15px;"></div>
+                <label class="item item-input item-floating-label " id="page-input2" name="password">
+                    <input type="password" placeholder="Password" ng-model="loginData.password" required/>
+                </label>
+            </div>
+            <button id="login-button1" class=" button button-light  button-block button-outline custom-button" ng-click="login();">LOGIN</button>
+
+            <div>
+            </div>
+            <div class="heading">
+                <p ng-click="forgot()"> Forgot Password</p>
+                <div class="divider_login">
+                    <hr>
+                    <p>OR</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="create" ng-show="loginData.is_sign_up">
+            <span style="" class="circle-left"><img src="img/circle.png"></span>
+            <button id="login-button1" class=" button button-light  button-block button-outline custom-button-create" ng-click="openModal();">CREATE ACCOUNT</button>
+            <span class="circle-right"><img src="img/circle.png"></span>
+        </div>
+
+   
+
+
+        <script id="templates/search.html" type="text/ng-template">
+            <ion-modal-view id="dialog">
+            <ion-header-bar class="bar bar-header bar-positive search-bar">
+            <h1 class="title">SIGN UP</h1>
+            <button class="button button-clear button-primary" ng-click="modal.remove()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding" style="background-color: #282a27;">                  
+         <div class="inner_new">
+            <div class="search">
+                <label>User Name</label>
+                <div class="icon_bg">
+                    <input type="text" id="signup_username" ng-model="signup.username"/>
+                </div>
+            </div>
+            <div class="search">
+                <label>Password</label>
+                <div class="icon_bg">
+                    <input type="password" id="signup_pwd" ng-model="signup.password"/>
+                </div>
+            </div>
+            <div class="search">
+                <label>Mobile Number</label>
+                <div class="icon_bg">
+                    <input type="tel" id="signup_mobile" ng-model="signup.mobile"/>
+                </div>
+            </div>
+            <div class="search">
+                <label>User Type</label>
+                <div class="icon_bg">
+                <ion-radio class="iscustorcomp"  value="cust" ng-model="signup.isuserorcompany">Sign up as customer</ion-radio>
+                <p style="width:100%; text-align:center; margin:0 !important;"> OR</p>
+                <ion-radio  class="iscustorcomp"  value="comp" ng-model="signup.isuserorcompany">Sign up as company</ion-radio>
+             </div>
+            </div>
+            <button style="margin-top: 20px;" class="button button-light  button-block  custom-button-save"  ng-click="submitSignUp()">Submit</button>
+        </div>
+
+            </ion-content>
+            </ion-modal-view>
+
+        </script>
+
+    </ion-content>
+
+
+</ion-view>

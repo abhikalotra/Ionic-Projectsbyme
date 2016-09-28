@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script src="assets/js/database.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener('backbutton', onBackKeyDown, false);
+
+            function onDeviceReady() {
+
+            }
+            function onBackKeyDown() {
+                navigator.app.exitApp();
+            }
+
+        </script>
+        <script type="text/javascript" charset="utf-8">
+
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+                createDB();
+            }
+        </script>
+
+        <script>
+            $(function () {
+
+                $("#profile").ready(function () {
+                    var url = 'http://59.181.101.224:8080/ril/service/allcustomer/' + localStorage.getItem("customer_id");
+//                    var url = 'http://59.181.101.224:8080/ril/service/allcustomer/2';
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        contentType: "application/xml",
+                        dataType: "XML",
+                        success: onSuccess,
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            if (jqXHR.status === 409) {
+                                $(jqXHR.responseText).find("errorMsg").each(function () {
+                                    window.plugins.spinnerDialog.hide();
+                                    window.plugins.toast.show($(this).text(), 'long', 'bottom');
+                                });
+                            }
+                            if (jqXHR.status === 0) {
+                                window.plugins.spinnerDialog.hide();
+                                window.plugins.toast.show('There is some problem. please try again later.', 'long', 'bottom');
+                            }
+                        }});
+                });
+
+                function onSuccess(data)
+                {
+                    var username;
+                    $("#customer_id").html($(data).find("id").text());
+
+                    localStorage.setItem("user_mobile", $(data).find("contactNumber").text());
+                    localStorage.setItem("user_email", $(data).find("email").text());
+                    username = $(data).find("firstName").text();
+                    username = username + ' ' + $(data).find("lastName").text();
+                    localStorage.setItem("user_group", $(data).find("membership").text());
+                    $("#miles").html($(data).find("pointsEarned").text());
+                    localStorage.setItem("miles", $(data).find("pointsEarned").text());
+                    localStorage.setItem("user_gender", $(data).find("gender").text());
+                    $("#user_occupation").html($(data).find("occupation").text());
+                    localStorage.setItem("user_name", username);
+                }
+            });
+        </script>
+    </head>
+    <body style="background:#f5f4f0;">
+
+        <header>
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <div class="header_inner_text_upper_title">Diesel</div>
+                    <div class="header_inner_text_upper_search_icon"><a onclick="showDiv()" href="login.html"><img src="assets/images/out.png"></a></div>
+                </div>
+
+                <div class="sub_header">
+                    <span class="pull-left">Style Miles: <strong id="miles"></strong></span>
+                </div>
+
+            </div>
+        </header>
+
+        <div class="main_category">
+            <a href="products.html"><div class="main_category_one"><div class="main_category_one_inner"><img src="assets/images/shop.png"><br>Redeem</div></div></a>
+            <div class="main_category_one"><div class="main_category_one_inner"><img src="assets/images/offers.png"><br>News board</div></div>
+            <a href="more.html"><div class="main_category_one"><div class="main_category_one_inner"><img src="assets/images/more.png"><br>More</div></div></a>
+            <a href="transactions.html"><div class="main_category_one"><div class="main_category_one_inner"><img src="assets/images/history.png"><br>History</div></div></a>
+        </div>
+
+    </body>
+</html>

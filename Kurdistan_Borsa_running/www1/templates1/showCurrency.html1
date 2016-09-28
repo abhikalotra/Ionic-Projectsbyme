@@ -1,0 +1,66 @@
+<ion-view title="" id="ads" cache-view="false" class=" ">
+
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+<!--
+        <button  class="drop-btn" ng-if="loginType == 1" ng-click="logout(myType)">Logout</button>
+-->
+        
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item abhiiii">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <img src="img/header_logo.png" width="35px" height="35px">
+        <div class="login_heading title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px; padding-bottom: 30px;">{{"KURDISTAN_MARKET"| translate}}</div>
+    </ion-header-bar>
+    <ion-content padding="true" class="manual-ios-statusbar-padding services has-header" style="background-color: #282a27;  padding-bottom: 75px;" >
+        <ion-refresher
+            spinner="lines"
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefreshCurrencies()">
+
+        </ion-refresher>
+        <ul>
+            <div class="top-headings">
+                <p class="left-heading">{{"FROM"| translate}}</p>
+                <p class="left-heading-left">{{"TO"| translate}}</p>
+                <p class="center-heading forKurDisBid" style="margin-right: 10px;">{{"BID"| translate}}</p>
+                <p class="right-heading forKurDisAsk" style="margin-right: 10px;">{{"ASK"| translate}}</p>
+            </div>
+            <br class="clear">
+            <div class="ad1">
+                <ion-list  ng-repeat="currencyRecord in currencyRecords">
+                    <div class="left_data">
+                        <div class="img_circle"><img src="img/inner_img.png" ng-src="http://kurdistanborsa.com/currency_exchange/assets/images/flags/64x64/{{currencyRecord.from_flag}}"></div>
+                        <div style="min-width:100px; text-align: center; float: left;"> <h2 style="margin-left: 5px; color: #fff">{{currencyRecord.from_currency_code}}</h2>
+                            <p style="margin-left: 5px;  font-size: 19px;   color: #339900;"> /<p>
+                            <h2 style="margin-left: 5px;  color: #fff;">{{currencyRecord.to_currency_code}}</h2>
+                        </div>
+                        <div class="img_circle"><img style="margin-left: 5px;" src="img/inner_img.png" ng-src="http://kurdistanborsa.com/currency_exchange/assets/images/flags/64x64/{{currencyRecord.to_flag}}"></div>
+                    </div>
+                    <div class="right_data">
+                        <div class="update">
+                            <a style=" min-width: 60px !important; text-align: center" ng-class="{'update_ask_bid': currencyRecord.ask_arrow == 0}" >{{currencyRecord.ask}}</a> 
+                            <a style=" min-width: 60px !important; text-align: center" ng-class="{'update_ask_bid': currencyRecord.bid_arrow == 0}" >{{currencyRecord.bid}}</a>
+                        </div>
+                    </div>
+                    <br class="clear">
+                </ion-list>
+            </div>
+        </ul>
+
+
+		<style ng-if="selectedLanguage == 'ku'">
+			p.center-heading.forKurDisBid{
+				    position: absolute !important;
+					left: 0px !important;
+			}
+			p.right-heading.forKurDisAsk {
+				position: absolute !important;
+				left: 40px !important;
+			}			
+		</style>
+
+    </ion-content>
+
+
+
+</ion-view>

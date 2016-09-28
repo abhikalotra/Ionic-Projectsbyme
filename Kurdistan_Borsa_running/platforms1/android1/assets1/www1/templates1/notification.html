@@ -1,0 +1,54 @@
+<ion-view title="" cache-view="false" hide-nav-bar="true" id="add" class=" ">
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <img src="img/header_logo.png" width="35px" height="35px">
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px; padding-bottom: 30px;">{{"NOTIFICATION"| translate}}</div>
+    </ion-header-bar>
+    <ion-content padding="true" style="background-color: #3d4039;  padding-bottom: 75px;" class="manual-ios-statusbar-padding has-header">
+
+        <ion-refresher
+            spinner="lines"
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefreshNotifications()">
+        </ion-refresher>
+        <ion-list>
+            <div class="inner_new" ng-repeat="notification in notifications">
+                <ion-item class="item-stable search"
+                          ng-click="toggleGroup(notification)"
+                          ng-class="{active: isGroupShown(notification)}">
+                    <i class="icon" ng-class="isGroupShown(notification) ? 'ion-minus' : 'ion-plus'"></i>
+                    &nbsp;
+                    {{notification.title}}
+                    <p style="float:right; color: #fff;">{{notification.date}}</p>
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-repeat="info in notification.info"
+                          ng-show="isGroupShown(notification)">
+                    <li>{{info.title}}</li>
+                    <li>{{info.message}}</li>
+                    <li>{{info.date}}</li></ion-item>
+            </div>
+        </ion-list>
+
+
+
+    </ion-content>
+    <style>
+        .list .item.item-accordion {
+            line-height: 38px;
+            padding-top: 0;
+            padding-bottom: 0;
+            transition: 0.09s all linear;
+        }
+        .list .item.item-accordion.ng-hide {
+            line-height: 0px;
+        }
+        .list .item.item-accordion.ng-hide-add,
+        .list .item.item-accordion.ng-hide-remove {
+            display: block !important;
+        }
+
+    </style>
+</ion-view>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="assets/js/apis.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener('backbutton', onBackKeyDown, false);
+            function onDeviceReady() {
+                getProfile();
+            }
+            function onBackKeyDown() {
+                window.location = "more.html";
+            }
+
+        </script>
+        <script>
+            Storage.prototype.setObject = function (key, value) {
+                this.setItem(key, JSON.stringify(value));
+            };
+            Storage.prototype.getObject = function (key) {
+                var value = this.getItem(key);
+                return value && JSON.parse(value);
+            };
+            function getProfile() {
+                var url = 'allcustomer/' + localStorage.getItem("customer_id");
+                fetchData(url, function (data) {
+                    window.plugins.spinnerDialog.hide();
+                    var username;
+                    var smallImage = document.getElementById('profile_image');
+//                    smallImage.style.display = 'block';
+                    smallImage.src = "data:image/jpeg;base64," + $(data).find("udf5").text();
+                    // $("#profile_image").attr('src', $(data).find("images").find(":first-child").text());
+                    $("#customer_id").html($(data).find("id").text());
+                    $("#user_mobile").html($(data).find("contactNumber").text());
+                    $("#user_mobilenumber").html($(data).find("contactNumber").text());
+                    localStorage.setItem("user_mobile", $(data).find("contactNumber").text());
+                    $("#user_email").html($(data).find("email").text());
+                    $("#user_emailid").html($(data).find("email").text());
+                    $("#first_name").html($(data).find("firstName").text());
+                    username = $(data).find("firstName").text();
+                    $("#last_name").html($(data).find("lastName").text());
+                    username = username + ' ' + $(data).find("lastName").text();
+                    $("#user_city").html($(data).find("city").text());
+                    $("#user_pincode").html($(data).find("pincode").text());
+                    $("#user_address").html($(data).find("addressLine1").text());
+                    $("#user_address_2").html($(data).find("addressLine2").text());
+                    $("#user_dob").html($(data).find("dob").text());
+                    $("#user_anniversary").html($(data).find("anniversaryDate").text());
+                    $("#user_group").html($(data).find("membership").text());
+                    var pointsEarned = $(data).find("pointsEarned").text();
+                    var pointsBurned = $(data).find("pointsBurned").text();
+                    var totalPoints = +pointsEarned - +pointsBurned;
+//                    $("#miles").html($(data).find("pointsEarned").text());
+                    $("#miles").html(totalPoints);
+//                    $("#miles").html($(data).find("pointsEarned").text());
+                    localStorage.setItem("miles", totalPoints);
+
+                    $("#user_gender").html($(data).find("gender").text());
+                    $("#user_occupation").html($(data).find("occupation").text());
+                    $("#user_name").html(username);
+                    var cust_profile = new profile($(data).find("id").text(), $(data).find("firstName").text(), $(data).find("lastName").text(), $(data).find("contactNumber").text(),
+                            $(data).find("email").text(), $(data).find("city").text(), $(data).find("pincode").text(), $(data).find("addressLine1").text(), $(data).find("addressLine2").text(),
+                            $(data).find("dob").text(), $(data).find("anniversaryDate").text(), $(data).find("membership").text(), $(data).find("gender").text(), $(data).find("occupation").text(),
+                            $(data).find("udf5").text());
+                    localStorage.setObject("cust_profile", cust_profile);
+                });
+            }
+            $(function () {
+                $("#profile_edit").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "profile_edit.html";
+                    }
+                })
+            });
+            $(function () {
+                $("#password").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "password.html";
+                    }
+                })
+            });
+            $(function () {
+                $("#redeem").click(function () {
+                    var networkState = navigator.connection.type;
+                    if (networkState == "none")
+                        window.plugins.toast.show('No internet connection.', 'short', 'bottom');
+                    else {
+                        window.location = "products.html";
+                    }
+                })
+            });
+            function profile(customer_id, fname, lname, user_mobile, user_email, user_city, user_pincode, user_address, user_address_2, user_dob,
+                    user_anivrsry, user_group, user_gender, user_occupa, image) {
+                var cProfile = {cid: customer_id,
+                    fname: fname,
+                    lname: lname,
+                    user_mobile: user_mobile,
+                    user_email: user_email,
+                    user_city: user_city,
+                    user_pincode: user_pincode,
+                    user_address: user_address,
+                    user_address_2: user_address_2,
+                    user_dob: user_dob,
+                    user_anniversary: user_anivrsry,
+                    user_group: user_group,
+                    user_gender: user_gender,
+                    user_occupation: user_occupa,
+                    image: image};
+
+                return cProfile;
+            }
+        </script>
+    </head>
+    <body style="background:#f5f4f0;">
+
+        <div class="profile_pic_details">
+            <div class="profile_pic_details_image"><img id="profile_image" src=""></div>
+            <div class="profile_pic_details_image_detail">
+                <div class="profile_pic_details_image_detail_header">
+                    <div class="profile_pic_details_image_detail_header_back"><a href="more.html"><img src="assets/images/back.png"></a></div>
+                    <br class="clear">
+                </div>
+                <div class="profile_pic_details_image_detail_header_name_address">
+                    <h3 id="user_name" ></h3>
+                    <p id="user_email" ></p><br>
+                    <p id="user_mobile" ></p>
+                </div>
+                <div class="profile_pic_details_image_detail_header diesel_id_detail">
+                    <div id="customer_id" class="profile_pic_details_image_detail_header_back"></div>
+                    <div class="profile_pic_details_image_detail_header_back pull-right">Miles <strong id="miles"></strong></div>
+                    <br class="clear">
+                </div>
+            </div>
+        </div>
+
+        <div class="profile_pic_details_text">
+            <div class="profile_pic_details_text_one">
+                <div class="profile_pic_details_text_inner_icon"><img src="assets/images/detail.png"></div>
+                <div class="profile_pic_details_text_inner"><strong style="text-transform:uppercase;">Primary Info</strong><br><br>
+                    <strong >First Name</strong> : <span id="first_name"></span><br>
+                    <strong >Last Name</strong> :<span id="last_name"></span>  <br>
+                    <strong >Mobile</strong> :<span id="user_mobilenumber"></span> <br>
+                    <strong >Email</strong> : <span  id="user_emailid"></span><br>
+                    <strong >City</strong> :<span id="user_city"></span><br>
+                    <strong >Pin Code</strong> :<span id="user_pincode"></span> <br>
+                    <strong >Group</strong> : <span id="user_group"></span>
+                </div>
+            </div>
+            <div class="profile_pic_details_text_one">
+                <div class="profile_pic_details_text_inner_icon"><img src="assets/images/detail.png"></div>
+                <div class="profile_pic_details_text_inner"><strong style="text-transform:uppercase;">Other Info</strong><br><br>
+                    <strong >Gender</strong> :<span id="user_gender"></span> <br>
+                    <strong >DOB</strong> :<span id="user_dob"></span> <br>
+                    <strong >Anniversary date</strong> :<span id="user_anniversary"></span> <br>
+                    <strong >Address 1</strong> :<span id="user_address"></span><br>
+                    <strong >Address 2</strong> :<span id="user_address_2"></span><br>
+                    <strong >Occupation</strong> :<span id="user_occupation"></span>
+                </div>
+            </div>
+
+            <div class="bottom_buttons_show">
+                <a  id="profile_edit"><button class="footer_buttons" >Edit Member detail</button></a>
+                <a  id="password"><button class="footer_buttons">Change Password</button></a>
+            </div>
+        </div>
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a  id="redeem" ><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a onclick="logout();"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+
+    </body>
+</html>

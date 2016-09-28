@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/intel/node/ionic/diseal cut running/Diesel_cult/platforms/android/build/intermediates/exploded-aar/android/CordovaLib/unspecified/debug/jars/classes.jar"
+        jumboMode="false"
+        revision="24.0.2"
+        sha1="3d8df3daf7e81893bffd18e43f44fb8bc859c199">
+        <dex dex="/home/intel/node/ionic/diseal cut running/Diesel_cult/platforms/android/build/intermediates/pre-dexed/debug/CordovaLib-unspecified-debug_0a91ac8d4b08cd26ba48fbf1910900ce73d8a01c.jar" />
+    </item>
+
+</items>

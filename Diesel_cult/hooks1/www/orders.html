@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="assets/js/database.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady() {
+                getCart();
+            }
+
+            function getCart() {
+                $("#total_miles").html(localStorage.getItem("miles"));
+                getSqlResultSet(function () {
+                    var product = result;
+                    var pay_miles = 0;
+                    var length = product.rows.length;
+                    if (length > 0) {
+
+                        var cart_container = $("#show_apend_product");
+                        for (var i = 0; i < length; i++) {
+                            cart_container.append('<div class="product_cart"><div class="product_cart_image"><img src="' + product.rows.item(i).image + '"></div><div class="product_cart_text"><div class="product_cart_text_detail">' + product.rows.item(i).productName + '<br><span>' + product.rows.item(i).productDescription + '</span></div><div class="product_cart_text_remove_price"><div class="quantity_form_cart"><input disabled type="text" value="' + product.rows.item(i).quantity + '" maxlength="2" class="quantity_form"></div><span class="price"><strong>Miles <span>' + product.rows.item(i).miles + '</span></strong></span><span class="remove"><a  onclick="removeProduct(' + product.rows.item(i).id + ');">Remove</a></span><br class="clear"></div></div><br class="clear"></div>');
+                            pay_miles = +pay_miles + +product.rows.item(i).pay;
+                        }
+                        $("#pay_miles").html(pay_miles);
+                        $("#available_miles").html(Math.abs(localStorage.getItem("miles") - pay_miles));
+                    } else {
+                        window.plugins.toast.show('No product.', 'short', 'bottom');
+                    }
+
+                });
+            }
+            function removeProduct(id) {
+                window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                removeCartProduct(id, function () {
+                    window.plugins.spinnerDialog.hide();
+                    location.reload();
+                });
+            }
+
+        </script>
+    </head>
+    <body style="background:#f5f4f0;">
+
+        <header style="position:relative;" class="header_main">
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <a href="product_detail.html"><div class="header_inner_text_upper_menu_icon"><img src="assets/images/black_back.png"></div></a>
+                    <div class="header_inner_text_upper_title">My Orders</div>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="product_cart_all" id="show_apend_product"></div>
+
+        <div class="product_cart_all">
+            <div style="padding:0 15px;" class="product_cart">
+                <div class="total_view">
+                    <span class="pull-left">Total</span>
+                    <span class="pull-right"><span id="total_miles"></span> Miles</span>
+                    <br class="clear">
+                </div>
+                <div class="total_view">
+                    <span class="pull-left"><strong>You Pay</strong></span>
+                    <span class="pull-right"><strong><span id="pay_miles"></span> Miles</strong></span>
+                    <br class="clear">
+                </div>
+                <div style="border:none;" class="total_view">
+                    <span class="pull-left"><strong>Available Balance</strong></span>
+                    <span class="pull-right"><strong><span id="available_miles"></span> Miles</strong></span>
+                    <br class="clear">
+                </div>
+            </div>
+        </div>
+
+
+        <div style="margin-bottom:70px;" class="bottom_buttons_show">
+            <button class="footer_buttons">redeem</button>
+        </div>
+        <br class="clear">
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a href="login.html"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+
+    </body>
+</html>

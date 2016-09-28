@@ -1,0 +1,39 @@
+<ion-view title="" cache-view="false" id="ads" class=" ">
+
+    <!--    <div class="bar bar-header bar-positive">
+            <img src="img/header_logo.png" width="35px" height="35px">
+            <h1 class="title">Manage Ads</h1>
+            <button  class="drop-btn" ng-click="popover.show($event)"></button> 
+        </div>-->
+
+    <ion-header-bar class="bar-positive bar bar-header" align-title="center">
+        <button  class="drop-btn" ng-click="popover.show($event)"></button>
+        <button ng-click="goBack()" class="button back-button buttons button-clear header-item">
+            <i class="icon ion-ios-arrow-back"></i></button>
+        <div class="title title-center header-item" style="transform: translate3d(0px, 0px, 0px); left: 71px; right: 71px;">Manage Ads</div>
+        <img src="img/header_logo.png" style="margin-left: 25px !important;" width="35px" height="35px">
+    </ion-header-bar>
+    <ion-content padding="true" class="manual-ios-statusbar-padding services has-header" style="background-color: #282a27;" >
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefreshAds()">
+        </ion-refresher>
+        <div class="inner_new">
+            <div class="read_more"><a href="#/welcome/add" ng-click="save()">ADD NEW AD</a></div>
+        </div>
+        <ul>
+            <ion-list class="ad1" ng-repeat="ad in ads">
+                <div class="left_data">
+                    <img src="img/inner_img.png" ng-src="{{ad.image}}">
+                    <h2 style="margin-left: 5px;">{{ad.name}}</h2>
+                </div>
+                <div class="right_data">
+                    <div class="update"><a href="#/welcome/add" ng-click="update(ad)">Update</a> <a href="#" ng-click="delete(ad)">Delete</a></div>
+                </div>
+                <br class="clear">
+            </ion-list>
+        </ul>
+        
+ </ion-content>
+
+</ion-view>

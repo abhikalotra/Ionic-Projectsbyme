@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/custom.css">
+
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener('backbutton', onBackKeyDown, false); //Listen to the User clicking on the back button
+
+            function onDeviceReady() {
+                localStorage.removeItem("isLogin");
+                localStorage.removeItem("customer_id");
+                localStorage.removeItem("miles");
+                localStorage.removeItem("user_name");
+                localStorage.removeItem("user_group");
+                localStorage.removeItem("user_mobile");
+                localStorage.removeItem("user_email");
+            }
+            function onBackKeyDown() {
+//                navigator.notification.confirm(
+//                        "Are you sure you want to exit ?", // message
+//                        onConfirm, // callback to invoke with index of button pressed
+//                        "Confirmation", // title
+//                        ["Yes", "No"]);                      // buttons label
+                navigator.app.exitApp();
+            }
+//            function onConfirm(buttonIndex) {
+//                if (buttonIndex == 2) {//If User selected No, then we just do nothing
+//                    return;
+//                } else {
+//                    navigator.app.exitApp();// Otherwise we quit the app.
+//                }
+//            }
+        </script>
+        <script>
+
+            $(function () {
+
+                $("#login_btn").click(function () {
+                    if ($("#mobile_text").val() === "" || $("#password_text").val() === "") {
+                        if ($("#mobile_text").val() === "" && $("#password_text").val() === "") {
+                            window.plugins.toast.show('Fields cannot be blank.', 'short', 'bottom');
+                        } else {
+                            if ($("#mobile_text").val() === "")
+                                window.plugins.toast.show('Please enter the mobile number.', 'short', 'bottom');
+                            if ($("#password_text").val() === "")
+                                window.plugins.toast.show('Please enter the password.', 'short', 'bottom');
+                        }
+                    } else
+                    {
+                        window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                        var xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><login><userName>' + $("#mobile_text").val() + '</userName><mobileNumber></mobileNumber>  <email></email>  <password>' + $("#password_text").val() + '</password>  <company>Diesel</company></login>';
+                        $.ajax({
+                            type: "POST",
+                            url: "http://59.181.101.224:8080/ril/service/auth",
+                            data: xmldata,
+                            contentType: "application/xml",
+                            dataType: "XML",
+                            success: onSuccess,
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                if (jqXHR.status === 409) {
+                                    $(jqXHR.responseText).find("errorMsg").each(function () {
+                                        window.plugins.spinnerDialog.hide();
+                                        window.plugins.toast.show($(this).text(), 'short', 'bottom');
+                                    });
+                                }
+                                if (jqXHR.status === 0) {
+                                    window.plugins.spinnerDialog.hide();
+                                    window.plugins.toast.show('There is some problem. please try again later.', 'short', 'bottom');
+                                }
+                            }});
+                    }
+                });
+
+                function onSuccess(data)
+                {
+                    localStorage.setItem("isLogin", true);
+                    window.plugins.spinnerDialog.hide();
+                    window.plugins.toast.show('successfully login...', 'short', 'bottom');
+                    $(data).find("id").each(function () {
+                        localStorage.setItem("customer_id", $(this).text());
+                    });
+                    window.location = "category.html";
+                }
+
+            });
+
+
+            $(function () {
+
+                $("#mobile_btn").click(function () {
+                    if ($("#mobile_number").val() == "") {
+                        window.plugins.toast.show('Please enter the mobile number.', 'short', 'bottom');
+
+                    } else
+                    {
+                        window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                        var xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><user>  <userName>Manish</userName>  <mobileNumber>' + $("#mobile_number").val() + '</mobileNumber>  <email></email>  <rProId></rProId>  <company>Diesel</company></user>';
+                        $.ajax({
+                            type: "POST",
+                            url: "http://59.181.101.224:8080/ril/service/otpByUserDetails",
+                            data: xmldata,
+                            contentType: "application/xml",
+                            dataType: "XML",
+                            success: onSuccess,
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                if (jqXHR.status === 409) {
+                                    $(jqXHR.responseText).find("errorMsg").each(function () {
+                                        window.plugins.spinnerDialog.hide();
+                                        window.plugins.toast.show($(this).text(), 'short', 'bottom');
+                                    });
+                                }
+                                if (jqXHR.status === 0) {
+                                    window.plugins.spinnerDialog.hide();
+                                    window.plugins.toast.show('There is some problem. please try again later.', 'short', 'bottom');
+                                }
+                            }
+                        });
+                    }
+                });
+
+                function onSuccess(data)
+                {
+                    window.plugins.spinnerDialog.hide();
+                    alert($(data).find("otp").text());
+                    otpCode = $(data).find("otp").text();
+                    $('#otpdivId').fadeIn();
+                    $('#divId').fadeOut();
+
+                }
+            });
+
+            $(function () {
+
+                $("#otp_btn").click(function () {
+                    if ($("#otp_text").val() == "") {
+                        window.plugins.toast.show('Please enter otp.', 'short', 'bottom');
+                    } else
+                    {
+                        if (otpCode == $("#otp_text").val()) {
+                            localStorage.setItem("user_mobile", $("#mobile_number").val());
+//                            localStorage.setItem("otp", otpCode);
+                            window.location = "enter_password.html";
+                        } else {
+                            window.plugins.toast.show('Invalid One Time Password (OTP) entered.', 'short', 'bottom');
+                        }
+
+                    }
+                });
+
+            });
+        </script>
+    </head>
+    <script>
+        function closePopup()
+        {
+            $('#divId').fadeOut();
+        }
+        function showDiv()
+        {
+            $('#divId').fadeIn();
+        }
+    </script>
+    <body>
+
+        <div style="display:none;" id="divId" onclick="closePopup()" class="model_black_area">
+            <div class="model_black_area_white">
+                <p>Please verify your mobile number registered with us. We shall send a 4-digit verification code.</p>
+                <div class="mobile_number_form">
+                    <select class="country_code_select">
+                        <option selected>+91</option>
+                        <option>234</option>
+                        <option>12</option>
+                        <option>24</option>
+                    </select>
+                    <input type="number" maxlength="10" class="mobile_number_main"  id="mobile_number" placeholder="Mobile Number">
+                </div>
+                <!--<a href="enter_password.html">-->
+                <button id="mobile_btn" class="enter_button">Submit</button>
+                <!--</a>-->
+            </div>
+        </div>
+
+        <div style="display:none;" id="otpdivId" class="model_black_area">
+            <div class="model_black_area_white">
+                <p>Please enter the 4-digit verification code.</p>
+                <div class="mobile_number_form">
+
+                    <input type="number" max="4" id="otp_text" min="4" class="mobile_number_main" placeholder="OTP Code">
+                </div><!-- mobile_number_form close -->
+                <a><button id="otp_btn" class="enter_button">Submit</button></a>
+            </div><!-- model_black_area_white close -->
+        </div>
+
+
+        <div class="login_screen">
+            <div class="login_logo"><img src="assets/images/deisel_cult_logo.png"></div><!-- login_logo close -->
+
+            <div class="login_forms_outer">
+                <input  id="mobile_text" type="text" placeholder="Mobile" class="login_forms">
+                <input id="password_text" type="password" placeholder="Password" class="login_forms">
+                <a class="margin_top" href="#">Forgot Password?</a>
+            </div>
+
+            <div class="login_screen_buttons">
+                <button id="login_btn" class="login_button">Login</button><br>
+                <a onClick="showDiv()" href="#">New user? Sign up</a>
+
+            </div>
+        </div>
+
+
+        <!-- jquery link -->
+        <script src="assets/js/jquery.js"></script>
+    </body>
+</html>

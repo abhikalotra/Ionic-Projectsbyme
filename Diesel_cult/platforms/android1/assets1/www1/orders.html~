@@ -1,0 +1,257 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Diesel Cult</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <script src="assets/js/database.js"></script>
+        <script src="assets/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            var isFadeIn = false;
+            document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener('backbutton', onBackKeyDown, false);
+
+            var product;
+            function onDeviceReady() {
+                getCart();
+            }
+
+            function onBackKeyDown() {
+                if (isFadeIn) {
+                    closePopup();
+                } else {
+                    window.location = "products.html";
+                }
+            }
+
+
+            function getCart() {
+                $("#total_miles").html(localStorage.getItem("miles"));
+                getSqlResultSet(function () {
+                    product = result;
+                    var pay_miles = 0;
+                    var length = product.rows.length;
+                    if (length > 0) {
+
+                        var cart_container = $("#show_apend_product");
+                        for (var i = 0; i < length; i++) {
+                            cart_container.append('<div class="product_cart"><div class="product_cart_image"><img src="' + product.rows.item(i).image + '"></div><div class="product_cart_text"><div class="product_cart_text_detail">' + product.rows.item(i).productName + '<br><span>' + product.rows.item(i).productDescription + '</span></div><div class="product_cart_text_remove_price"><div class="quantity_form_cart"><input disabled type="text" value="' + product.rows.item(i).quantity + '" maxlength="2" class="quantity_form"></div><span class="price"><strong>Miles <span>' + product.rows.item(i).miles + '</span></strong></span><span class="remove"><a  onclick="removeProduct(' + product.rows.item(i).id + ');">Remove</a></span><br class="clear"></div></div><br class="clear"></div>');
+                            pay_miles = +pay_miles + +product.rows.item(i).pay;
+                        }
+                        $("#pay_miles").html(pay_miles);
+                        $("#available_miles").html(Math.abs(localStorage.getItem("miles") - pay_miles));
+                    } else {
+                        window.plugins.toast.show('No product.', 'short', 'bottom');
+                    }
+
+                });
+            }
+            function removeProduct(id) {
+                window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                removeCartProduct(id, function () {
+                    window.plugins.spinnerDialog.hide();
+                    location.reload();
+                });
+            }
+
+
+            $(function () {
+                $("#mobile_btn").click(function () {
+                    if ($("#mobile_number").val() == "") {
+                        window.plugins.toast.show('Please enter the mobile number.', 'short', 'bottom');
+                    } else
+                    {
+                        window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                        var xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><user>  <userName>' + $("#mobile_number").val() + '</userName>  <mobileNumber>' + $("#mobile_number").val() + '</mobileNumber>  <email></email>  <rProId></rProId>  <company>Diesel</company></user>';
+                        $.ajax({
+                            type: "POST",
+                            url: "http://59.181.101.224:8080/ril/service/otpByUserDetails",
+                            data: xmldata,
+                            contentType: "application/xml",
+                            dataType: "XML",
+                            success: onSuccess,
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                if (jqXHR.status === 409) {
+                                    $(jqXHR.responseText).find("errorMsg").each(function () {
+                                        window.plugins.spinnerDialog.hide();
+                                        window.plugins.toast.show($(this).text(), 'short', 'bottom');
+                                    });
+                                }
+                                if (jqXHR.status === 0) {
+                                    window.plugins.spinnerDialog.hide();
+                                    window.plugins.toast.show('There is some problem. please try again later.', 'short', 'bottom');
+                                }
+                            }
+                        });
+                    }
+                });
+
+                function onSuccess(data)
+                {
+                    window.plugins.spinnerDialog.hide();
+                    alert($(data).find("otp").text());
+                    otpCode = $(data).find("otp").text();
+                    $('#otpdivId').fadeIn();
+                    $('#divId').fadeOut();
+
+                }
+            });
+
+            $(function () {
+
+                $("#otp_btn").click(function () {
+                    if ($("#otp_text").val() == "") {
+                        window.plugins.toast.show('Please enter otp.', 'short', 'bottom');
+                    } else
+                    {
+                        if (otpCode == $("#otp_text").val()) {
+                            var container = "<itemList>";
+                            var length = product.rows.length;
+                            for (var i = 0; i < length; i++) {
+                                container += '<item><redeemItemId>' + product.rows.item(i).id + '</redeemItemId><itemQuantity>' + product.rows.item(i).quantity + '</itemQuantity></item>';
+                            }
+                            container += "</itemList>";
+                            window.plugins.spinnerDialog.show(null, "Please wait. . .", true);
+                            var xmldata = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><redeem><customerId>' + localStorage.getItem("customer_id") + '</customerId> <otp>' + otpCode + '</otp><cashierId>100</cashierId><storeCode>1</storeCode><notes>Cult App Test</notes>' + container.toString() + '</redeem>';
+                            $.ajax({
+                                type: "POST",
+                                url: "http://59.181.101.224:8080/ril/service/redeemItem",
+                                data: xmldata,
+                                contentType: "application/xml",
+                                dataType: "XML",
+                                success: onSuccess,
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    if (jqXHR.status === 409) {
+                                        $(jqXHR.responseText).find("errorMsg").each(function () {
+                                            $('#otpdivId').fadeOut();
+                                            window.plugins.spinnerDialog.hide();
+                                            window.plugins.toast.show($(this).text(), 'short', 'bottom');
+                                        });
+                                    }
+                                    if (jqXHR.status === 0) {
+                                        window.plugins.spinnerDialog.hide();
+                                        window.plugins.toast.show('There is some problem. please try again later.', 'short', 'bottom');
+                                    }
+                                }});
+                        } else {
+                            window.plugins.toast.show('Invalid One Time Password (OTP) entered.', 'short', 'bottom');
+                        }
+
+                    }
+                });
+
+            });
+
+            function onSuccess(data)
+            {
+                $('#otpdivId').fadeOut();
+                window.plugins.spinnerDialog.hide();
+                window.plugins.toast.show('successfully order', 'short', 'bottom');
+            }
+
+            function closePopup()
+            {
+                $('#divId').fadeOut("", function () {
+                    isFadeIn = false;
+                });
+            }
+            function showDiv()
+            {
+                if (product.rows.length > 0) {
+                    $('#divId').fadeIn("", function () {
+                        isFadeIn = true;
+                    });
+                } else {
+                window.plugins.toast.show('cart is empty...', 'short', 'bottom');
+
+                }
+            }
+        </script>
+    </head>
+    <body  style="background:#f5f4f0;">
+
+        <div style="display:none;" id="divId"  class="model_black_area">
+            <div class="model_black_area_white">
+                <div onClick="closePopup()" class="popup_button_close">X</div>
+                <p>Please verify your mobile number registered with us. We shall send a 4-digit verification code.</p>
+                <div class="mobile_number_form">
+                    <select class="country_code_select">
+                        <option selected>+91</option>
+                        <option>234</option>
+                        <option>12</option>
+                        <option>24</option>
+                    </select>
+                    <input type="number" maxlength="10" class="mobile_number_main"  id="mobile_number" placeholder="Mobile Number">
+                </div>
+                <button id="mobile_btn" class="enter_button">Submit</button>
+            </div>
+        </div>
+
+        <div style="display:none;" id="otpdivId" class="model_black_area">
+            <div class="model_black_area_white">
+                <div onClick="closeOtpPopup()" class="popup_button_close">X</div>
+                <p>Please enter the 4-digit verification code.</p>
+                <div class="mobile_number_form">
+                    <input type="number" max="4" id="otp_text" min="4" class="mobile_number_main" placeholder="OTP Code">
+                </div>
+                <a><button id="otp_btn" class="enter_button">Submit</button></a>
+            </div>
+        </div>
+
+        <header style="position:relative;" class="header_main">
+            <div class="header_inner">
+
+                <div class="header_inner_text_upper">
+                    <a href="product_detail.html"><div class="header_inner_text_upper_menu_icon"><img src="assets/images/black_back.png"></div></a>
+                    <div class="header_inner_text_upper_title">My Orders</div>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="product_cart_all" id="show_apend_product"></div>
+
+        <div class="product_cart_all">
+            <div style="padding:0 15px;" class="product_cart">
+                <div class="total_view">
+                    <span class="pull-left">Total</span>
+                    <span class="pull-right"><span id="total_miles"></span> Miles</span>
+                    <br class="clear">
+                </div>
+                <div class="total_view">
+                    <span class="pull-left"><strong>You Pay</strong></span>
+                    <span class="pull-right"><strong><span id="pay_miles"></span> Miles</strong></span>
+                    <br class="clear">
+                </div>
+                <div style="border:none;" class="total_view">
+                    <span class="pull-left"><strong>Available Balance</strong></span>
+                    <span class="pull-right"><strong><span id="available_miles"></span> Miles</strong></span>
+                    <br class="clear">
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div style="margin-bottom:70px;" class="bottom_buttons_show">
+            <button onclick="showDiv();" class="footer_buttons">redeem</button>
+        </div>
+        <br class="clear">
+
+        <div class="bottom_tabs">
+            <a href="category.html"><div class="bottom_tabs_one"><img src="assets/images/home1.png"><br>Home</div></a>
+            <a href="products.html"><div class="bottom_tabs_one"><img src="assets/images/catalog.png"><br>Catalogue</div></a>
+            <a href="orders.html"><div class="bottom_tabs_one"><img src="assets/images/instore.png"><br>Cart</div></a>
+            <a href="login.html"><div class="bottom_tabs_one"><img src="assets/images/logout.png"><br>Logout</div></a>
+        </div>
+
+
+
+    </body>
+</html>
